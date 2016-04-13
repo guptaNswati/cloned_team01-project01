@@ -1,162 +1,138 @@
-###Instructions###
+# Project 1 Proposal
+### *Planet Hopper*
 
-*This is a guide document to help you write the project proposal.*
+* **Person**[ ] Composition = *new* **Person**[4];
+ * Composition[0] = Joshua Fan;
+ * Composition[1] = Swati Gupta;
+ * Composition[2] = Xiaoxiang Cao;
+ * Composition[3] = Nitzan Orr;
 
-*You have to remove this "Instructions" section and replace any text between brackets `[` and `]`.*
-
-*NOTE: For readability, individual items in a list are not surrounded by brackets (with the exception of the section titled  "Deliverables and Milestones"). Assume these need also be replaced
-Also, any other text is written as an example.*
-
-*Post questions in the* ***public discussion forum*** *for the current project.*
-
-*Note: As long as your proposal contains the key parts and descriptions you may format this document as you see fit. However, I highly recommend certain sections such as* "Objectives and Deliverables" *be described via a bulleted list.*
-
----
-
-###Project 1 Proposal###
-
-####[Project Name]####
-
-__Team Composition:__<br>
-[Name of Teammates]
-
-[Date]
-
----
-
-####Table of Contents####
-
-[*This page enables the reader to quickly find relevant parts of the document. Including titles and page numbers of each section.
-Note: The page numbers are for example only. Change these as you see fit.*]
-
-* 1 Project Overview 
-  * 1.1 Abstract…………………………………….………………………Pg 3
-  * 1.2 Target Customer……………….…………………………………Pg 4
-  * 1.3 Search Words……………….……………………………………Pg 4
-  * 1.4 Scope and Objectives….…………………………………………Pg 4, 5
-* 2 Team and Constraints
-  * 2.1 Team Profile…….……………………………………………….…Pg 6
-  * 2.2 Challenges……….……………………………………………….Pg 7
-  * 2.3 Assumptions and Constraints………………………………....Pg 7
-* 3 Deliverables and Milestones
- * 3.1 Project Deliverables……………………………………………..Pg 8
- * 3.2 Schedule and Budget Summary…..…………………………..Pg 9
-
-
----
-
-## 1.0	Project Overview
-### 1.1 Abstract
-
-[How would you briefly describe the purpose of your project?]
-
-[Often readers lack sufficient time to read the entire project proposal. Therefore, a short synopsis is necessary to provide motivation and a high level introduction of the project. ]
-
-* [Give a brief introduction as to ***problem statement***, the ***scope*** and a high level description of the system to be ***delivered***.] 
-*	[Include ***background*** for the project. Motivate the project by describing:
-  * What is the value of the system over the status quo?
-  * How will the final product be used by the target customer?]
-
-
-### 1.2.	Target Customer [important part]
-
-[Who is the target audience?]
-
-[List the intended user group(s):
-*	Who is  client (direct customer)? 
-*	Who is user (indrect customer)?]
-
-For example, for a patient management software the client may be the dental office and users may be Office Manager, Patient Coordinator, and Receptionist.
-
-
-### 1.3.	Search Words 
-[Brief descriptors of your project that you think someone might use to search for your project. The descriptor may be three to five words or short phrases.]
-
-
-###1.4.	Scope and Objectives [critical section]
-[What is the scope and goals of your group project?]
-
-[The scope describes the specific software system that your team will be designing and delivering.]
-
-[Reminder:
-
-*	The ideal project will be a software system that will challenge a team of 4 or 5 students to use a broad range of software engineering skills. This includes skills, such as, requirements analysis, software design and architecture,  implementation, testing, to project planning, scheduling, tracking and documentaiton.
-
-*	Each student will each work approximately 10 hours per week for 4 weeks<sup>[1](#footnote_1)</sup>.  As part of the team experience, you will be analyzing what the client would be asking from the developers, list the services and features  to be provided by the proposed system, estimate the efforts for each service or feature, identify the components that have priority and negotiate project services based on time (and budget constraints).<br>
- *<sup><a name="footnote_1">1</a></sup>Note: Rarely does a proposal come in over the top. Instead, more often a proposal is not sufficient in scope and hence not accepted (until modified).*
-
-*	 For every component, state whether you will be working on the implementation<sup>[2](#footnote_2)</sup> that  will support it, or whether you will use existing work. <br>
- *<sup><a name="footnote_2">2</a></sup>Note: The impelementation involves source code.*]
-
-
----
-
-## 2.0	Team and Constraints
-
-###2.1.	Team profile
-[What are the strengths for each team member?]
-
-[For each member of the team ***describe qualifications and strengths***<sup>[3](#footnote_3)</sup>.
-
-*<sup><a name="footnote_3">3</a></sup>Note: Every team member is expected to be involved in all project activities. This section only describes individual strengths, and NOT the team member’s sole responsibilites.*]
-
-
-### 2.1.	Challenges
-[What are the challenges you foresee in successfully completing your project?]
-
-[Provide a ***description of challenges*** that your group might face. These are often technical and non-technical aspects that may not be apparent to the reader.]
-
-For example, if you were creating a software system for a dental office to manage patients, a challenge may be learning the domain, which involves following HIPPA regulations in disclosure of protected health information.
-
-### 2.2.	Assumptions and Constraints
-[Under what assumptions and constraints will the team adhere to?]
-
-[**List any specific assumptions on which the project is based on and imposed constraints** that your team will be working under. Non-technical constraints could be: such as schedule and budget. Technical constraints may be design or implementation metholodogies, tools, operating system(s), hardware or software constraints.
-
-* Non-Technical Constraints:
-  * Such as time limit
-  * add here...
-* Techinical Constraibts:
-  * add here...]
-
----
-
-##3.0	Deliverables and Milestones
-
-### 3.1.	Project Deliverables 
-
-[What are the specific delivarables by your team?]
-
-[***Provide a list of deliverables***<sup>[4](#footnote_4)</sup> of any project artifacts.]
-
-Deliverables include:
-*	Software System Project Proposal.
-*	[design document]
-*	[user manual and installation instructions]
-*	[presentations]
-*	[any other documents]
-*	[implementation code]
-*	[This list may include product deployment activities that are necessary for the successful use of the system your team develops.]
-
- *<sup><a name="footnote_4">4</a></sup>Note: This list may be modified over the weeks until the final submission.* 
+#### Date:
+**April 11th, 2016**
 
 
 
-### 3.2.	Schedule and Budget Summary [critical section]
-[What are the projected milestones and specific delivarables?]
+## 1.0 Project Overview
 
-[Fill in your teams projected milestones. You will be modifying this over the next few weeks.]
+#### 1.1 Abstract
+***Planet Hopper*** is an educational game about the planets of the Solar System and the effects of gravity. The objective of the game is for a player to hop from one planet to another to find out information about the planet they landed on. A player must also plan their hops in a way that overcomes the force of gravity.
+
+There are 8 planets in the Solar System, including Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Venus. And the Sun.
+
+This game will immerse the player in our Solar System, exploring it’s 8 planets and the force of gravity on a quest to visit all the planets. Through gameplay, the player will learn valuable information about each planet in our Solar System and what role gravity plays in the human endeavor of space exploration. However, landing on a planet is not an easy task since the player’s trajectory is affected by the force of gravity, emanating from each planet and the Sun.
+
+The final product will be used by any person interested in exploring the Solar System on their own computer--no need for a spacesuit! The information gained by playing this fun and educational game will be valuable for many years to come since no change is due in the planet's’ characteristics for another 4.5 billion years...or 100 years if humans wreck the Earth. Play this while you still can...
+
+#### 1.2 Target Customer
+The clients of this product are parents and education institutions who wish to educate their children/students about the planets of the Solar System and the effects of gravity.  
+
+In addition, any person interested in learning about the planets will be able to play.
+
+* ***Users:***
+ * K-12 Students
+ * Children
+ * Physics buffs
+
+#### 1.3 Search Words
+*Solar System, Planet, Planets, Gravity, Simulation, Simulator, Sun, Educational, Game, Planet Hopper, Hopper, Leapfrog*
+
+#### 1.4 Scope and Objectives
+
+The objective is to build a working system that is flexible and responsive to change. Via this group project the focus is on learning how to divide a big project into smaller doable parts, how to work in team and how to use each team members strong pursuit.
+
+While following the agile process of software development, team has decided to take the simplest path and building a software system that can be used for entertainment and education. We may use existing codes, libraries and build on them.
+
+##### *Features:*
+* A desktop game built in Java
+* Orbiting colored planets around Sun
+* At the beginning of the game, player will be on planet Earth
+* Game involves hopping from one planet to another
+* Directions will be shown for hopping 	
+* Once the player successfully hops from one planet to another, he/she is rewarded with the unique information about that planet
+* For hopping, the player will have to use basic spatial and fine motor skills as well as a rudimentary understanding of the force of gravity.
+
+##### *Design and Implementation:*
+Welcome screen with an image of solar system and text box containing introductory information about the purpose of game. On the top of the screen there will be buttons for taking player to settings menu for volume and speed, for game rules. At bottom, three buttons for game control, exit, start and home.  
+For implementing planet and player movement, we may use Slick2D, Java Swing.
+
+###### *Prototype UI (Strictly for educational purposes)*
+![Prototype UI](image/PlanetHopper.jpg)
+
+## 2.0 Team and Constraints
+
+#### 2.1 Team Profile
+Josh
+Physics algorithms
+
+Swati
+Java Swing UI
+CS 1A, 1B
+Familiarity of database management systems
+
+Xiaoxiang
+Working knowledge in Science and Life Science
+Proficiency in Git basics and rudimentary knowledge of advanced Git
+
+Nitzan
+Long experience with Java
+Familiarity with Java API
+CS 1A, 1B
 
 
-####Milestones
+2.2 Challenges
 
-| Item                       | Date            |
-| :--------------------------|:----------------|
-| Project Proposal           | April 13, 2016  |
-| Proposal Presentation      | April 14, 2016  |
-| [feature 1]                | [expected date] |
-| [feature 2]                | [expected date] |
-| ...                        | [expected date] |
-| Sprint 1                   | April 21, 2016  |
-| ...                        | [expected date] |
-| Demonstration and Delivery | May 12, 2016    |
+Non-Technical Challenges
+Designing a game that is educational, yet fun.
+Advancing scope in small enough steps that all chosen features can be implemented in time.
+Technical Challenges
+Incorporating real-life data of the Solar System into the game in order to make it as accurate as possible.
+
+2.3 Assumptions and Constraints
+
+Non-technical Constraints
+Time
+Each team member is taking other courses too
+Less than 4 weeks to code.
+Not all team members have a laptop
+Technical Constraints
+Implementation of advanced UI features will take time because of need to learn about them prior to coding.
+Scalable design that will allow addition of possible features and continued maintainability
+Team members are relatively new to Git/Github so working with it will be slow at first
+
+
+
+
+3.0 Deliverables and Milestones___________________
+
+3.1 Project Deliverables
+
+Project Proposal
+Installation instructions
+User Manual
+Source Code
+Screen Shots
+Presentation about final product and its development.
+
+
+
+3.2 Schedule and Budget Summary
+
+Use this “table” because that’s what Markdown uses:
+
+| Item                       			| Date            |
+| :--------------------------			|:----------------|
+| Project Proposal      			| Wed, April 13, 2016  |
+| Proposal Presentation	     	| Thurs, April 14, 2016 |
+| UI Design				| Sat, April 16, 2016  |
+| GUI starters		                        | Mon, April 18, 2016 |
+| Class skeleton			| Mon, April 18, 2016 |
+| Orbiting algorithm  			| Thurs, April 21, 2016 |
+| Sprint 1                   			| Thurs, April 21, 2016  |
+| Functional solar system      	            | Sun, April 24, 2016  |
+| Functional spaceship			| Wed, April 27, 2016  |
+| Sprint 2                   			| Thurs, April 28, 2016  |
+| Advanced UI for spaceship control  | Sat, April 30, 2016  |
+| Info boxes on planets		| Sun, April 31, 2016  |
+| Sprint 3                   			| Thurs, May 5, 2016  |
+| Extra features if time allows		| Mon, May 9, 2016   |
+| Demonstration and Delivery		| Thurs, May 12, 2016  |
