@@ -102,37 +102,33 @@ For implementing planet and player movement, we may use Slick2D, Java Swing.
 
 
 
-3.0 Deliverables and Milestones___________________
+## 3.0 Deliverables and Milestones
 
-3.1 Project Deliverables
+#### 3.1 Project Deliverables
 
-Project Proposal
-Installation instructions
-User Manual
-Source Code
-Screen Shots
-Presentation about final product and its development.
+* Project Proposal
+* Installation instructions
+* User Manual
+* Source Code
+* Screen Shots
+* Presentation about final product and its development.
 
-
-
-3.2 Schedule and Budget Summary
-
-Use this “table” because that’s what Markdown uses:
+#### 3.2 Schedule and Budget Summary
 
 | Item                       			| Date            |
 | :--------------------------			|:----------------|
-| Project Proposal      			| Wed, April 13, 2016  |
-| Proposal Presentation	     	| Thurs, April 14, 2016 |
-| UI Design				| Sat, April 16, 2016  |
-| GUI starters		                        | Mon, April 18, 2016 |
-| Class skeleton			| Mon, April 18, 2016 |
-| Orbiting algorithm  			| Thurs, April 21, 2016 |
+| Project Proposal      			   | Wed, April 13, 2016  |
+| Proposal Presentation	          	| Thurs, April 14, 2016 |
+| UI Design				               | Sat, April 16, 2016  |
+| GUI starters		                  | Mon, April 18, 2016 |
+| Class skeleton			            | Mon, April 18, 2016 |
+| Orbiting algorithm  	       		| Thurs, April 21, 2016 |
 | Sprint 1                   			| Thurs, April 21, 2016  |
-| Functional solar system      	            | Sun, April 24, 2016  |
-| Functional spaceship			| Wed, April 27, 2016  |
+| Functional solar system      	   | Sun, April 24, 2016  |
+| Functional spaceship		      	| Wed, April 27, 2016  |
 | Sprint 2                   			| Thurs, April 28, 2016  |
-| Advanced UI for spaceship control  | Sat, April 30, 2016  |
-| Info boxes on planets		| Sun, April 31, 2016  |
+| Advanced UI for spaceship control | Sat, April 30, 2016  |
+| Info boxes on planets		         | Sun, April 31, 2016  |
 | Sprint 3                   			| Thurs, May 5, 2016  |
 | Extra features if time allows		| Mon, May 9, 2016   |
-| Demonstration and Delivery		| Thurs, May 12, 2016  |
+| Demonstration and Delivery	    	| Thurs, May 12, 2016  |
