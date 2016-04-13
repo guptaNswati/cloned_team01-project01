@@ -61,43 +61,43 @@ For implementing planet and player movement, we may use Slick2D, Java Swing.
 ## 2.0 Team and Constraints
 
 #### 2.1 Team Profile
-Josh
-Physics algorithms
+* ***Josh***
+ * Physics algorithms
 
-Swati
-Java Swing UI
-CS 1A, 1B
-Familiarity of database management systems
+* ***Swati***
+ * Java Swing UI
+ * CS 1A, 1B
+ * Familiarity of database management systems
 
-Xiaoxiang
-Working knowledge in Science and Life Science
-Proficiency in Git basics and rudimentary knowledge of advanced Git
+* ***Xiaoxiang***
+ * Working knowledge in Science and Life Science
+ * Proficiency in Git basics and rudimentary knowledge of advanced Git
+ * Basic Markdown editing skills
+* ***Nitzan***
+ * Long experience with Java
+ * Familiarity with Java API
+ * CS 1A, 1B
 
-Nitzan
-Long experience with Java
-Familiarity with Java API
-CS 1A, 1B
 
+#### 2.2 Challenges
 
-2.2 Challenges
+* ***Non-Technical Challenges***
+ * Designing a game that is educational, yet fun.
+ * Advancing scope in small enough steps that all chosen features can be implemented in time.
+* ***Technical Challenges***
+ * Incorporating real-life data of the Solar System into the game in order to make it as accurate as possible.
 
-Non-Technical Challenges
-Designing a game that is educational, yet fun.
-Advancing scope in small enough steps that all chosen features can be implemented in time.
-Technical Challenges
-Incorporating real-life data of the Solar System into the game in order to make it as accurate as possible.
+#### 2.3 Assumptions and Constraints
 
-2.3 Assumptions and Constraints
-
-Non-technical Constraints
-Time
-Each team member is taking other courses too
-Less than 4 weeks to code.
-Not all team members have a laptop
-Technical Constraints
-Implementation of advanced UI features will take time because of need to learn about them prior to coding.
-Scalable design that will allow addition of possible features and continued maintainability
-Team members are relatively new to Git/Github so working with it will be slow at first
+* ***Non-technical Constraints***
+ * Time
+ * Each team member is taking other courses too
+ * Less than 4 weeks to code.
+ * Not all team members have a laptop
+* ***Technical Constraints***
+ * Implementation of advanced UI features will take time because of need to learn about them prior to coding.
+ * Scalable design that will allow addition of possible features and continued maintainability
+ * Team members are relatively new to Git/Github so working with it will be slow at first
 
 
 
