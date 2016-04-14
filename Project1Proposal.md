@@ -11,16 +11,16 @@
 **April 11th, 2016**
 
 ### Table of Contents
-* ###### 1.0 [Project Overview](#1.0)
+* 1.0 [Project Overview](#1.0)
   * 1.1 [Abstract](#1.1)
   * 1.2 [Target Customer](#1.2)
   * 1.3 [Search Words](#1.3)
   * 1.4 [Scope and Objectives](#1.4)
-* ###### 2.0 [Team and Constraints](#2.0)
+* 2.0 [Team and Constraints](#2.0)
   * 2.1 [Team Profile](#2.1)
   * 2.2 [Challenges](#2.2)
   * 2.3 [Assumptions and Constraints](#2.3)
-* ###### 3.0 [Deliverables and Milestones](#3.0)
+* 3.0 [Deliverables and Milestones](#3.0)
   * 3.1 [Project Deliverables](#3.1)
   * 3.2 [Schedule and Budget Summary](#3.2)
 
