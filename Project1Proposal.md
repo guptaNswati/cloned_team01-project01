@@ -121,8 +121,8 @@ For implementing planet and player movement, we may use Slick2D, Java Swing.
 
 * ***Non-technical Constraints***
  * Time
-   * Each team member is taking other courses too
-   * Less than 4 weeks to code.
+    * Each team member is taking other courses too
+    * Less than 4 weeks to code.
  * Not all team members have a laptop
 * ***Technical Constraints***
  * Implementation of advanced UI features will take time because of need to learn about them prior to coding.
