@@ -11,22 +11,24 @@
 **April 11th, 2016**
 
 ### Table of Contents
-* 1 Project Overview
-  * 1.1 Abstract…………………………………….………………………Pg 3
-  * 1.2 Target Customer……………….…………………………………Pg 4
-  * 1.3 Search Words……………….……………………………………Pg 4
-  * 1.4 Scope and Objectives….…………………………………………Pg 4, 5
-* 2 Team and Constraints
-  * 2.1 Team Profile…….……………………………………………….…Pg 6
-  * 2.2 Challenges……….……………………………………………….Pg 7
-  * 2.3 Assumptions and Constraints………………………………....Pg 7
-* 3 Deliverables and Milestones
- * 3.1 Project Deliverables……………………………………………..Pg 8
- * 3.2 Schedule and Budget Summary…..…………………………..Pg 9
+* ###### 1.0 [Project Overview](#1.0)
+  * 1.1 [Abstract](#1.1)
+  * 1.2 [Target Customer](#1.2)
+  * 1.3 [Search Words](#1.3)
+  * 1.4 [Scope and Objectives](#1.4)
+* ###### 2.0 [Team and Constraints](#2.0)
+  * 2.1 [Team Profile](#2.1)
+  * 2.2 [Challenges](#2.2)
+  * 2.3 [Assumptions and Constraints](#2.3)
+* ###### 3.0 [Deliverables and Milestones](#3.0)
+  * 3.1 [Project Deliverables](#3.1)
+  * 3.2 [Schedule and Budget Summary](#3.2)
 
-
+<a name="1.0"></a>
 
 ## 1.0 Project Overview
+
+<a name="1.1"></a>
 
 #### 1.1 Abstract
 ***Planet Hopper*** is an educational game about the planets of the Solar System and the effects of gravity. The objective of the game is for a player to hop from one planet to another to find out information about the planet they landed on. A player must also plan their hops in a way that overcomes the force of gravity.
@@ -36,6 +38,8 @@ There are 8 planets in the Solar System, including Mercury, Venus, Earth, Mars, 
 This game will immerse the player in our Solar System, exploring it’s 8 planets and the force of gravity on a quest to visit all the planets. Through gameplay, the player will learn valuable information about each planet in our Solar System and what role gravity plays in the human endeavor of space exploration. However, landing on a planet is not an easy task since the player’s trajectory is affected by the force of gravity, emanating from each planet and the Sun.
 
 The final product will be used by any person interested in exploring the Solar System on their own computer--no need for a spacesuit! The information gained by playing this fun and educational game will be valuable for many years to come since no change is due in the planet's’ characteristics for another 4.5 billion years...or 100 years if humans wreck the Earth. Play this while you still can...
+
+<a name="1.2"></a>
 
 #### 1.2 Target Customer
 The clients of this product are parents and education institutions who wish to educate their children/students about the planets of the Solar System and the effects of gravity.  
@@ -47,8 +51,12 @@ In addition, any person interested in learning about the planets will be able to
  * Children
  * Physics buffs
 
+ <a name="1.3"></a>
+
 #### 1.3 Search Words
 *Solar System, Planet, Planets, Gravity, Simulation, Simulator, Sun, Educational, Game, Planet Hopper, Hopper, Leapfrog*
+
+<a name="1.4"></a>
 
 #### 1.4 Scope and Objectives
 
@@ -72,7 +80,11 @@ For implementing planet and player movement, we may use Slick2D, Java Swing.
 ###### *Prototype UI (Strictly for educational purposes)*
 ![Prototype UI](image/PlanetHopper.jpg)
 
+<a name="2.0"></a>
+
 ## 2.0 Team and Constraints
+
+<a name="2.1"></a>
 
 #### 2.1 Team Profile
 * ***Josh***
@@ -93,6 +105,8 @@ For implementing planet and player movement, we may use Slick2D, Java Swing.
  * CS 1A, 1B
 
 
+ <a name="2.2"></a>
+
 #### 2.2 Challenges
 
 * ***Non-Technical Challenges***
@@ -100,6 +114,8 @@ For implementing planet and player movement, we may use Slick2D, Java Swing.
  * Advancing scope in small enough steps that all chosen features can be implemented in time.
 * ***Technical Challenges***
  * Incorporating real-life data of the Solar System into the game in order to make it as accurate as possible.
+
+ <a name="2.3"></a>
 
 #### 2.3 Assumptions and Constraints
 
@@ -113,10 +129,11 @@ For implementing planet and player movement, we may use Slick2D, Java Swing.
  * Scalable design that will allow addition of possible features and continued maintainability
  * Team members are relatively new to Git/Github so working with it will be slow at first
 
+ <a name="3.0"></a>
 
+## 3.0 Deliverables and Milestones<a name="abcde"/>
 
-
-## 3.0 Deliverables and Milestones
+<a name="3.1"></a>
 
 #### 3.1 Project Deliverables
 
@@ -126,6 +143,8 @@ For implementing planet and player movement, we may use Slick2D, Java Swing.
 * Source Code
 * Screen Shots
 * Presentation about final product and its development.
+
+<a name="3.2"></a>
 
 #### 3.2 Schedule and Budget Summary
 
