@@ -2,13 +2,13 @@
 ## *Planet Hopper*
 
 * **Person**[  ] Composition = *new* **Person**[4];
- * Composition[0] = Joshua Fan;
- * Composition[1] = Swati Gupta;
- * Composition[2] = Xiaoxiang Cao;
- * Composition[3] = Nitzan Orr;
+ * Composition[0] = "Joshua Fan";
+ * Composition[1] = "Swati Gupta";
+ * Composition[2] = "Xiaoxiang Cao";
+ * Composition[3] = "Nitzan Orr";
 
 #### Date:
-**April 11th, 2016**
+**April 13th, 2016**
 
 ### Table of Contents
 * 1.0 [Project Overview](#1.0)
