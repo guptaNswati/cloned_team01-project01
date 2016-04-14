@@ -1,7 +1,7 @@
 # Project 1 Proposal
 ### *Planet Hopper*
 
-* **Person**[ ] Composition = *new* **Person**[4];
+* **Person**[  ] Composition = *new* **Person**[4];
  * Composition[0] = Joshua Fan;
  * Composition[1] = Swati Gupta;
  * Composition[2] = Xiaoxiang Cao;
@@ -9,6 +9,20 @@
 
 #### Date:
 **April 11th, 2016**
+
+### Table of Contents
+* 1 Project Overview
+  * 1.1 Abstract…………………………………….………………………Pg 3
+  * 1.2 Target Customer……………….…………………………………Pg 4
+  * 1.3 Search Words……………….……………………………………Pg 4
+  * 1.4 Scope and Objectives….…………………………………………Pg 4, 5
+* 2 Team and Constraints
+  * 2.1 Team Profile…….……………………………………………….…Pg 6
+  * 2.2 Challenges……….……………………………………………….Pg 7
+  * 2.3 Assumptions and Constraints………………………………....Pg 7
+* 3 Deliverables and Milestones
+ * 3.1 Project Deliverables……………………………………………..Pg 8
+ * 3.2 Schedule and Budget Summary…..…………………………..Pg 9
 
 
 
