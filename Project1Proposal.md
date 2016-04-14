@@ -37,12 +37,12 @@ There are 8 planets in the Solar System, including Mercury, Venus, Earth, Mars, 
 
 This game will immerse the player in our Solar System, exploring it’s 8 planets and the force of gravity on a quest to visit all the planets. Through gameplay, the player will learn valuable information about each planet in our Solar System and what role gravity plays in the human endeavor of space exploration. However, landing on a planet is not an easy task since the player’s trajectory is affected by the force of gravity, emanating from each planet and the Sun.
 
-The final product will be used by any person interested in exploring the Solar System on their own computer--no need for a spacesuit! The information gained by playing this fun and educational game will be valuable for many years to come since no change is due in the planet's’ characteristics for another 4.5 billion years...or 100 years if humans wreck the Earth. Play this while you still can...
+The final product will be used by any person interested in exploring the Solar System on their own computer — no need for a spacesuit! The information gained by playing this fun and educational game will be valuable for many years to come since no change is due in the planet's characteristics for another 4.5 billion years...or 100 years if humans wreck the Earth. Play this while you still can...
 
 <a name="1.2"></a>
 
 #### 1.2 Target Customer
-The clients of this product are parents and education institutions who wish to educate their children/students about the planets of the Solar System and the effects of gravity.  
+The clients of this product are parents and education institutions who wish to educate their children/students about the planets of the Solar System and the effects of gravity.
 
 In addition, any person interested in learning about the planets will be able to play.
 
@@ -69,17 +69,17 @@ While following the agile process of software development, team has decided to t
 * Orbiting colored planets around Sun
 * At the beginning of the game, player will be on planet Earth
 * Game involves hopping from one planet to another
-* Directions will be shown for hopping 	
+* Directions will be shown for hopping
 * Once the player successfully hops from one planet to another, he/she is rewarded with the unique information about that planet
 * For hopping, the player will have to use basic spatial and fine motor skills as well as a rudimentary understanding of the force of gravity.
 
 ##### *Design and Implementation:*
-Welcome screen with an image of solar system and text box containing introductory information about the purpose of game. On the top of the screen there will be buttons for taking player to settings menu for volume and speed, for game rules. At bottom, three buttons for game control, exit, start and home.  
-For implementing planet and player movement, we may use Slick2D, Java Swing.
+Welcome screen with an image of solar system and text box containing introductory information about the purpose of game. On the top of the screen there will be buttons for taking player to settings menu for volume and speed, and game rules. At bottom, three buttons for game controls, exit, start and home.
+For implementing planet and player movement, we may use Slick2D and Java Swing.
 
 ###### *Prototype UI*
 ![Prototype UI](image/PlanetHopper.jpg)
-_(** Picture is subject to copyright. Strictly for academic purposes.)_
+_* Image contains art subject to copyright. Strictly for academic purposes._
 <a name="2.0"></a>
 
 ## 2.0 Team and Constraints
@@ -139,26 +139,26 @@ _(** Picture is subject to copyright. Strictly for academic purposes.)_
 * User Manual
 * Source Code
 * Screen Shots
-* Presentation about final product and its development.
+* Presentation about final product and its development
 
 <a name="3.2"></a>
 
 #### 3.2 Schedule and Budget Summary
 
-| Item                       			| Date            |
-| :--------------------------			|:----------------|
-| Project Proposal      			   | Wed, April 13, 2016  |
-| Proposal Presentation	          	| Thurs, April 14, 2016 |
-| UI Design				               | Sat, April 16, 2016  |
-| GUI starters		                  | Mon, April 18, 2016 |
-| Class skeleton			            | Mon, April 18, 2016 |
-| Orbiting algorithm  	       		| Thurs, April 21, 2016 |
-| Sprint 1                   			| Thurs, April 21, 2016  |
-| Functional solar system      	   | Sun, April 24, 2016  |
-| Functional spaceship		      	| Wed, April 27, 2016  |
-| Sprint 2                   			| Thurs, April 28, 2016  |
-| Advanced UI for spaceship control | Sat, April 30, 2016  |
-| Info boxes on planets		         | Sun, April 31, 2016  |
-| Sprint 3                   			| Thurs, May 5, 2016  |
-| Extra features if time allows		| Mon, May 9, 2016   |
-| Demonstration and Delivery	    	| Thurs, May 12, 2016  |
+| Item                       	    		| Date                  |
+| :--------------------------		    	|:----------------      |
+| Project Proposal      			         | Wed, April 13, 2016   |
+| Proposal Presentation	           	| Thurs, April 14, 2016 |
+| UI Design				                     | Sat, April 16, 2016   |
+| GUI starters		                    | Mon, April 18, 2016   |
+| Class skeleton			                 | Mon, April 18, 2016   |
+| Orbiting algorithm  	           		| Thurs, April 21, 2016 |
+| Sprint 1                   	    		| Thurs, April 21, 2016 |
+| Functional solar system   	       | Sun, April 24, 2016   |
+| Functional spaceship		           	| Wed, April 27, 2016   |
+| Sprint 2                   		    	| Thurs, April 28, 2016 |
+| Advanced UI for spaceship control | Sat, April 30, 2016   |
+| Info boxes on planets		           | Sun, April 31, 2016   |
+| Sprint 3                   		    	| Thurs, May 5, 2016    |
+| Extra features if time allows		   | Mon, May 9, 2016      |
+| Demonstration and Delivery	      	| Thurs, May 12, 2016   |
