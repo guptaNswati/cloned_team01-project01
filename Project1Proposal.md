@@ -1,5 +1,5 @@
 # Project 1 Proposal
-### *Planet Hopper*
+## *Planet Hopper*
 
 * **Person**[  ] Composition = *new* **Person**[4];
  * Composition[0] = Joshua Fan;
@@ -77,9 +77,9 @@ While following the agile process of software development, team has decided to t
 Welcome screen with an image of solar system and text box containing introductory information about the purpose of game. On the top of the screen there will be buttons for taking player to settings menu for volume and speed, for game rules. At bottom, three buttons for game control, exit, start and home.  
 For implementing planet and player movement, we may use Slick2D, Java Swing.
 
-###### *Prototype UI (Strictly for educational purposes)*
+###### *Prototype UI*
 ![Prototype UI](image/PlanetHopper.jpg)
-
+_(** Picture is subject to copyright. Strictly for academic purposes.)_
 <a name="2.0"></a>
 
 ## 2.0 Team and Constraints
@@ -89,12 +89,10 @@ For implementing planet and player movement, we may use Slick2D, Java Swing.
 #### 2.1 Team Profile
 * ***Josh***
  * Physics algorithms
-
 * ***Swati***
  * Java Swing UI
  * CS 1A, 1B
  * Familiarity of database management systems
-
 * ***Xiaoxiang***
  * Working knowledge in Science and Life Science
  * Proficiency in Git basics and rudimentary knowledge of advanced Git
