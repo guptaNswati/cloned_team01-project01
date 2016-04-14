@@ -60,7 +60,7 @@ In addition, any person interested in learning about the planets will be able to
 
 #### 1.4 Scope and Objectives
 
-The objective is to build a working system that is flexible and responsive to change. Via this group project the focus is on learning how to divide a big project into smaller doable parts, how to work in team and how to use each team members strong pursuit.
+The objective is to build a working system that is flexible and responsive to change. Via this group project, the focus is on learning how to divide a big project into smaller doable parts, how to work in team and how to use each team member's strong suit.
 
 While following the agile process of software development, team has decided to take the simplest path and building a software system that can be used for entertainment and education. We may use existing codes, libraries and build on them.
 
@@ -101,7 +101,6 @@ _(** Picture is subject to copyright. Strictly for academic purposes.)_
  * Long experience with Java
  * Familiarity with Java API
  * CS 1A, 1B
-
 
  <a name="2.2"></a>
 
