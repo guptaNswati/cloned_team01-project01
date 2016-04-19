@@ -8,9 +8,15 @@ public class Player
 {
    private int xPos;
    private int yPos;
+   private int velocity;
+   private int angleOfPlayer;
    private boolean isOnPlanet; //false when traveling through space "hop"
-   public boolean [] planetsVisited = new boolean[8];
+   private int [] xPosHistory; //array to track past x positions in order to draw a line behind the player
+   private int [] yPosHistory; //array to track past y positions
+   
    //1-Mercury, 2-Venus, 3-Earth, 4-Mars, 5-Jupiter, 6-Saturn, 7-Uranus, 8-Neptune
+   public boolean [] planetsVisited = new boolean[8];
+      
    
  
    //CONSTRUCTOR
@@ -58,6 +64,7 @@ public class Player
        }
     }
     
+    
     //draw player
     public void draw(Graphics g){
        g.setColor(Color.BLACK);
@@ -83,7 +90,6 @@ public class Player
    {
       
       Player joe = new Player();
-      //joe.draw(g);
 
    }
 
