@@ -31,6 +31,7 @@ public class ScheduledExample {
                     float newX = ship.x
                     float newY = ship.y
                     for (Planet p : planets) {
+                        // TODO: gConst must be initialized
                         newX -= gConst * p.mass / (ship.x - p.x)^2;
                         newY -= gConst * p.mass / (ship.y - p.y)^2;
                     }
