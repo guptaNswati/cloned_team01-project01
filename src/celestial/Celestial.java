@@ -21,7 +21,6 @@ public class Celestial {
 
    public void draw(Graphics g) {
       g.setColor(color);
-      System.out.printf("%d, %d\n", coordinate.x, coordinate.y);
       g.fillOval(coordinate.x, coordinate.y, (int)radius * 2, (int)radius * 2);
    }
 
@@ -32,8 +31,7 @@ public class Celestial {
 
    public void setCoordinate(Point coordinate) {
       // TODO: validator
-      this.coordinate.x = coordinate.x;
-      this.coordinate.y = coordinate.y;
+      this.coordinate = new Point(coordinate.x, coordinate.y);
    }
 
    public void setRadius(double radius) {
