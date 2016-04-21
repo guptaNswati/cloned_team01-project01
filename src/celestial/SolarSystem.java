@@ -3,6 +3,7 @@ package celestial;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,6 +43,7 @@ public class SolarSystem extends JPanel {
       super.paintComponent(g);
       sun.draw(g);
       Graphics2D g2d = (Graphics2D)g;
+      g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
       for (Planet planet : planets) {
          planet.draw(g);
          g2d.drawOval(sun.getX() - planet.getDistanceToSun(),
