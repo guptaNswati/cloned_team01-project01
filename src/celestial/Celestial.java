@@ -8,20 +8,22 @@ public class Celestial {
    private Point coordinate;
    private Color color;
    private String name;
-   private double radius;
+   private int radius;
 
    public Celestial() {}
 
-   public Celestial(Point coordinate, Color color, String name, double radius) {
+   public Celestial(Point coordinate, Color color, String name, int radius) {
       this.name = name;
       this.color = color;
-      setCoordinate(coordinate);
+      this.coordinate = new Point();
+      setCoordinate(coordinate.x, coordinate.y);
       setRadius(radius);
    }
 
    public void draw(Graphics g) {
       g.setColor(color);
-      g.fillOval(coordinate.x, coordinate.y, (int)radius * 2, (int)radius * 2);
+      g.fillOval(coordinate.x - radius, coordinate.y - radius, radius * 2,
+            radius * 2);
    }
 
    public void updateCoordinate() {
@@ -29,12 +31,13 @@ public class Celestial {
       coordinate.y++;
    }
 
-   public void setCoordinate(Point coordinate) {
+   public void setCoordinate(int x, int y) {
       // TODO: validator
-      this.coordinate = new Point(coordinate.x, coordinate.y);
+      coordinate.x = x;
+      coordinate.y = y;
    }
 
-   public void setRadius(double radius) {
+   public void setRadius(int radius) {
       this.radius = radius > 0 ? radius : 10;
    }
 
