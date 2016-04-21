@@ -7,14 +7,11 @@ public class OrbitCalculation {
    public static void nextCoordinate(final Celestial sun, Planet planet) {
       double dTheta = 2 * Math.PI / planet.getPeriodInMS()
             * Constants.TIME_INTERVAL;
-      planet.setAngleToSun(planet.getAngleToSun() + dTheta);
+      planet.setAngleToSun((planet.getAngleToSun() + dTheta) % (2 * Math.PI));
       // update (x,y) coordinate
-      int dx, dy;
-      dx = (int)(planet.getDistanceToSun() * Math.cos(planet.getAngleToSun()));
-      dy = (int)(planet.getDistanceToSun() * Math.sin(planet.getAngleToSun()));
       int newX, newY;
-      newX = sun.getX() + dx;
-      newY = sun.getY() + dy;
+      newX = (int)(sun.getX() + planet.getDistanceToSun() * Math.cos(planet.getAngleToSun()));
+      newY = (int)(sun.getY() + planet.getDistanceToSun() * Math.sin(planet.getAngleToSun()));
       planet.setCoordinate(newX, newY);
    }
 }
