@@ -41,9 +41,9 @@ public class SolarSystem extends JPanel {
    @Override
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
-      sun.draw(g);
       Graphics2D g2d = (Graphics2D)g;
       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+      sun.draw(g);
       for (Planet planet : planets) {
          planet.draw(g);
          g2d.drawOval(sun.getX() - planet.getDistanceToSun(),
