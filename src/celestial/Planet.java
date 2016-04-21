@@ -1,11 +1,15 @@
 package celestial;
 
-public class Planet extends Celetial
-{
+import java.awt.Color;
+import java.awt.Point;
 
-   @Override
-   public void draw()
-   {
-
+public class Planet extends Celestial {
+   public Planet() {
+      super();
    }
+
+   public Planet(Point coordinate, Color color, String name, double radius) {
+      super(coordinate, color, name, radius);
+   }
+
 }
