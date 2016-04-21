@@ -21,7 +21,7 @@ public class SolarSystem extends JPanel {
    public static final String[] PLANET_NAMES = { "Mercury", "Venus", "Earth",
          "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
    public static final Color[] PLANET_COLORS = { Color.darkGray, Color.yellow,
-         Color.blue, Color.cyan, Color.orange, Color.gray, Color.blue,
+         Color.blue, Color.green, Color.orange, Color.gray, Color.blue,
          Color.magenta };
    public static final int[] PLANET_SIZES = { 5, 7, 10, 8, 22, 20, 17, 15 };
 
