@@ -1,5 +1,8 @@
 package physics;
 
+/**
+ * A class that contains constants that will be used in calculations.
+ */
 public class Constants {
    public static final int TIME_INTERVAL = 40;
 
