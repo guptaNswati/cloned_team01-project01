@@ -5,6 +5,9 @@ import javax.swing.JFrame;
 import celestial.SolarSystem;
 import physics.Constants;;
 
+/**
+ * Testing class that tests Sprint 1 which is a running solar system.
+ */
 public class TestSolarSystem {
    public static void main(String[] args) {
       JFrame frame = new JFrame("Simple Window");
