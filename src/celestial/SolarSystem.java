@@ -3,8 +3,8 @@ package celestial;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,6 +14,11 @@ import javax.swing.Timer;
 import physics.Constants;
 import physics.OrbitCalculation;
 
+/**
+ * A solar system object contains a sun and a number of planets. It contains a
+ * paintComponent method necessary for GUI. A run method that updates planets
+ * coordinates every time interval.
+ */
 public class SolarSystem extends JPanel {
    private Celestial sun;
    private Planet[] planets;
@@ -42,7 +47,8 @@ public class SolarSystem extends JPanel {
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
       Graphics2D g2d = (Graphics2D)g;
-      g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+      g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+            RenderingHints.VALUE_ANTIALIAS_ON);
       sun.draw(g);
       for (Planet planet : planets) {
          planet.draw(g);

@@ -3,6 +3,11 @@ package celestial;
 import java.awt.Color;
 import java.awt.Point;
 
+/**
+ * An object of a Planet class inherits from Celestial. It also has three
+ * additional members, distanceToSun, periodInMS, angleToSun.
+ */
+
 public class Planet extends Celestial {
    private final int distanceToSun;
    private final int periodInMS;
