@@ -8,6 +8,8 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.Random;
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -34,16 +36,17 @@ public class Update extends JPanel {
          Color.blue, Color.green, Color.orange, Color.gray, Color.blue,
          Color.magenta };
    public static final int[] PLANET_SIZES = { 5, 7, 10, 8, 22, 20, 17, 15 };
-   public static final int[] PLANET_PERIODS = { 2338, 6394, 11276, 18559, 42848, 69662, 115190, 164790 };
-
+   public static final int[] PLANET_PERIODS = { 7286, 20612, 37865, 58300, 81435, 107127, 134883, 164790 };
+   
    public Update() {
       super();
       sun = new Celestial(new Point(Constants.FRAME_WIDTH / 2,
             Constants.FRAME_HEIGHT / 2 - 40), Color.red, "Sun", 30);
       planets = new Planet[NUM_OF_PLANETS];
+      Random randGen = new Random();
       for (int i = 0; i < NUM_OF_PLANETS; i++) {
-         planets[i] = new Planet(PLANET_COLORS[i], PLANET_NAMES[i],
-               PLANET_SIZES[i], 50 * (i + 1), 0, PLANET_PERIODS[i]);
+         planets[i] = new Planet(PLANET_COLORS[i], PLANET_NAMES[i], PLANET_SIZES[i],
+               50 * (i + 1), randGen.nextDouble() * 2 * Math.PI, PLANET_PERIODS[i]);
       }
    }
 
