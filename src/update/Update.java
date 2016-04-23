@@ -1,4 +1,4 @@
-package celestial;
+package update;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -11,17 +11,20 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import celestial.Celestial;
+import celestial.Planet;
 import physics.Constants;
-import physics.OrbitCalculation;
+import physics.Physics;
 
 /**
  * A solar system object contains a sun and a number of planets. It contains a
  * paintComponent method necessary for GUI. A run method that updates planets
  * coordinates every time interval.
  */
-public class SolarSystem extends JPanel {
+public class Update extends JPanel {
    private Celestial sun;
    private Planet[] planets;
+   //private Ship ship;
 
    public static final int NUM_OF_PLANETS = 8;
 
@@ -31,15 +34,16 @@ public class SolarSystem extends JPanel {
          Color.blue, Color.green, Color.orange, Color.gray, Color.blue,
          Color.magenta };
    public static final int[] PLANET_SIZES = { 5, 7, 10, 8, 22, 20, 17, 15 };
+   public static final int[] PLANET_PERIODS = { 2338, 6394, 11276, 18559, 42848, 69662, 115190, 164790 };
 
-   public SolarSystem() {
+   public Update() {
       super();
       sun = new Celestial(new Point(Constants.FRAME_WIDTH / 2,
             Constants.FRAME_HEIGHT / 2 - 40), Color.red, "Sun", 30);
       planets = new Planet[NUM_OF_PLANETS];
       for (int i = 0; i < NUM_OF_PLANETS; i++) {
          planets[i] = new Planet(PLANET_COLORS[i], PLANET_NAMES[i],
-               PLANET_SIZES[i], 50 * (i + 1), 0, (i + 1) * 1000);
+               PLANET_SIZES[i], 50 * (i + 1), 0, PLANET_PERIODS[i]);
       }
    }
 
@@ -63,7 +67,7 @@ public class SolarSystem extends JPanel {
          @Override
          public void actionPerformed(ActionEvent e) {
             for (Planet planet : planets)
-               OrbitCalculation.nextCoordinate(sun, planet);
+               Physics.planetaryOrbit(sun, planet);
             repaint();
          }
       });

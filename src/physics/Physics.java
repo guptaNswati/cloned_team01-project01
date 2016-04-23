@@ -6,8 +6,8 @@ import celestial.Planet;
 /**
  * Has static method to update planets' coordinations.
  */
-public class OrbitCalculation {
-   public static void nextCoordinate(final Celestial sun, Planet planet) {
+public class Physics {
+   public static void planetaryOrbit(final Celestial sun, Planet planet) {
       double dTheta = 2 * Math.PI / planet.getPeriodInMS()
             * Constants.TIME_INTERVAL;
       planet.setAngleToSun((planet.getAngleToSun() + dTheta) % (2 * Math.PI));
@@ -18,5 +18,9 @@ public class OrbitCalculation {
       newY = (int)(sun.getY()
             + planet.getDistanceToSun() * Math.sin(planet.getAngleToSun()));
       planet.setCoordinate(newX, newY);
+   }
+   
+   public static void shipFlight(Ship ship) {
+       
    }
 }
