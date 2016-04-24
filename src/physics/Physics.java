@@ -2,6 +2,7 @@ package physics;
 
 import celestial.Celestial;
 import celestial.Planet;
+import ship.Ship;
 
 /**
  * Has static method to update planets' coordinations.
@@ -19,8 +20,6 @@ public class Physics {
             + planet.getDistanceToSun() * Math.sin(planet.getAngleToSun()));
       planet.setCoordinate(newX, newY);
    }
-   
-   public static void shipFlight(Ship ship) {
-       
-   }
+
+   public static void shipFlight(Ship ship) {}
 }
