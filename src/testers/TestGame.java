@@ -1,5 +1,8 @@
 package testers;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JFrame;
 
 import physics.Constants;
@@ -15,7 +18,9 @@ public class TestGame {
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       Update update = new Update();
       frame.add(update);
-      frame.setResizable(false);
+      update.setBackground(Color.black);
+      frame.add(BorderLayout.CENTER, update);
+      // frame.setResizable(false);
       frame.setVisible(true);
 
       update.run();

@@ -7,7 +7,6 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -26,7 +25,7 @@ import physics.Physics;
 public class Update extends JPanel {
    private Celestial sun;
    private Planet[] planets;
-   //private Ship ship;
+   // private Ship ship;
 
    public static final int NUM_OF_PLANETS = 8;
 
@@ -36,17 +35,19 @@ public class Update extends JPanel {
          Color.blue, Color.green, Color.orange, Color.gray, Color.blue,
          Color.magenta };
    public static final int[] PLANET_SIZES = { 5, 7, 10, 8, 22, 20, 17, 15 };
-   public static final int[] PLANET_PERIODS = { 7286, 20612, 37865, 58300, 81435, 107127, 134883, 164790 };
-   
+   public static final int[] PLANET_PERIODS = { 7286, 20612, 37865, 58300,
+         81435, 107127, 134883, 164790 };
+
    public Update() {
       super();
-      sun = new Celestial(new Point(Constants.FRAME_WIDTH / 2,
-            Constants.FRAME_HEIGHT / 2 - 40), Color.red, "Sun", 30);
+      sun = new Celestial(new Point(Constants.INIT_SUN_X, Constants.INIT_SUN_Y),
+            Color.red, "Sun", 30);
       planets = new Planet[NUM_OF_PLANETS];
       Random randGen = new Random();
       for (int i = 0; i < NUM_OF_PLANETS; i++) {
-         planets[i] = new Planet(PLANET_COLORS[i], PLANET_NAMES[i], PLANET_SIZES[i],
-               50 * (i + 1), randGen.nextDouble() * 2 * Math.PI, PLANET_PERIODS[i]);
+         planets[i] = new Planet(PLANET_COLORS[i], PLANET_NAMES[i],
+               PLANET_SIZES[i], 50 * (i + 1),
+               randGen.nextDouble() * 2 * Math.PI, PLANET_PERIODS[i]);
       }
    }
 
@@ -54,6 +55,10 @@ public class Update extends JPanel {
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
       Graphics2D g2d = (Graphics2D)g;
+
+      double scale = Math.min(getWidth() / 1682., getHeight() / 953.);
+      g2d.scale(scale, scale);
+
       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
             RenderingHints.VALUE_ANTIALIAS_ON);
       sun.draw(g);
