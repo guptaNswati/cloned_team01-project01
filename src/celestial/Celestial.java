@@ -4,9 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 
 /**
  * An object of class Celestial has 4 members, coordinate, color, name, radius.
@@ -18,7 +21,7 @@ public class Celestial {
    private Color color;
    private String name;
    private int radius;
-   private Image image;
+   private BufferedImage image;
 
    /**
     * A default parameter that does nothing.
@@ -100,7 +103,8 @@ public class Celestial {
    }
 
    public void setImage(String filename) {
-      image = new ImageIcon(filename).getImage();
+      try {
+         image = ImageIO.read(new File(filename));
+      } catch (IOException ex) {}
    }
-
 }
