@@ -2,7 +2,7 @@ package celestial;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 
 /**
  * An object of class Celestial has 4 members, coordinate, color, name, radius.
@@ -10,7 +10,7 @@ import java.awt.Point;
  * has also a draw method to draw the celestial on GUI.
  */
 public class Celestial {
-   private Point coordinate;
+   private Point2D coordinate;
    private Color color;
    private String name;
    private int radius;
@@ -33,11 +33,11 @@ public class Celestial {
     * @param radius
     *           The radius of a celestial
     */
-   public Celestial(Point coordinate, Color color, String name, int radius, long mass) {
+   public Celestial(Point2D.Double coordinate, Color color, String name, int radius, long mass) {
       this.name = name;
       this.color = color;
-      this.coordinate = new Point();
-      setCoordinate(coordinate.x, coordinate.y);
+      this.coordinate = new Point2D.Double();
+      setCoordinate(coordinate.getX(), coordinate.getY());
       setRadius(radius);
       setMass(mass);
    }
@@ -50,12 +50,8 @@ public class Celestial {
     */
    public void draw(Graphics g) {
       g.setColor(color);
-      g.fillOval(coordinate.x - radius, coordinate.y - radius, radius * 2,
+      g.fillOval((int)coordinate.getX() - radius, (int)coordinate.getY() - radius, radius * 2,
             radius * 2);
-   }
-
-   public Point getCoordinate() {
-      return coordinate;
    }
 
    /**
@@ -66,10 +62,9 @@ public class Celestial {
     * @param y
     *           y coordinate.
     */
-   public void setCoordinate(int x, int y) {
+   public void setCoordinate(double x, double y) {
       // TODO: validator
-      coordinate.x = x;
-      coordinate.y = y;
+      coordinate.setLocation(x, y);
    }
 
    public double getRadius() {
@@ -88,11 +83,11 @@ public class Celestial {
       this.mass = mass > 0 ? mass : 1;
    }
 
-   public int getX() {
-      return coordinate.x;
+   public double getX() {
+      return coordinate.getX();
    }
 
-   public int getY() {
-      return coordinate.y;
+   public double getY() {
+      return coordinate.getY();
    }
 }

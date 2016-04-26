@@ -1,7 +1,7 @@
 package celestial;
 
 import java.awt.Color;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 
 /**
  * An object of a Planet class inherits from Celestial. It also has three
@@ -21,7 +21,7 @@ public class Planet extends Celestial {
 
    public Planet(Color color, String name, int radius, long mass, int distanceToSun,
          double angleToSun, int periodInMS) {
-      super(new Point(), color, name, radius, mass);
+      super(new Point2D.Double(), color, name, radius, mass);
       this.distanceToSun = distanceToSun > 0 ? distanceToSun : 10;
       this.setAngleToSun(angleToSun);
       this.periodInMS = periodInMS > 1000 ? periodInMS : 1000;

@@ -30,13 +30,13 @@ public class Physics {
                + (ship.getAttachedCelestial().getRadius() + 2) * Math.sin(ship.getAngle()));
       }
       else {
-         newX = (int)(ship.getCoordinate().getX() + ship.getSpeed() * Math.cos(ship.getAngle()));
-         newY = (int)(ship.getCoordinate().getY() + ship.getSpeed() * Math.sin(ship.getAngle()));
+         newX = (int)(ship.getX() + ship.getThrust() * Math.cos(ship.getAngle()));
+         newY = (int)(ship.getY() + ship.getThrust() * Math.sin(ship.getAngle()));
          for (Planet planet : planets) {
             newX -= (int)(Constants.GRAVITATIONAL_CONSTANT * planet.getMass()
-                  / Math.pow(ship.getCoordinate().getX() - planet.getX(), 2));
+                  / Math.pow(ship.getX() - planet.getX(), 2));
             newY -= (int)(Constants.GRAVITATIONAL_CONSTANT * planet.getMass()
-                  / Math.pow(ship.getCoordinate().getY() - planet.getY(), 2));
+                  / Math.pow(ship.getY() - planet.getY(), 2));
          }
       }
       ship.setCoordinate(newX, newY);

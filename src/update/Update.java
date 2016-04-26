@@ -3,7 +3,7 @@ package update;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,7 +44,7 @@ public class Update extends JPanel {
 
    public Update() {
       super();
-      sun = new Celestial(new Point(Constants.FRAME_WIDTH / 2,
+      sun = new Celestial(new Point2D.Double(Constants.FRAME_WIDTH / 2,
             Constants.FRAME_HEIGHT / 2 - 40), Color.red, "Sun", 30, 1989000000);
       planets = new Planet[NUM_OF_PLANETS];
       ship = new Ship();
@@ -65,8 +65,8 @@ public class Update extends JPanel {
       sun.draw(g);
       for (Planet planet : planets) {
          planet.draw(g);
-         g2d.drawOval(sun.getX() - planet.getDistanceToSun(),
-               sun.getY() - planet.getDistanceToSun(),
+         g2d.drawOval((int)sun.getX() - planet.getDistanceToSun(),
+               (int)sun.getY() - planet.getDistanceToSun(),
                planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
       }
       ship.draw(g);
