@@ -66,14 +66,13 @@ public class Update extends JPanel {
       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
             RenderingHints.VALUE_ANTIALIAS_ON);
       sun.draw(g);
-
+      arrow.draw(g, this);
       for (Planet planet : planets) {
          planet.draw(g);
          g2d.drawOval(sun.getX() - planet.getDistanceToSun(),
                sun.getY() - planet.getDistanceToSun(),
                planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
       }
-      arrow.draw(g, this);
    }
 
    public void run() {

@@ -2,24 +2,30 @@ package ship;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 
 public class Arrow {
    private Point coordinate;
-   private Image image;
+   private BufferedImage image;
    private int width;
    private int height;
    private double angle;
 
    public Arrow(String filename, Point coordinate) {
       setCoordinate(coordinate);
-      image = new ImageIcon(filename).getImage();
+      try {
+         image = ImageIO.read(new File(filename));
+      } catch (IOException ex) {}
       width = 50;
-      height = 10;
+      height = 8;
    }
 
    public int getX() {
@@ -40,9 +46,14 @@ public class Arrow {
 
    public void draw(Graphics g, ImageObserver imgOb) {
       Graphics2D g2d = (Graphics2D)g;
-      g2d.rotate(angle, coordinate.x, coordinate.y);
-      g2d.drawImage(image, coordinate.x, coordinate.y - height / 2, width,
-            height, imgOb);
+      AffineTransform trans = new AffineTransform();
+      trans.translate(getX(), getY() - height / 2);
+      trans.rotate(angle, 0, height / 2);
+      trans.scale(width / (double)image.getWidth(),
+            height / (double)image.getHeight());
+      AffineTransformOp op = new AffineTransformOp(trans,
+            AffineTransformOp.TYPE_BILINEAR);
+      g2d.drawImage(image, op, 0, 0);
    }
 
    public double getAngle() {
