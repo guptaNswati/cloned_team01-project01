@@ -19,7 +19,7 @@ public class Planet extends Celestial {
       periodInMS = 1;
    }
 
-   public Planet(Color color, String name, int radius, long mass, int distanceToSun,
+   public Planet(Color color, String name, int radius, double mass, int distanceToSun,
          double angleToSun, int periodInMS) {
       super(new Point2D.Double(), color, name, radius, mass);
       this.distanceToSun = distanceToSun > 0 ? distanceToSun : 10;

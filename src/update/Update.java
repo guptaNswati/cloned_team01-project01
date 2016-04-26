@@ -39,13 +39,13 @@ public class Update extends JPanel {
    public static final int[] PLANET_SIZES = { 5, 7, 10, 8, 22, 20, 17, 15 };
    public static final int[] PLANET_PERIODS = {
          7286, 20612, 37865, 58300, 81435, 107127, 134883, 164790 };
-   public static final long[] PLANET_MASSES = {
-         330000, 4870000, 5970000, 642000, 1898000000, 568000000, 86800000, 102000000 };
+   public static final double[] PLANET_MASSES = {
+         5.8, 8.5, 8.7, 6.5, 14.5, 13.2, 11.4, 11.5 };
 
    public Update() {
       super();
       sun = new Celestial(new Point2D.Double(Constants.FRAME_WIDTH / 2,
-            Constants.FRAME_HEIGHT / 2 - 40), Color.red, "Sun", 30, 1989000000);
+            Constants.FRAME_HEIGHT / 2 - 40), Color.red, "Sun", 30, 21.4);
       planets = new Planet[NUM_OF_PLANETS];
       ship = new Ship();
       Random randGen = new Random();

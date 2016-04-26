@@ -14,7 +14,7 @@ public class Celestial {
    private Color color;
    private String name;
    private int radius;
-   private long mass;
+   private double mass;
 
    /**
     * A default parameter that does nothing.
@@ -33,7 +33,7 @@ public class Celestial {
     * @param radius
     *           The radius of a celestial
     */
-   public Celestial(Point2D.Double coordinate, Color color, String name, int radius, long mass) {
+   public Celestial(Point2D.Double coordinate, Color color, String name, int radius, double mass) {
       this.name = name;
       this.color = color;
       this.coordinate = new Point2D.Double();
@@ -75,11 +75,11 @@ public class Celestial {
       this.radius = radius > 0 ? radius : 10;
    }
 
-   public long getMass() {
+   public double getMass() {
       return mass;
    }
 
-   public void setMass(long mass) {
+   public void setMass(double mass) {
       this.mass = mass > 0 ? mass : 1;
    }
 
