@@ -7,7 +7,6 @@ import java.awt.geom.Point2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -20,9 +19,9 @@ import physics.Constants;
 import physics.Physics;
 
 /**
- * A solar system object contains a sun and a number of planets. It contains a
- * paintComponent method necessary for GUI. A run method that updates planets
- * coordinates every time interval.
+ * An update object contains all dynamic graphical elements.
+ * It contains a paintComponent method necessary for GUI.
+ * The run method updates physical coordinates and GUI elements at regular intervals.
  */
 public class Update extends JPanel {
    private Celestial sun;
@@ -44,14 +43,16 @@ public class Update extends JPanel {
 
    public Update() {
       super();
-      sun = new Celestial(new Point2D.Double(Constants.FRAME_WIDTH / 2,
-            Constants.FRAME_HEIGHT / 2 - 40), Color.red, "Sun", 30, 21.4);
+      sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
+            Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
       planets = new Planet[NUM_OF_PLANETS];
       ship = new Ship();
       Random randGen = new Random();
       for (int i = 0; i < NUM_OF_PLANETS; i++) {
-         planets[i] = new Planet(PLANET_COLORS[i], PLANET_NAMES[i], PLANET_SIZES[i], PLANET_MASSES[i],
-               50 * (i + 1), randGen.nextDouble() * 2 * Math.PI, PLANET_PERIODS[i]);
+         planets[i] = new Planet(PLANET_COLORS[i], PLANET_NAMES[i],
+               PLANET_SIZES[i], PLANET_MASSES[i],
+               50 * (i + 1), randGen.nextDouble() * 2 * Math.PI,
+               PLANET_PERIODS[i]);
       }
       ship.setAttachedCelestial(planets[2]);
    }
@@ -60,6 +61,10 @@ public class Update extends JPanel {
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
       Graphics2D g2d = (Graphics2D)g;
+      
+      double scale = Math.min(getWidth() / 1682., getHeight() / 953.);
+      g2d.scale(scale, scale);
+      
       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
             RenderingHints.VALUE_ANTIALIAS_ON);
       sun.draw(g);

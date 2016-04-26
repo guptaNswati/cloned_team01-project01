@@ -5,7 +5,7 @@ import celestial.Planet;
 import ship.Ship;
 
 /**
- * Has static method to update planets' coordinations.
+ * Methods to calculate planet and ship coordinates.
  */
 public class Physics {
    public static void planetaryOrbit(final Celestial sun, Planet planet) {
@@ -19,6 +19,10 @@ public class Physics {
       newY = (int)(sun.getY()
             + planet.getDistanceToSun() * Math.sin(planet.getAngleToSun()));
       planet.setCoordinate(newX, newY);
+   }
+   
+   public static void shipGuideline(Ship ship, Planet[] planets, int frame) {
+      
    }
    
    public static void shipFlight(Ship ship, Planet[] planets) {

@@ -1,9 +1,12 @@
 package testers;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JFrame;
 
 import physics.Constants;
-import update.Update;;
+import update.Update;
 
 /**
  * Testing class that tests Sprint 1 which is a running solar system.
@@ -15,7 +18,8 @@ public class TestGame {
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       Update update = new Update();
       frame.add(update);
-      frame.setResizable(false);
+      update.setBackground(Color.black);
+      frame.add(BorderLayout.CENTER, update);
       frame.setVisible(true);
 
       update.run();

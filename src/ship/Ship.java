@@ -27,7 +27,7 @@ public class Ship {
    }
 
    public void draw(Graphics g) {
-      g.setColor(Color.black);
+      g.setColor(Color.white);
       g.fillOval((int)coordinate.getFirst().getX() - 2,
             (int)coordinate.getFirst().getY() - 2, 4, 4);
    }
