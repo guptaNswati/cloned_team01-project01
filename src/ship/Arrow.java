@@ -12,6 +12,7 @@ public class Arrow {
    private Image image;
    private int width;
    private int height;
+   private double angle;
 
    public Arrow(String filename, Point coordinate) {
       setCoordinate(coordinate);
@@ -40,4 +41,13 @@ public class Arrow {
       g.drawImage(image, coordinate.x, coordinate.y - height / 2, width, height,
             imgOb);
    }
+
+   public double getAngle() {
+      return angle;
+   }
+
+   public void setAngle(double angle) {
+      this.angle = angle;
+   }
+
 }
