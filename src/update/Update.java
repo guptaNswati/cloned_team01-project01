@@ -10,6 +10,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -94,6 +95,7 @@ public class Update extends JPanel {
       super();
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
+      sun.setImage(new ImageIcon("image/MrSun-sample.png").getImage());
       planets = new Planet[NUM_OF_PLANETS];
       ship = new Ship();
       Random randGen = new Random();
@@ -129,13 +131,12 @@ public class Update extends JPanel {
       // Anti-aliasing
       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
             RenderingHints.VALUE_ANTIALIAS_ON);
-
-      sun.draw(g);
       ship.draw(g);
+      sun.draw(g, this);
 
       // Draw all planets
       for (Planet planet : planets) {
-         planet.draw(g); //draws planet
+         planet.draw(g, this); //draws planet
 
          // Checks the distance between planets and player and displays information appropriately
          if (Physics.distanceToPlanet(planet, ship) < 2)

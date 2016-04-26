@@ -2,7 +2,9 @@ package celestial;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.geom.Point2D;
+import java.awt.image.ImageObserver;
 
 /**
  * An object of class Celestial has 4 members, coordinate, color, name, radius.
@@ -15,6 +17,7 @@ public class Celestial {
    private String name;
    private int radius;
    private double mass;
+   private Image image;
 
    /**
     * A default parameter that does nothing.
@@ -33,7 +36,8 @@ public class Celestial {
     * @param radius
     *           The radius of a celestial
     */
-   public Celestial(Point2D.Double coordinate, Color color, String name, int radius, double mass) {
+   public Celestial(Point2D.Double coordinate, Color color, String name,
+         int radius, double mass) {
       this.setName(name);
       this.color = color;
       this.coordinate = new Point2D.Double();
@@ -48,10 +52,15 @@ public class Celestial {
     * @param g
     *           A Graphics object that is passed in by paintComponent method.
     */
-   public void draw(Graphics g) {
-      g.setColor(color);
-      g.fillOval((int)coordinate.getX() - radius, (int)coordinate.getY() - radius, radius * 2,
-            radius * 2);
+   public void draw(Graphics g, ImageObserver imgOb) {
+      if (image == null) {
+         g.setColor(color);
+         g.fillOval((int)coordinate.getX() - radius,
+               (int)coordinate.getY() - radius, radius * 2, radius * 2);
+      }
+      else
+         g.drawImage(image, (int)coordinate.getX() - radius,
+               (int)coordinate.getY() - radius, radius * 2, radius * 2, imgOb);
    }
 
    /**
@@ -63,7 +72,6 @@ public class Celestial {
     *           y coordinate.
     */
    public void setCoordinate(double x, double y) {
-      // TODO: validator
       coordinate.setLocation(x, y);
    }
 
@@ -83,7 +91,7 @@ public class Celestial {
       this.mass = mass > 0 ? mass : 1;
    }
 
-   public Point2D getCoordinate(){
+   public Point2D getCoordinate() {
       return coordinate;
    }
 
@@ -95,13 +103,19 @@ public class Celestial {
       return coordinate.getY();
    }
 
-public String getName()
-{
-    return name;
-}
+   public String getName() {
+      return name;
+   }
 
-public void setName(String name)
-{
-    this.name = name;
-}
+   public void setName(String name) {
+      this.name = name;
+   }
+
+   public Image getImage() {
+      return image;
+   }
+
+   public void setImage(Image image) {
+      this.image = image;
+   }
 }
