@@ -16,6 +16,8 @@ import celestial.Celestial;
 import celestial.Planet;
 import physics.Constants;
 import physics.Physics;
+import ship.Arrow;
+import ship.Ship;
 
 /**
  * A solar system object contains a sun and a number of planets. It contains a
@@ -25,7 +27,8 @@ import physics.Physics;
 public class Update extends JPanel {
    private Celestial sun;
    private Planet[] planets;
-   // private Ship ship;
+   private Ship ship;
+   private Arrow arrow;
 
    public static final int NUM_OF_PLANETS = 8;
 
@@ -49,6 +52,7 @@ public class Update extends JPanel {
                PLANET_SIZES[i], 50 * (i + 1),
                randGen.nextDouble() * 2 * Math.PI, PLANET_PERIODS[i]);
       }
+      arrow = new Arrow("image/arrow-sample.png", planets[2].getCoordinate());
    }
 
    @Override
@@ -62,6 +66,7 @@ public class Update extends JPanel {
       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
             RenderingHints.VALUE_ANTIALIAS_ON);
       sun.draw(g);
+      arrow.draw(g, this);
       for (Planet planet : planets) {
          planet.draw(g);
          g2d.drawOval(sun.getX() - planet.getDistanceToSun(),
@@ -76,6 +81,7 @@ public class Update extends JPanel {
          public void actionPerformed(ActionEvent e) {
             for (Planet planet : planets)
                Physics.planetaryOrbit(sun, planet);
+            arrow.setCoordinate(planets[2].getCoordinate());
             repaint();
          }
       });
