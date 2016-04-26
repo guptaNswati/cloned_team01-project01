@@ -1,5 +1,3 @@
-package celestial;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,8 +9,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import physics.Constants;
-import physics.OrbitCalculation;
 
 /**
  * A solar system object contains a sun and a number of planets. It contains a
@@ -22,6 +18,9 @@ import physics.OrbitCalculation;
 public class SolarSystem extends JPanel {
    private Celestial sun;
    private Planet[] planets;
+   private static CSVReader csv = new CSVReader();
+   private String[][] dataInfo = csv.getInfo();
+   private String[] names = csv.getNames();
 
    public static final int NUM_OF_PLANETS = 8;
 
@@ -34,12 +33,27 @@ public class SolarSystem extends JPanel {
 
    public SolarSystem() {
       super();
+      
+      String[][] data = new String [8][1];     
+      for(int i = 0; i < data.length; i++)
+      {
+          data[i][0] = dataInfo[i+1][0];              
+      }
+      
+      String[] name = new String[8];
+      for(int n = 0; n < name.length; n++)
+      {
+          name[n] = names[n+1];
+      }
+      
+      
       sun = new Celestial(new Point(Constants.FRAME_WIDTH / 2,
             Constants.FRAME_HEIGHT / 2 - 40), Color.red, "Sun", 30);
+
       planets = new Planet[NUM_OF_PLANETS];
       for (int i = 0; i < NUM_OF_PLANETS; i++) {
          planets[i] = new Planet(PLANET_COLORS[i], PLANET_NAMES[i],
-               PLANET_SIZES[i], 50 * (i + 1), 0, (i + 1) * 1000);
+               PLANET_SIZES[i], 50 * (i + 1), 0, (i + 1) * 1000, data, name);
       }
    }
 
