@@ -10,7 +10,6 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -95,7 +94,7 @@ public class Update extends JPanel {
       super();
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
-      sun.setImage(new ImageIcon("image/MrSun-sample.png").getImage());
+      sun.setImage("image/MrSun-sample.png");
       planets = new Planet[NUM_OF_PLANETS];
       ship = new Ship();
       Random randGen = new Random();
