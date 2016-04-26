@@ -14,6 +14,7 @@ public class Celestial {
    private Color color;
    private String name;
    private int radius;
+   private long mass;
 
    /**
     * A default parameter that does nothing.
@@ -32,12 +33,13 @@ public class Celestial {
     * @param radius
     *           The radius of a celestial
     */
-   public Celestial(Point coordinate, Color color, String name, int radius) {
+   public Celestial(Point coordinate, Color color, String name, int radius, long mass) {
       this.name = name;
       this.color = color;
       this.coordinate = new Point();
       setCoordinate(coordinate.x, coordinate.y);
       setRadius(radius);
+      setMass(mass);
    }
 
    /**
@@ -50,6 +52,10 @@ public class Celestial {
       g.setColor(color);
       g.fillOval(coordinate.x - radius, coordinate.y - radius, radius * 2,
             radius * 2);
+   }
+
+   public Point getCoordinate() {
+      return coordinate;
    }
 
    /**
@@ -66,12 +72,20 @@ public class Celestial {
       coordinate.y = y;
    }
 
+   public double getRadius() {
+      return radius;
+   }
+
    public void setRadius(int radius) {
       this.radius = radius > 0 ? radius : 10;
    }
 
-   public Point getCoordinate() {
-      return coordinate;
+   public long getMass() {
+      return mass;
+   }
+
+   public void setMass(long mass) {
+      this.mass = mass > 0 ? mass : 1;
    }
 
    public int getX() {
@@ -80,9 +94,5 @@ public class Celestial {
 
    public int getY() {
       return coordinate.y;
-   }
-
-   public double getRadius() {
-      return radius;
    }
 }

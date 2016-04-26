@@ -15,6 +15,7 @@ import javax.swing.Timer;
 
 import celestial.Celestial;
 import celestial.Planet;
+import ship.Ship;
 import physics.Constants;
 import physics.Physics;
 
@@ -26,7 +27,7 @@ import physics.Physics;
 public class Update extends JPanel {
    private Celestial sun;
    private Planet[] planets;
-   //private Ship ship;
+   private Ship ship;
 
    public static final int NUM_OF_PLANETS = 8;
 
@@ -36,18 +37,23 @@ public class Update extends JPanel {
          Color.blue, Color.green, Color.orange, Color.gray, Color.blue,
          Color.magenta };
    public static final int[] PLANET_SIZES = { 5, 7, 10, 8, 22, 20, 17, 15 };
-   public static final int[] PLANET_PERIODS = { 7286, 20612, 37865, 58300, 81435, 107127, 134883, 164790 };
-   
+   public static final int[] PLANET_PERIODS = {
+         7286, 20612, 37865, 58300, 81435, 107127, 134883, 164790 };
+   public static final long[] PLANET_MASSES = {
+         330000, 4870000, 5970000, 642000, 1898000000, 568000000, 86800000, 102000000 };
+
    public Update() {
       super();
       sun = new Celestial(new Point(Constants.FRAME_WIDTH / 2,
-            Constants.FRAME_HEIGHT / 2 - 40), Color.red, "Sun", 30);
+            Constants.FRAME_HEIGHT / 2 - 40), Color.red, "Sun", 30, 1989000000);
       planets = new Planet[NUM_OF_PLANETS];
+      ship = new Ship();
       Random randGen = new Random();
       for (int i = 0; i < NUM_OF_PLANETS; i++) {
-         planets[i] = new Planet(PLANET_COLORS[i], PLANET_NAMES[i], PLANET_SIZES[i],
+         planets[i] = new Planet(PLANET_COLORS[i], PLANET_NAMES[i], PLANET_SIZES[i], PLANET_MASSES[i],
                50 * (i + 1), randGen.nextDouble() * 2 * Math.PI, PLANET_PERIODS[i]);
       }
+      ship.setAttachedCelestial(planets[2]);
    }
 
    @Override
@@ -63,6 +69,7 @@ public class Update extends JPanel {
                sun.getY() - planet.getDistanceToSun(),
                planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
       }
+      ship.draw(g);
    }
 
    public void run() {
@@ -71,6 +78,7 @@ public class Update extends JPanel {
          public void actionPerformed(ActionEvent e) {
             for (Planet planet : planets)
                Physics.planetaryOrbit(sun, planet);
+            Physics.shipFlight(ship, planets);
             repaint();
          }
       });

@@ -19,9 +19,9 @@ public class Planet extends Celestial {
       periodInMS = 1;
    }
 
-   public Planet(Color color, String name, int radius, int distanceToSun,
+   public Planet(Color color, String name, int radius, long mass, int distanceToSun,
          double angleToSun, int periodInMS) {
-      super(new Point(), color, name, radius);
+      super(new Point(), color, name, radius, mass);
       this.distanceToSun = distanceToSun > 0 ? distanceToSun : 10;
       this.setAngleToSun(angleToSun);
       this.periodInMS = periodInMS > 1000 ? periodInMS : 1000;

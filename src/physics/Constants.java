@@ -8,4 +8,6 @@ public class Constants {
 
    public static final int FRAME_WIDTH = 1700;
    public static final int FRAME_HEIGHT = 1000;
+   
+   public static final double GRAVITATIONAL_CONSTANT = 0.001;
 }
