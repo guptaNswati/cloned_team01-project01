@@ -2,7 +2,9 @@ package celestial;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.ImageObserver;
 
 /**
  * An object of class Celestial has 4 members, coordinate, color, name, radius.
@@ -14,6 +16,7 @@ public class Celestial {
    private Color color;
    private String name;
    private int radius;
+   private Image image;
 
    /**
     * A default parameter that does nothing.
@@ -46,10 +49,14 @@ public class Celestial {
     * @param g
     *           A Graphics object that is passed in by paintComponent method.
     */
-   public void draw(Graphics g) {
-      g.setColor(color);
-      g.fillOval(coordinate.x - radius, coordinate.y - radius, radius * 2,
-            radius * 2);
+   public void draw(Graphics g, ImageObserver imgOb) {
+      if (image == null) {
+         g.setColor(color);
+         g.fillOval(coordinate.x - radius, coordinate.y - radius, radius * 2,
+               radius * 2);
+      } else
+         g.drawImage(image, getX() - radius, getY() - radius, 2 * radius,
+               2 * radius, imgOb);
    }
 
    /**
@@ -85,4 +92,13 @@ public class Celestial {
    public double getRadius() {
       return radius;
    }
+
+   public Image getImage() {
+      return image;
+   }
+
+   public void setImage(Image image) {
+      this.image = image;
+   }
+
 }

@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -42,6 +43,7 @@ public class Update extends JPanel {
       super();
       sun = new Celestial(new Point(Constants.INIT_SUN_X, Constants.INIT_SUN_Y),
             Color.red, "Sun", 30);
+      sun.setImage(new ImageIcon("image/MrSun-sample.png").getImage());
       planets = new Planet[NUM_OF_PLANETS];
       Random randGen = new Random();
       for (int i = 0; i < NUM_OF_PLANETS; i++) {
@@ -61,9 +63,9 @@ public class Update extends JPanel {
 
       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
             RenderingHints.VALUE_ANTIALIAS_ON);
-      sun.draw(g);
+      sun.draw(g, this);
       for (Planet planet : planets) {
-         planet.draw(g);
+         planet.draw(g, this);
          g2d.drawOval(sun.getX() - planet.getDistanceToSun(),
                sun.getY() - planet.getDistanceToSun(),
                planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
