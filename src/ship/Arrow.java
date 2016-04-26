@@ -1,6 +1,7 @@
 package ship;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.ImageObserver;
@@ -38,8 +39,10 @@ public class Arrow {
    }
 
    public void draw(Graphics g, ImageObserver imgOb) {
-      g.drawImage(image, coordinate.x, coordinate.y - height / 2, width, height,
-            imgOb);
+      Graphics2D g2d = (Graphics2D)g;
+      g2d.rotate(angle, coordinate.x, coordinate.y);
+      g2d.drawImage(image, coordinate.x, coordinate.y - height / 2, width,
+            height, imgOb);
    }
 
    public double getAngle() {
