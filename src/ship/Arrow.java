@@ -3,6 +3,9 @@ package ship;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -11,8 +14,9 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JComponent;
 
-public class Arrow {
+public class Arrow extends JComponent {
    private Point coordinate;
    private BufferedImage image;
    private int width;
@@ -26,12 +30,15 @@ public class Arrow {
       } catch (IOException ex) {}
       width = 50;
       height = 8;
+
    }
 
+   @Override
    public int getX() {
       return coordinate.x;
    }
 
+   @Override
    public int getY() {
       return coordinate.y;
    }
@@ -64,4 +71,19 @@ public class Arrow {
       this.angle = angle;
    }
 
+   public KeyListener getArrowControl() {
+      return new ArrowControl();
+   }
+
+   private class ArrowControl extends KeyAdapter {
+      private int keyStrokePerPI = 30;
+
+      @Override
+      public void keyPressed(KeyEvent e) {
+         if (e.getKeyCode() == KeyEvent.VK_LEFT)
+            angle -= Math.PI / keyStrokePerPI;
+         if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+            angle += Math.PI / keyStrokePerPI;
+      }
+   }
 }

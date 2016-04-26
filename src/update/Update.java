@@ -53,6 +53,7 @@ public class Update extends JPanel {
                randGen.nextDouble() * 2 * Math.PI, PLANET_PERIODS[i]);
       }
       arrow = new Arrow("image/arrow-sample.png", planets[2].getCoordinate());
+      toggleKeyListener();
    }
 
    @Override
@@ -82,10 +83,15 @@ public class Update extends JPanel {
             for (Planet planet : planets)
                Physics.planetaryOrbit(sun, planet);
             arrow.setCoordinate(planets[2].getCoordinate());
-            arrow.setAngle(arrow.getAngle() + Math.PI / 50);
             repaint();
          }
       });
       timer.start();
+   }
+
+   private void toggleKeyListener() {
+      setFocusable(true);
+      requestFocusInWindow();
+      addKeyListener(arrow.getArrowControl());
    }
 }
