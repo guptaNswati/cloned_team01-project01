@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.ImageObserver;
 
+import javax.swing.ImageIcon;
+
 /**
  * An object of class Celestial has 4 members, coordinate, color, name, radius.
  * It has a default and a 4 parameter constructor, and getters and setters. It
@@ -97,8 +99,8 @@ public class Celestial {
       return image;
    }
 
-   public void setImage(Image image) {
-      this.image = image;
+   public void setImage(String filename) {
+      image = new ImageIcon(filename).getImage();
    }
 
 }
