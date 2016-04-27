@@ -62,7 +62,8 @@ public class Update extends JPanel {
       super.paintComponent(g);
       Graphics2D g2d = (Graphics2D)g;
       
-      double scale = Math.min(getWidth() / 1682., getHeight() / 953.);
+      // TODO: Keep solar system centered regardless of aspect ratio
+      double scale = Math.min(getWidth() / 952., getHeight() / 952.);
       g2d.scale(scale, scale);
       
       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
