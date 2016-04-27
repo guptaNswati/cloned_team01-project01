@@ -71,11 +71,11 @@ public class Arrow extends JComponent {
       this.angle = angle;
    }
 
-   public KeyListener getArrowControl() {
-      return new ArrowControl();
+   public KeyListener getArrowKeyControl() {
+      return new ArrowKeyControl();
    }
 
-   private class ArrowControl extends KeyAdapter {
+   private class ArrowKeyControl extends KeyAdapter {
       private int keyStrokePerPI = 30;
 
       @Override

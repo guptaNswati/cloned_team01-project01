@@ -92,6 +92,6 @@ public class Update extends JPanel {
    private void toggleKeyListener() {
       setFocusable(true);
       requestFocusInWindow();
-      addKeyListener(arrow.getArrowControl());
+      addKeyListener(arrow.getArrowKeyControl());
    }
 }
