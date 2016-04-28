@@ -13,4 +13,6 @@ public class Constants {
    public static final int INIT_SUN_Y = 952 / 2;
    
    public static final double GRAVITATIONAL_CONSTANT = 1;
+
+
 }

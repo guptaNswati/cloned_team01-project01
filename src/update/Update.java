@@ -17,6 +17,8 @@ import celestial.Planet;
 import ship.Ship;
 import physics.Constants;
 import physics.Physics;
+import ship.Arrow;
+import ship.Ship;
 
 /**
  * An update object contains all dynamic graphical elements.
@@ -28,6 +30,10 @@ public class Update extends JPanel {
    private Planet[] planets;
    private Ship ship;
 
+
+   private Arrow arrow;
+
+
    public static final int NUM_OF_PLANETS = 8;
 
    public static final String[] PLANET_NAMES = { "Mercury", "Venus", "Earth",
@@ -36,6 +42,7 @@ public class Update extends JPanel {
          Color.blue, Color.green, Color.orange, Color.gray, Color.blue,
          Color.magenta };
    public static final int[] PLANET_SIZES = { 5, 7, 10, 8, 22, 20, 17, 15 };
+
    public static final int[] PLANET_PERIODS = {
          7286, 20612, 37865, 58300, 81435, 107127, 134883, 164790 };
    public static final double[] PLANET_MASSES = {
@@ -54,21 +61,27 @@ public class Update extends JPanel {
                50 * (i + 1), randGen.nextDouble() * 2 * Math.PI,
                PLANET_PERIODS[i]);
       }
+
       ship.setAttachedCelestial(planets[2]);
+      arrow = new Arrow("image/arrow-sample.png", planets[2].getCoordinate());
+      toggleKeyListener();
+
    }
 
    @Override
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
       Graphics2D g2d = (Graphics2D)g;
-      
+
       // TODO: Keep solar system centered regardless of aspect ratio
       double scale = Math.min(getWidth() / 952., getHeight() / 952.);
       g2d.scale(scale, scale);
       
+
       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
             RenderingHints.VALUE_ANTIALIAS_ON);
       sun.draw(g);
+      arrow.draw(g, this);
       for (Planet planet : planets) {
          planet.draw(g);
          g2d.drawOval((int)sun.getX() - planet.getDistanceToSun(),
@@ -85,9 +98,18 @@ public class Update extends JPanel {
             for (Planet planet : planets)
                Physics.planetaryOrbit(sun, planet);
             Physics.shipFlight(ship, planets);
+
+            arrow.setCoordinate(planets[2].getCoordinate());
+
             repaint();
          }
       });
       timer.start();
+   }
+
+   private void toggleKeyListener() {
+      setFocusable(true);
+      requestFocusInWindow();
+      addKeyListener(arrow.getArrowKeyControl());
    }
 }

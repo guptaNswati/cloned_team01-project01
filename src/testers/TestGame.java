@@ -20,6 +20,8 @@ public class TestGame {
       frame.add(update);
       update.setBackground(Color.black);
       frame.add(BorderLayout.CENTER, update);
+      // frame.setResizable(false);
+
       frame.setVisible(true);
 
       update.run();

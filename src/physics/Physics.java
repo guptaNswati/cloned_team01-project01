@@ -45,4 +45,5 @@ public class Physics {
       }
       ship.setCoordinate(newX, newY);
    }
+
 }
