@@ -22,11 +22,12 @@ import physics.Constants;
 import physics.Physics;
 import ship.Arrow;
 import ship.Ship;
+import ship.Ship;
 
 /**
- * An update object contains all dynamic graphical elements.
- * It contains a paintComponent method necessary for GUI.
- * The run method updates physical coordinates and GUI elements at regular intervals.
+ * An update object contains all dynamic graphical elements. It contains a
+ * paintComponent method necessary for GUI. The run method updates physical
+ * coordinates and GUI elements at regular intervals.
  */
 public class Update extends JPanel {
    private Celestial sun;
@@ -89,12 +90,16 @@ public class Update extends JPanel {
          11.5  //Neptune
    };
 
+   /**
+    * Instantiate and initialize all members.
+    */
    public Update() {
 
       super();
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
       sun.setImage("image/MrSun-sample.png");
+
       planets = new Planet[NUM_OF_PLANETS];
       ship = new Ship();
       Random randGen = new Random();
@@ -111,6 +116,7 @@ public class Update extends JPanel {
       }
 
       ship.setAttachedCelestial(planets[2]);
+
       toggleKeyListener();
 
       CSVReader csv = new CSVReader();
@@ -118,6 +124,9 @@ public class Update extends JPanel {
       planetWithPlayer = "";
    }
 
+   /**
+    * Draw solar system and ship and arrow.
+    */
    @Override
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
@@ -159,6 +168,9 @@ public class Update extends JPanel {
       }
    }
 
+   /**
+    * Update every object every time interval.
+    */
    public void run() {
       Timer timer = new Timer(Constants.TIME_INTERVAL, new ActionListener() {
          @Override
@@ -178,6 +190,9 @@ public class Update extends JPanel {
       timer.start();
    }
 
+   /**
+    * Called by constructor to enable JPanel to listen to key listener.
+    */
    private void toggleKeyListener() {
       setFocusable(true);
       requestFocusInWindow();

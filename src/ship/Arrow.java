@@ -12,13 +12,40 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+/**
+ * An arrow to draw on GUI. Also contains and inner private class for key
+ * control.
+ * 
+ * @author TerryTsao
+ */
 public class Arrow extends JComponent {
+   /**
+    * Arrow's coordinate.
+    */
    private Point2D coordinate;
+   /**
+    * Arrow's image.
+    */
    private BufferedImage image;
+   /**
+    * Arrow's width.
+    */
    private int width;
+   /**
+    * Arrow's height.
+    */
    private int height;
+   /**
+    * Arrow's angle with respect to horizontal x to the right.
+    */
    private double angle;
 
+   /**
+    * Constructor that sets angle's position and image.
+    * 
+    * @param filename
+    * @param coordinate
+    */
    public Arrow(String filename, Point2D coordinate) {
       setCoordinate(coordinate);
       try {
@@ -47,6 +74,13 @@ public class Arrow extends JComponent {
       return coordinate;
    }
 
+   /**
+    * Transform the image with translation, rotation, and scale operations to
+    * draw on screen.
+    * 
+    * @param g
+    *           Graphics object for drawing.
+    */
    public void draw(Graphics g) {
       Graphics2D g2d = (Graphics2D)g;
       AffineTransform trans = new AffineTransform();
