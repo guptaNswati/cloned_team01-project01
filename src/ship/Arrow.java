@@ -2,7 +2,7 @@ package ship;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -17,13 +17,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 public class Arrow extends JComponent {
-   private Point coordinate;
+   private Point2D coordinate;
    private BufferedImage image;
    private int width;
    private int height;
    private double angle;
 
-   public Arrow(String filename, Point coordinate) {
+   public Arrow(String filename, Point2D coordinate) {
       setCoordinate(coordinate);
       try {
          image = ImageIO.read(new File(filename));
@@ -35,19 +35,19 @@ public class Arrow extends JComponent {
 
    @Override
    public int getX() {
-      return coordinate.x;
+      return (int)coordinate.getX();
    }
 
    @Override
    public int getY() {
-      return coordinate.y;
+      return (int)coordinate.getY();
    }
 
-   public void setCoordinate(Point coordinate) {
+   public void setCoordinate(Point2D coordinate) {
       this.coordinate = coordinate;
    }
 
-   public Point getCoordinate() {
+   public Point2D getCoordinate() {
       return coordinate;
    }
 

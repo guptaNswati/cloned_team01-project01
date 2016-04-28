@@ -83,6 +83,10 @@ public class Celestial {
       this.mass = mass > 0 ? mass : 1;
    }
 
+   public Point2D getCoordinate(){
+      return coordinate;
+   }
+
    public double getX() {
       return coordinate.getX();
    }
