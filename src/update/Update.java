@@ -119,7 +119,10 @@ public class Update extends JPanel {
       
       
       sun.draw(g);
-      arrow.draw(g, this);
+      
+      if(ship.getOnCelestial()) {
+         arrow.draw(g, this);
+      }
       
       //draw all planets
       for (Planet planet : planets) {
@@ -143,7 +146,7 @@ public class Update extends JPanel {
             }
             Physics.shipFlight(ship, planets);
 
-            arrow.setCoordinate(ship.getAttachedCelestial().getCoordinate()); //arrow on ship's planet
+            arrow.setCoordinate(ship.getAttachedCelestial().getCoordinate()); //places arrow on ship's planet
 
             repaint();
          }
