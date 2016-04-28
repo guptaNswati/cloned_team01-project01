@@ -1,6 +1,6 @@
 package physics;
 
-import celestial.Celestial;
+import celestial.CelestialObject;
 import celestial.Planet;
 import ship.Ship;
 
@@ -8,7 +8,7 @@ import ship.Ship;
  * Methods to calculate planet and ship coordinates.
  */
 public class Physics {
-   public static void planetaryOrbit(final Celestial sun, Planet planet) {
+   public static void planetaryOrbit(final CelestialObject sun, Planet planet) {
       double dTheta = 2 * Math.PI / planet.getPeriodInMS() * Constants.TIME_INTERVAL;
       planet.setAngleToSun((planet.getAngleToSun() + dTheta) % (2 * Math.PI));
       

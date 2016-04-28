@@ -8,7 +8,7 @@ import java.awt.geom.Point2D;
  * additional members, distanceToSun, periodInMS, angleToSun.
  */
 
-public class Planet extends Celestial {
+public class Planet extends CelestialObject {
    private final int distanceToSun;
    private final int periodInMS;
    private double angleToSun;

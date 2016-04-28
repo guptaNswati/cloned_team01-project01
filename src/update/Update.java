@@ -12,12 +12,11 @@ import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import celestial.Celestial;
+import celestial.CelestialObject;
 import celestial.Planet;
 import physics.Constants;
 import physics.Physics;
 import ship.Arrow;
-import ship.Ship;
 import ship.Ship;
 
 /**
@@ -26,7 +25,7 @@ import ship.Ship;
  * coordinates and GUI elements at regular intervals.
  */
 public class Update extends JPanel {
-   private Celestial sun;
+   private CelestialObject sun;
    private Planet [] planets;
    private Ship ship;
    private Arrow arrow;
@@ -84,7 +83,7 @@ public class Update extends JPanel {
     */
    public Update() {
       super();
-      sun = new Celestial(
+      sun = new CelestialObject(
             new Point2D.Double(Constants.INIT_SUN_X, Constants.INIT_SUN_Y),
             Color.red, "Sun", 30, 21.4);
       planets = new Planet[NUM_OF_PLANETS];

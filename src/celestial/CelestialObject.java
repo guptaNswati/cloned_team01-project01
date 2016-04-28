@@ -5,11 +5,11 @@ import java.awt.Graphics;
 import java.awt.geom.Point2D;
 
 /**
- * An object of class Celestial has 4 members, coordinate, color, name, radius.
- * It has a default and a 4 parameter constructor, and getters and setters. It
- * has also a draw method to draw the celestial on GUI.
+ * An object of class CelestialObject has 4 members, coordinate, color, name,
+ * radius. It has a default and a 4 parameter constructor, and getters and
+ * setters. It has also a draw method to draw the celestial object on GUI.
  */
-public class Celestial {
+public class CelestialObject {
    private Point2D coordinate;
    private Color color;
    private String name;
@@ -19,21 +19,22 @@ public class Celestial {
    /**
     * A default parameter that does nothing.
     */
-   public Celestial() {}
+   public CelestialObject() {}
 
    /**
     * A 4-parameter constructor that initializes Celestial class.
     * 
     * @param coordinate
-    *           Coordinate of a celestial
+    *           Coordinate of a celestial object
     * @param color
-    *           Color of a celestial
+    *           Color of a celestial object
     * @param name
-    *           The name of a celestial
+    *           The name of a celestial object
     * @param radius
-    *           The radius of a celestial
+    *           The radius of a celestial object
     */
-   public Celestial(Point2D.Double coordinate, Color color, String name, int radius, double mass) {
+   public CelestialObject(Point2D.Double coordinate, Color color,
+         String name, int radius, double mass) {
       this.name = name;
       this.color = color;
       this.coordinate = new Point2D.Double();
@@ -50,8 +51,8 @@ public class Celestial {
     */
    public void draw(Graphics g) {
       g.setColor(color);
-      g.fillOval((int)coordinate.getX() - radius, (int)coordinate.getY() - radius, radius * 2,
-            radius * 2);
+      g.fillOval((int)coordinate.getX() - radius,
+            (int)coordinate.getY() - radius, radius * 2, radius * 2);
    }
 
    /**
@@ -83,7 +84,7 @@ public class Celestial {
       this.mass = mass > 0 ? mass : 1;
    }
 
-   public Point2D getCoordinate(){
+   public Point2D getCoordinate() {
       return coordinate;
    }
 

@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
 
-import celestial.Celestial;
+import celestial.CelestialObject;
 //import ship.Arrow.ArrowKeyControl;
 
 public class Ship {
@@ -20,7 +20,7 @@ public class Ship {
    private double fuel;
    private double angle;
    private boolean onCelestial;
-   private Celestial attachedCelestial;
+   private CelestialObject attachedCelestial;
 
    public Ship() {
       coordinate.push(new Point2D.Double(0, 0));
@@ -113,11 +113,11 @@ public class Ship {
       this.onCelestial = onCelestial;
    }
 
-   public Celestial getAttachedCelestial() {
+   public CelestialObject getAttachedCelestial() {
       return attachedCelestial;
    }
 
-   public void setAttachedCelestial(Celestial Celestial) {
+   public void setAttachedCelestial(CelestialObject Celestial) {
       this.attachedCelestial = Celestial;
    }
    
