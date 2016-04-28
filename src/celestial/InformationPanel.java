@@ -10,12 +10,8 @@ import javax.swing.JTextArea;
  * @author swati
  *
  */
-public class InformationPanel extends JPanel
-{
-   
-    
-    InformationPanel()
-    {
+public class InformationPanel extends JPanel{  
+    InformationPanel() {
         super.setSize(Constants.FRAME_WIDTH/4, Constants.FRAME_HEIGHT); 
         super.setLocation(5, 5);
         this.setBackground(Color.WHITE);
@@ -27,11 +23,9 @@ public class InformationPanel extends JPanel
         
         Information infoKey;
    
-        while(info_iterator.hasNext())
-        {
+        while(info_iterator.hasNext()) {
             infoKey = info_iterator.next();   
             this.add(new JScrollPane(new JTextArea(infoKey.toString(), 8, 15)));             
-        }
-        
+        }        
     }
 }
