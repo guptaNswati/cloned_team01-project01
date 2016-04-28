@@ -131,22 +131,22 @@ public class Ship {
 
       @Override
       public void keyPressed(KeyEvent e) {
-         if (e.getKeyCode() == KeyEvent.VK_LEFT)
+         if (e.getKeyCode() == KeyEvent.VK_LEFT && onCelestial)
             angle -= Math.PI / keyStrokePerPI;
-         if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+         if (e.getKeyCode() == KeyEvent.VK_RIGHT && onCelestial)
             angle += Math.PI / keyStrokePerPI;
-         if(e.getKeyCode() == KeyEvent.VK_UP) //increase power
+         if(e.getKeyCode() == KeyEvent.VK_UP && onCelestial) //increase power
             increaseThrust(1);
-         if(e.getKeyCode() == KeyEvent.VK_DOWN) //decrease power
+         if(e.getKeyCode() == KeyEvent.VK_DOWN && onCelestial) //decrease power
             decreaseThrust(1);
-         if(e.getKeyCode() == KeyEvent.VK_SPACE) { //launch from planet
+         if(e.getKeyCode() == KeyEvent.VK_SPACE ) { //launch from planet
             if(onCelestial){
                onCelestial = false;
             }
             else {
-               thrust = 0;
-               resetFuel();
                onCelestial = true;
+               setThrust(1);
+               resetFuel();
             }
          }
       }
