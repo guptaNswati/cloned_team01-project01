@@ -2,10 +2,14 @@ package ship;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
 
 import celestial.Celestial;
+//import ship.Arrow.ArrowKeyControl;
 
 public class Ship {
    // Head of list is current position + 1
@@ -116,4 +120,29 @@ public class Ship {
    public void setAttachedCelestial(Celestial Celestial) {
       this.attachedCelestial = Celestial;
    }
+   
+   
+   public KeyListener getShipKeyControl() {
+      return new ShipKeyControl();
+   }
+
+   private class ShipKeyControl extends KeyAdapter {
+      private int keyStrokePerPI = 30;
+
+      @Override
+      public void keyPressed(KeyEvent e) {
+         if (e.getKeyCode() == KeyEvent.VK_LEFT)
+            angle -= Math.PI / keyStrokePerPI;
+         if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+            angle += Math.PI / keyStrokePerPI;
+         if(e.getKeyCode() == KeyEvent.VK_UP) //increase power
+            thrust += 5;
+         if(e.getKeyCode() == KeyEvent.VK_DOWN) //decrease power
+            thrust -= 5;
+         if(e.getKeyCode() == KeyEvent.VK_SPACE) //launch from planet
+            onCelestial = false;
+      }
+   }
 }
+
+
