@@ -60,7 +60,7 @@ public class Ship {
    }
 
    public void setThrust(double thrust) {
-      this.thrust = thrust > 0 ? thrust : 0;
+      this.thrust = thrust >= 0 ? thrust : 0;
    }
 
    public void increaseThrust(double thrust) {
@@ -85,7 +85,7 @@ public class Ship {
       }
    }
    
-   public void resetFuel(double fuel) {
+   public void resetFuel() {
       this.fuel = 100;
    }
 
@@ -136,11 +136,19 @@ public class Ship {
          if (e.getKeyCode() == KeyEvent.VK_RIGHT)
             angle += Math.PI / keyStrokePerPI;
          if(e.getKeyCode() == KeyEvent.VK_UP) //increase power
-            thrust += 5;
+            increaseThrust(1);
          if(e.getKeyCode() == KeyEvent.VK_DOWN) //decrease power
-            thrust -= 5;
-         if(e.getKeyCode() == KeyEvent.VK_SPACE) //launch from planet
-            onCelestial = false;
+            decreaseThrust(1);
+         if(e.getKeyCode() == KeyEvent.VK_SPACE) { //launch from planet
+            if(onCelestial){
+               onCelestial = false;
+            }
+            else {
+               thrust = 0;
+               resetFuel();
+               onCelestial = true;
+            }
+         }
       }
    }
 }
