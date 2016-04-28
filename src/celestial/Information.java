@@ -1,8 +1,74 @@
-
+/**
+ * an object of Information calss contains informatio about a planet. Planets name and other basic features.
+ * @author swati
+ *
+ */
 public class Information
 {
     private String name;
     private String basic;
+    private String diameter;
+    private String mass;
+    private String type;
+    private String age;
+    private String distance;
+    
+    
+    Information(String name, String basics, String diameter, String mass, String type, String age, String distance)
+    {
+        this.name = name;
+        this.basic = basics;
+        this.diameter = diameter;
+        this.mass = mass;
+        this.type = type;
+        this.age = age;
+        this.distance = distance;
+    }
+   
+    /**
+     * constructor that takes a string and array of string objects that sets information members
+     */
+   Information(String token, String[] tokens)
+   {
+       
+           this.name = token;
+           this.basic = tokens[0];
+           this.diameter = tokens[1];
+           this.mass = tokens[2];
+           this.type = tokens[3];
+           this.age = tokens[4];
+           this.distance = tokens[5];               
+   }
+   
+   /**
+    * this divides the basic information in multiple lines for easy reading
+    */
+   public String divideBasic()
+   {
+       String features = "Did you know";
+       String[] token = this.basic.split(".");
+       
+       for(int i = 0; i < token.length; i++)
+       {
+           features += token[i] + "\n";
+       }
+       return features;
+       
+   }
+   
+   /**
+    * returns this as a String
+    */
+   public String toString()
+   {
+       String text = " ";
+       
+       text += this.name + "\n" + this.basic + "." + "\n" + this.diameter + "." 
+       + "\n" + this.mass + "." + "\n" + this.type + "." + "\n" + this.age + "." + "\n" + this.distance + ".";
+       
+       return text;
+   }
+   
     /**
      * @return the name
      */
@@ -115,34 +181,5 @@ public class Information
         this.distance = distance;
     }
 
-    private String diameter;
-    private String mass;
-    private String type;
-    private String age;
-    private String distance;
-    
-    Information(String name, String basics, String diameter, String mass, String type, String age, String distance)
-    {
-        this.name = name;
-        this.basic = basics;
-        this.diameter = diameter;
-        this.mass = mass;
-        this.type = type;
-        this.age = age;
-        this.distance = distance;
-    }
-    
-   Information(String[] tokens)
-   {
-       
-           this.name = tokens[0];
-           this.basic = tokens[1];
-           this.diameter = tokens[2];
-           this.mass = tokens[3];
-           this.type = tokens[4];
-           this.age = tokens[5];
-           this.distance = tokens[6];          
-     
-   }
 
 }

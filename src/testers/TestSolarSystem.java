@@ -13,11 +13,16 @@ public class TestSolarSystem {
       JFrame frame = new JFrame("Simple Window");
       frame.setBounds(0, 0, Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+      InformationPanel infoPanel = new InformationPanel();      
+      frame.add(infoPanel);
+      
       SolarSystem solarSystem = new SolarSystem();
       frame.add(solarSystem);
       frame.setResizable(false);
       frame.setVisible(true);
 
-      solarSystem.run();
+      //commenting out this so that information panel is visible on screen
+//      solarSystem.run();
    }
 }
