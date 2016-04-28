@@ -13,14 +13,35 @@ public class Planet extends Celestial {
    private final int periodInMS;
    private double angleToSun;
 
+   /**
+    * Dummy default constructor just in case.
+    */
    public Planet() {
       super();
       distanceToSun = 1;
       periodInMS = 1;
    }
 
-   public Planet(Color color, String name, int radius, double mass, int distanceToSun,
-         double angleToSun, int periodInMS) {
+   /**
+    * A constructor that initialize members.
+    * 
+    * @param color
+    *           Color of planet.
+    * @param name
+    *           Name of planet.
+    * @param radius
+    *           Radius of planet.
+    * @param mass
+    *           Mass of planet.
+    * @param distanceToSun
+    *           Distance to Sun of planet.
+    * @param angleToSun
+    *           Angle to Sun of planet.
+    * @param periodInMS
+    *           Period of planet.
+    */
+   public Planet(Color color, String name, int radius, double mass,
+         int distanceToSun, double angleToSun, int periodInMS) {
       super(new Point2D.Double(), color, name, radius, mass);
       this.distanceToSun = distanceToSun > 0 ? distanceToSun : 10;
       this.setAngleToSun(angleToSun);

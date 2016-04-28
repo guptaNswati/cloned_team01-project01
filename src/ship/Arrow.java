@@ -2,11 +2,11 @@ package ship;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Point2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -16,13 +16,40 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+/**
+ * An arrow to draw on GUI. Also contains and inner private class for key
+ * control.
+ * 
+ * @author TerryTsao
+ */
 public class Arrow extends JComponent {
+   /**
+    * Arrow's coordinate.
+    */
    private Point2D coordinate;
+   /**
+    * Arrow's image.
+    */
    private BufferedImage image;
+   /**
+    * Arrow's width.
+    */
    private int width;
+   /**
+    * Arrow's height.
+    */
    private int height;
+   /**
+    * Arrow's angle with respect to horizontal x to the right.
+    */
    private double angle;
 
+   /**
+    * Constructor that sets angle's position and image.
+    * 
+    * @param filename
+    * @param coordinate
+    */
    public Arrow(String filename, Point2D coordinate) {
       setCoordinate(coordinate);
       try {
@@ -51,6 +78,15 @@ public class Arrow extends JComponent {
       return coordinate;
    }
 
+   /**
+    * Transform the image with translation, rotation, and scale operations to
+    * draw on screen.
+    * 
+    * @param g
+    *           Graphics object for drawing.
+    * @param imgOb
+    *           Image Observer.
+    */
    public void draw(Graphics g, ImageObserver imgOb) {
       Graphics2D g2d = (Graphics2D)g;
       AffineTransform trans = new AffineTransform();
@@ -71,10 +107,20 @@ public class Arrow extends JComponent {
       this.angle = angle;
    }
 
+   /**
+    * Provides an instance of key control for arrow.
+    * 
+    * @return Private inner class for arrow key control.
+    */
    public KeyListener getArrowKeyControl() {
       return new ArrowKeyControl();
    }
 
+   /**
+    * Key control is an KeyAdapter that overrides keyPressed method.
+    * 
+    * @author TerryTsao
+    */
    private class ArrowKeyControl extends KeyAdapter {
       private int keyStrokePerPI = 30;
 
