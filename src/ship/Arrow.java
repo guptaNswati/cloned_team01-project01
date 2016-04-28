@@ -78,6 +78,7 @@ public class Arrow extends JComponent {
    private class ArrowKeyControl extends KeyAdapter {
       private int keyStrokePerPI = 30;
 
+      //TODO: Make arrow not movable while ship is in flight
       @Override
       public void keyPressed(KeyEvent e) {
          if (e.getKeyCode() == KeyEvent.VK_LEFT)

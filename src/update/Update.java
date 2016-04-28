@@ -119,7 +119,10 @@ public class Update extends JPanel {
       
       
       sun.draw(g);
-      arrow.draw(g, this);
+      
+      if(ship.getOnCelestial()) {
+         arrow.draw(g, this);
+      }
       
       //draw all planets
       for (Planet planet : planets) {
@@ -138,11 +141,12 @@ public class Update extends JPanel {
       Timer timer = new Timer(Constants.TIME_INTERVAL, new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            for (Planet planet : planets)
+            for (Planet planet : planets) {
                Physics.planetaryOrbit(sun, planet);
+            }
             Physics.shipFlight(ship, planets);
 
-            arrow.setCoordinate(planets[2].getCoordinate());
+            arrow.setCoordinate(ship.getAttachedCelestial().getCoordinate()); //places arrow on ship's planet
 
             repaint();
          }
