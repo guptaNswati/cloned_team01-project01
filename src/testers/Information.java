@@ -1,5 +1,7 @@
+package testers;
+
 /**
- * an object of Information calss contains informatio about a planet. Planets name and other basic features.
+ * an object of Information class contains information about a planet. Planets name and other basic features.
  * @author swati
  *
  */

@@ -147,6 +147,7 @@ public class Update extends JPanel {
             Physics.shipFlight(ship, planets);
 
             arrow.setCoordinate(ship.getAttachedCelestial().getCoordinate()); //places arrow on ship's planet
+            
 
             repaint();
          }
