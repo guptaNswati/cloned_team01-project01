@@ -1,7 +1,10 @@
+package testers;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import celestial.*;
+
 /**
  * reads from a csv file and creates a arraylist of Information Objects that contains information about Planets
  * @author swati
@@ -14,7 +17,7 @@ public class CSVReader {
         infoData = new ArrayList<Information>();
         
         try {
-            Scanner input = new Scanner (new File("resource/info.txt"));
+            Scanner input = new Scanner (new File("resources/info.txt"));
             
             int count = 0;
            
@@ -30,7 +33,7 @@ public class CSVReader {
         } 
     
         catch (FileNotFoundException e) {
-        System.out.println("File sun.txt not found!");
+        System.out.println("File info.txt not found!");
     }
     
    }
