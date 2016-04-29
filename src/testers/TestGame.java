@@ -29,6 +29,6 @@ public class TestGame {
       frame.setResizable(true);
       frame.setVisible(true);
 
-      //update.run();
+      update.run();
    }
 }
