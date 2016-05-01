@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 
 import physics.Constants;
 import update.Update;
-import celestial.*;
 
 /**
  * Testing class that tests Sprint 1 which is a running solar system.
@@ -18,8 +17,8 @@ public class TestGame {
       frame.setBounds(0, 0, Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-      InformationPanel infoPanel = new InformationPanel();      
-      frame.add(infoPanel);
+//      InformationPanel infoPanel = new InformationPanel();      
+//      frame.add(infoPanel);
       
       Update update = new Update();
       frame.add(update);
