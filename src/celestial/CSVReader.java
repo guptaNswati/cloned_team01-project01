@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 public class CSVReader {
     private ArrayList<Information> infoData;
    
-    CSVReader() {
+   public CSVReader() {
         infoData = new ArrayList<Information>();
         
         try {

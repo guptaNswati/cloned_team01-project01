@@ -17,8 +17,8 @@ public class TestGame {
       frame.setBounds(0, 0, Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-      InformationPanel infoPanel = new InformationPanel();      
-      frame.add(infoPanel);
+//      InformationPanel infoPanel = new InformationPanel();      
+//      frame.add(infoPanel);
       
       SolarSystem solarSystem = new SolarSystem();
       frame.add(solarSystem);
