@@ -13,7 +13,7 @@ import celestial.*;
 public class CSVReader {
     private ArrayList<Information> infoData;
    
-   public CSVReader() {
+    CSVReader() {
         infoData = new ArrayList<Information>();
         
         try {
