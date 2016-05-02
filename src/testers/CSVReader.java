@@ -24,7 +24,7 @@ public class CSVReader {
             while(input.hasNext()) {      
                 //reads given file line by line and splits every line into tokens                  
                 String[] token = input.nextLine().split(",");
-                String[] tokens = token[1].split("#");               
+                String[] tokens = token[1].split("##");               
                 infoData.add(new Information(token[0], tokens));
  
               count++;
