@@ -189,6 +189,7 @@ public class Update extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                toggleTestingPanel();
+               Update.this.requestFocus();
             }
          });
       }
