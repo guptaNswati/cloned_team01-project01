@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,6 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import celestial.Celestial;
 import celestial.Planet;
@@ -207,15 +211,6 @@ public class Update extends JPanel {
    }
    
    // for testing
-   private void toggleTestingPanel() {
-      JFrame tester = new JFrame("Tester");
-      tester.setBounds(getWidth() - 100, 200, 500, 500);
-      // add(BorderLayout.SOUTH, new SliderPanel("gr"));
-      tester.setVisible(true);
-      tester.requestFocus();
-      tester.add(new SliderPanel("dsaflsadf"));
-   }
-   
    class TesterButton extends JButton {
       public TesterButton(String name) {
          super(name);
@@ -223,23 +218,60 @@ public class Update extends JPanel {
          addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+               setEnabled(false);
                toggleTestingPanel();
                Update.this.requestFocus();
             }
          });
       }
+
+      private void toggleTestingPanel() {
+         JFrame tester = new JFrame("Tester");
+         tester.setBounds(Constants.FRAME_WIDTH, 200, 700, 500);
+         tester.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+               setEnabled(true);
+            }
+         });
+         tester.setVisible(true);
+         tester.requestFocus();
+         PeriodSliders periodSliders = new PeriodSliders();
+         tester.add(BorderLayout.WEST, periodSliders);
+      }
    }
    
-   class SliderPanel extends JPanel {
-      public SliderPanel(String label) {
+   class PeriodSliders extends JPanel {
+      public PeriodSliders() {
          this.add(BorderLayout.NORTH,
-               new JLabel(label, SwingConstants.CENTER));
+               new JLabel("Period", SwingConstants.CENTER));
          JPanel panel = new JPanel();
-         this.add(BorderLayout.CENTER, panel);
-         panel.setLayout(new GridLayout(3, 1));
-         for (int i = 0; i < 3; i++)
-            panel.add(new JSlider(0, 5, 3));
-         this.setVisible(true);
+         panel.setLayout(new GridLayout(NUM_OF_PLANETS, 3));
+         JLabel[] labels = new JLabel[NUM_OF_PLANETS];
+         JLabel[] values = new JLabel[NUM_OF_PLANETS];
+         JSlider[] sliders = new JSlider[NUM_OF_PLANETS];
+         for (int i = 0; i < NUM_OF_PLANETS; i++) {
+            labels[i] = new JLabel(planets[i].getName());
+            values[i] = new JLabel(
+                  Integer.toString(planets[i].getPeriodInMS()));
+            sliders[i] = new JSlider(1000, 200000,
+                  planets[i].getPeriodInMS());
+            sliders[i].setMinorTickSpacing(500);
+            sliders[i].setMajorTickSpacing(2000);
+            panel.add(labels[i]);
+            panel.add(values[i]);
+            panel.add(sliders[i]);
+            Planet planet = planets[i];
+            JLabel value = values[i];
+            sliders[i].addChangeListener(new ChangeListener() {
+               @Override
+               public void stateChanged(ChangeEvent e) {
+                  planet.setPeriodInMS(((JSlider)e.getSource()).getValue());
+                  value.setText(Integer.toString(planet.getPeriodInMS()));
+               }
+            });
+         }
+         this.add(BorderLayout.SOUTH, panel);
       }
    }
 }
