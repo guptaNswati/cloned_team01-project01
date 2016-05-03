@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
@@ -113,8 +114,8 @@ public class Update extends JPanel {
       arrow = new Arrow("image/arrow-sample.png", planets[2].getCoordinate());
       toggleKeyListener();
 
-      // for testing
-      add(new TesterButton("tester"));
+      // for testing.
+      add(new TesterButton("tester")); // comment out this line when done
    }
 
    @Override
@@ -192,7 +193,7 @@ public class Update extends JPanel {
 
       private void toggleTestingPanel() {
          JFrame tester = new JFrame("Tester");
-         tester.setBounds(Constants.FRAME_WIDTH, 200, 700, 500);
+         tester.setBounds(0, 0, 700, 700);
          tester.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -212,31 +213,74 @@ public class Update extends JPanel {
                new JLabel("Period", SwingConstants.CENTER));
          JPanel panel = new JPanel();
          panel.setLayout(new GridLayout(NUM_OF_PLANETS, 3));
-         JLabel[] labels = new JLabel[NUM_OF_PLANETS];
-         JLabel[] values = new JLabel[NUM_OF_PLANETS];
-         JSlider[] sliders = new JSlider[NUM_OF_PLANETS];
+         JLabel[] labels = labelGen();
+         JTextField[] values = valueGen();
+         JSlider[] sliders = sliderGen();
          for (int i = 0; i < NUM_OF_PLANETS; i++) {
-            labels[i] = new JLabel(planets[i].getName());
-            values[i] = new JLabel(
-                  Integer.toString(planets[i].getPeriodInMS()));
-            sliders[i] = new JSlider(1000, 200000,
-                  planets[i].getPeriodInMS());
-            sliders[i].setMinorTickSpacing(500);
-            sliders[i].setMajorTickSpacing(2000);
+            pairListeners(values[i], sliders[i], planets[i]);
             panel.add(labels[i]);
             panel.add(values[i]);
             panel.add(sliders[i]);
-            Planet planet = planets[i];
-            JLabel value = values[i];
-            sliders[i].addChangeListener(new ChangeListener() {
-               @Override
-               public void stateChanged(ChangeEvent e) {
-                  planet.setPeriodInMS(((JSlider)e.getSource()).getValue());
-                  value.setText(Integer.toString(planet.getPeriodInMS()));
-               }
-            });
          }
          this.add(BorderLayout.SOUTH, panel);
+      }
+
+      private void pairListeners(JTextField value, JSlider slider,
+            Planet planet) {
+         value.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               String str = ((JTextField)e.getSource()).getText();
+               int strValue = 0;
+               try {
+                  strValue = Integer.parseInt(str);
+               } catch (NumberFormatException ex) {}
+               int newValue = strValue >= 1000 ? strValue : 10000;
+               planet.setPeriodInMS(newValue);
+               slider.setValue(newValue);
+               value.setText(Integer.toString(newValue));
+            }
+         });
+         slider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+               int newValue = ((JSlider)e.getSource()).getValue();
+               planet.setPeriodInMS(newValue);
+               value.setText(Integer.toString(newValue));
+            }
+         });
+      }
+
+      private JSlider[] sliderGen() {
+         JSlider[] sliders = new JSlider[NUM_OF_PLANETS];
+         int i = 0;
+         for (Planet planet : planets) {
+            sliders[i] = new JSlider(1000, 200000, planet.getPeriodInMS());
+            i++;
+         }
+         return sliders;
+      }
+
+      private JTextField[] valueGen() {
+         JTextField[] values = new JTextField[NUM_OF_PLANETS];
+         int i = 0;
+         for (Planet planet : planets) {
+            values[i] = new JTextField(10);
+            values[i].setHorizontalAlignment(SwingConstants.CENTER);
+            values[i].setText(Integer.toString(planet.getPeriodInMS()));
+            i++;
+         }
+         return values;
+      }
+
+      private JLabel[] labelGen() {
+         JLabel[] labels = new JLabel[NUM_OF_PLANETS];
+         int i = 0;
+         for(Planet planet: planets){
+            labels[i] = new JLabel(planet.getName());
+            i++;
+         }
+         return labels;
       }
    }
 }
