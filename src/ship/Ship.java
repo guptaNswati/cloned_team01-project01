@@ -2,10 +2,14 @@ package ship;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
 
 import celestial.Celestial;
+//import ship.Arrow.ArrowKeyControl;
 
 public class Ship {
    // Head of list is current position + 1
@@ -56,7 +60,7 @@ public class Ship {
    }
 
    public void setThrust(double thrust) {
-      this.thrust = thrust > 0 ? thrust : 0;
+      this.thrust = thrust >= 0 ? thrust : 0;
    }
 
    public void increaseThrust(double thrust) {
@@ -81,7 +85,7 @@ public class Ship {
       }
    }
    
-   public void resetFuel(double fuel) {
+   public void resetFuel() {
       this.fuel = 100;
    }
 
@@ -116,4 +120,37 @@ public class Ship {
    public void setAttachedCelestial(Celestial Celestial) {
       this.attachedCelestial = Celestial;
    }
+   
+   
+   public KeyListener getShipKeyControl() {
+      return new ShipKeyControl();
+   }
+
+   private class ShipKeyControl extends KeyAdapter {
+      private int keyStrokePerPI = 30;
+
+      @Override
+      public void keyPressed(KeyEvent e) {
+         if (e.getKeyCode() == KeyEvent.VK_LEFT && onCelestial)
+            angle -= Math.PI / keyStrokePerPI;
+         if (e.getKeyCode() == KeyEvent.VK_RIGHT && onCelestial)
+            angle += Math.PI / keyStrokePerPI;
+         if(e.getKeyCode() == KeyEvent.VK_UP && onCelestial) //increase power
+            increaseThrust(1);
+         if(e.getKeyCode() == KeyEvent.VK_DOWN && onCelestial) //decrease power
+            decreaseThrust(1);
+         if(e.getKeyCode() == KeyEvent.VK_SPACE ) { //launch from planet
+            if(onCelestial){
+               onCelestial = false;
+            }
+            else {
+               onCelestial = true;
+               setThrust(1);
+               resetFuel();
+            }
+         }
+      }
+   }
 }
+
+

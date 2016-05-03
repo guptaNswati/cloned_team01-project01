@@ -9,9 +9,9 @@ import ship.Ship;
  */
 public class Physics {
    public static void planetaryOrbit(final Celestial sun, Planet planet) {
-      double dTheta = 2 * Math.PI / planet.getPeriodInMS()
-            * Constants.TIME_INTERVAL;
+      double dTheta = 2 * Math.PI / planet.getPeriodInMS() * Constants.TIME_INTERVAL;
       planet.setAngleToSun((planet.getAngleToSun() + dTheta) % (2 * Math.PI));
+      
       // update (x,y) coordinate
       int newX, newY;
       newX = (int)(sun.getX()
@@ -45,4 +45,5 @@ public class Physics {
       }
       ship.setCoordinate(newX, newY);
    }
+
 }
