@@ -10,13 +10,13 @@ import java.awt.geom.Point2D;
 
 public class Planet extends Celestial {
    private final int distanceToSun;
-   private final int periodInMS;
+   private int periodInMS;
    private double angleToSun;
 
    public Planet() {
       super();
       distanceToSun = 1;
-      periodInMS = 1;
+      setPeriodInMS(1);
    }
 
    public Planet(Color color, String name, int radius, double mass, int distanceToSun,
@@ -24,7 +24,7 @@ public class Planet extends Celestial {
       super(new Point2D.Double(), color, name, radius, mass);
       this.distanceToSun = distanceToSun > 0 ? distanceToSun : 10;
       this.setAngleToSun(angleToSun);
-      this.periodInMS = periodInMS > 1000 ? periodInMS : 1000;
+      this.setPeriodInMS(periodInMS > 1000 ? periodInMS : 1000);
       // set Planet's initial x and y
    }
 
@@ -42,5 +42,9 @@ public class Planet extends Celestial {
 
    public int getPeriodInMS() {
       return periodInMS;
+   }
+
+   public void setPeriodInMS(int periodInMS) {
+      this.periodInMS = periodInMS > 1000 ? periodInMS : 1000;
    }
 }

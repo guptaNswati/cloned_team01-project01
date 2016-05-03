@@ -34,7 +34,7 @@ public class Celestial {
     *           The radius of a celestial
     */
    public Celestial(Point2D.Double coordinate, Color color, String name, int radius, double mass) {
-      this.name = name;
+      this.setName(name);
       this.color = color;
       this.coordinate = new Point2D.Double();
       setCoordinate(coordinate.getX(), coordinate.getY());
@@ -93,5 +93,13 @@ public class Celestial {
 
    public double getY() {
       return coordinate.getY();
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public void setName(String name) {
+      this.name = name;
    }
 }
