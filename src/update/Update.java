@@ -201,14 +201,15 @@ public class Update extends JPanel {
             }
          });
          tester.setVisible(true);
-         tester.requestFocus();
-         PeriodSliders periodSliders = new PeriodSliders();
-         tester.add(BorderLayout.WEST, periodSliders);
+         JPanel panel = new JPanel();
+         panel.requestFocus();
+         panel.add(new PeriodSliders());
+         tester.add(panel);
       }
    }
    
    class PeriodSliders extends JPanel {
-      public PeriodSliders() {
+      PeriodSliders() {
          this.add(BorderLayout.NORTH,
                new JLabel("Period", SwingConstants.CENTER));
          JPanel panel = new JPanel();
@@ -277,7 +278,7 @@ public class Update extends JPanel {
          JLabel[] labels = new JLabel[NUM_OF_PLANETS];
          int i = 0;
          for(Planet planet: planets){
-            labels[i] = new JLabel(planet.getName());
+            labels[i] = new JLabel(planet.getName(), SwingConstants.CENTER);
             i++;
          }
          return labels;
