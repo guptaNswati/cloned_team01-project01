@@ -1,8 +1,10 @@
 package update;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,8 +12,13 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 import celestial.Celestial;
@@ -197,5 +204,42 @@ public class Update extends JPanel {
       setFocusable(true);
       requestFocusInWindow();
       addKeyListener(ship.getShipKeyControl());
+   }
+   
+   // for testing
+   private void toggleTestingPanel() {
+      JFrame tester = new JFrame("Tester");
+      tester.setBounds(getWidth() - 100, 200, 500, 500);
+      // add(BorderLayout.SOUTH, new SliderPanel("gr"));
+      tester.setVisible(true);
+      tester.requestFocus();
+      tester.add(new SliderPanel("dsaflsadf"));
+   }
+   
+   class TesterButton extends JButton {
+      public TesterButton(String name) {
+         super(name);
+         setVisible(true);
+         addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               toggleTestingPanel();
+               Update.this.requestFocus();
+            }
+         });
+      }
+   }
+   
+   class SliderPanel extends JPanel {
+      public SliderPanel(String label) {
+         this.add(BorderLayout.NORTH,
+               new JLabel(label, SwingConstants.CENTER));
+         JPanel panel = new JPanel();
+         this.add(BorderLayout.CENTER, panel);
+         panel.setLayout(new GridLayout(3, 1));
+         for (int i = 0; i < 3; i++)
+            panel.add(new JSlider(0, 5, 3));
+         this.setVisible(true);
+      }
    }
 }
