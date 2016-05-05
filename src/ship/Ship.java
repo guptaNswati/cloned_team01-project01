@@ -21,6 +21,7 @@ public class Ship {
    private double angle;
    private boolean onCelestial;
    private Celestial attachedCelestial;
+   private ThrustBox thrustInput;
 
    public Ship() {
       coordinate.push(new Point2D.Double(0, 0));
@@ -28,6 +29,7 @@ public class Ship {
       fuel = 100;
       angle = 0;
       onCelestial = true;
+      thrustInput = new ThrustBox(this);
    }
 
    public void draw(Graphics g) {
@@ -149,8 +151,17 @@ public class Ship {
                resetFuel();
             }
          }
+         thrustInput.setText(thrust);
       }
    }
+   
+   /**
+    * @return the thrustInput box
+    */
+   public ThrustBox getThrustInput() {
+      return thrustInput;
+   }
+
 }
 
 

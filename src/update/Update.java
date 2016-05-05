@@ -114,8 +114,9 @@ public class Update extends JPanel {
       arrow = new Arrow("image/arrow-sample.png", planets[2].getCoordinate());
       toggleKeyListener();
 
+      add(ship.getThrustInput());
       // for testing.
-      add(new TesterButton("tester")); // comment out this line when done
+      // add(new TesterButton("tester")); // comment out this line when done
    }
 
    @Override
