@@ -135,8 +135,9 @@ public class Update extends JPanel {
       info = csv.getInfoData();
       planetWithPlayer = "";
 
+      add(ship.getThrustInput());
       // for testing.
-      add(new TesterButton("tester")); // comment out this line when done
+      // add(new TesterButton("tester")); // comment out this line when done
    }
 
    /**

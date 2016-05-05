@@ -27,6 +27,7 @@ public class Ship {
    private boolean onCelestial;
    private Celestial attachedCelestial;
    private Arrow arrow;
+   private ThrustBox thrustInput;
 
    public Ship() {
       coordinate.push(new Point2D.Double(0, 0));
@@ -37,6 +38,7 @@ public class Ship {
       radius = 2;
       onCelestial = true;
       arrow = new Arrow("image/arrow-sample.png", coordinate.peekFirst());
+      thrustInput = new ThrustBox(this);
    }
 
    public void draw(Graphics g) {
@@ -188,6 +190,14 @@ public class Ship {
             }
          }
          arrow.setAngle(angle);
+         thrustInput.setText(thrust);
       }
+   }
+   
+   /**
+    * @return the thrustInput box
+    */
+   public ThrustBox getThrustInput() {
+      return thrustInput;
    }
 }
