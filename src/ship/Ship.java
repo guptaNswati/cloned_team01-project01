@@ -27,7 +27,7 @@ public class Ship {
    public Ship() {
       coordinate.push(new Point2D.Double(0, 0));
       momentum = new Point2D.Double(0, 0);
-      thrust = 1;
+      thrust = 1.2;
       fuel = 100;
       angle = 0;
       onCelestial = true;
@@ -151,6 +151,7 @@ public class Ship {
             }
             else {
                momentum.setLocation(0, 0);
+               setThrust(1.2);
                resetFuel();
                onCelestial = true;
             }
