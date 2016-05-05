@@ -37,9 +37,9 @@ public class Physics {
          newX = (int)(ship.getX() + ship.getThrust() * Math.cos(ship.getAngle()));
          newY = (int)(ship.getY() + ship.getThrust() * Math.sin(ship.getAngle()));
          for (Planet planet : planets) {
-            newX -= (int)(Constants.GRAVITATIONAL_CONSTANT * planet.getMass()
+            newX -= (int)(Constants.GRAV_CONSTANT * planet.getMass()
                   / Math.pow(ship.getX() - planet.getX(), 2));
-            newY -= (int)(Constants.GRAVITATIONAL_CONSTANT * planet.getMass()
+            newY -= (int)(Constants.GRAV_CONSTANT * planet.getMass()
                   / Math.pow(ship.getY() - planet.getY(), 2));
          }
       }
