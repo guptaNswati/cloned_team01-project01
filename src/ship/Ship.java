@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 import celestial.Celestial;
 //import ship.Arrow.ArrowKeyControl;
@@ -16,6 +17,7 @@ public class Ship {
    private LinkedList<Point2D> guideline = new LinkedList<Point2D>();
    // Head of list is current position
    private LinkedList<Point2D> coordinate = new LinkedList<Point2D>();
+   private ListIterator<Point2D> coordIter = coordinate.listIterator();
    private double thrust;
    private double fuel;
    private double angle;
@@ -34,6 +36,20 @@ public class Ship {
       g.setColor(Color.white);
       g.fillOval((int)coordinate.getFirst().getX() - 2,
             (int)coordinate.getFirst().getY() - 2, 4, 4);
+
+      //draw position history line behind ship
+      if(!onCelestial)
+      {
+         for(Point2D coord : coordinate)
+         {
+            g.fillOval((int)coord.getX(),
+                  (int)coord.getY(), 2, 2);
+         }
+      }
+      
+      
+         
+      
    }
 
    public Point2D getCoordinate() {
@@ -42,8 +58,16 @@ public class Ship {
 
    public void setCoordinate(double x, double y) {
       coordinate.push(new Point2D.Double(x, y));
-      if (coordinate.size() > 100) {
+      
+      if (!onCelestial && coordinate.size() > 100) {
          coordinate.removeLast();
+      }
+      else if(onCelestial && coordinate.size() > 1) {
+         //remove all but first coord when on planet
+         //this is so ship's previous positions on planet aren't drawn in "position history line"
+         Point2D tempFirstCoord = coordinate.getFirst();
+         coordinate.clear(); 
+         coordinate.add(tempFirstCoord);
       }
    }
 
