@@ -56,8 +56,8 @@ public class Arrow extends JComponent {
       AffineTransform trans = new AffineTransform();
       trans.translate(getX(), getY() - height / 2);
       trans.rotate(angle, 0, height / 2);
-      trans.scale(width / (double)image.getWidth(),
-            height / (double)image.getHeight());
+      trans.scale((double) (width / image.getWidth()),
+            (double) (height / image.getHeight()));
       AffineTransformOp op = new AffineTransformOp(trans,
             AffineTransformOp.TYPE_BILINEAR);
       g2d.drawImage(image, op, 0, 0);
