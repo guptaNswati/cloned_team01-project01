@@ -17,5 +17,5 @@ public class Constants {
    
    // Lower value means force of gravity decreases less with distance
    // 0.5 is constant force to infinite distance
-   public static final double GRAV_FALLOFF = 0.6;
+   public static final double GRAV_FALLOFF = 0.65;
 }
