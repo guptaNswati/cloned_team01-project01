@@ -1,3 +1,5 @@
+package information;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -7,18 +9,22 @@ import java.io.FileNotFoundException;
  * @author swati
  *
  */
-public class CSVReader {
+public class CSVReader
+{
     private ArrayList<Information> infoData;
    
-   public CSVReader() {
+    public CSVReader()
+    {
         infoData = new ArrayList<Information>();
         
-        try {
-            Scanner input = new Scanner (new File("resource/info.txt"));
+        try 
+        {
+            Scanner input = new Scanner (new File("resources/info.txt"));
             
             int count = 0;
            
-            while(input.hasNext()) {      
+            while(input.hasNext())
+            {      
                 //reads given file line by line and splits every line into tokens                  
                 String[] token = input.nextLine().split(",");
                 String[] tokens = token[1].split("#");               
@@ -29,15 +35,17 @@ public class CSVReader {
             input.close();       
         } 
     
-        catch (FileNotFoundException e) {
-        System.out.println("File sun.txt not found!");
+        catch (FileNotFoundException e) 
+    {
+        System.out.println("File not found!");
     }
     
    }
     /**
      * @return the info
      */
-    public ArrayList<Information> getInfoData() {
+    public ArrayList<Information> getInfoData()
+    {
         return this.infoData;
     }
 }
