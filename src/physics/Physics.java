@@ -25,13 +25,6 @@ public class Physics {
       
    }
    
-   /**
-    * Calculates ship momentum and coordinates while in flight.
-    * 
-    * @param ship
-    * @param sun
-    * @param planets
-    */
    public static void shipFlight(Ship ship, Celestial sun, Planet[] planets) {
       if (ship.getOnCelestial()) {
          double newX, newY;
