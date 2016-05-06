@@ -27,9 +27,6 @@ public class TestGame {
       frame.setResizable(true);
       frame.setVisible(true);
 
-      //commenting out this so that information panel is visible on screen
-      //solarSystem.run();
-
       frame.add(update);
       update.setBackground(Color.black);
       frame.add(BorderLayout.CENTER, update);

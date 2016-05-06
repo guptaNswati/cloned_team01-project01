@@ -18,7 +18,7 @@ import ship.Ship;
 import physics.Constants;
 import physics.Physics;
 import ship.Arrow;
-import ship.Ship;
+//import ship.Ship;
 
 /**
  * An update object contains all dynamic graphical elements.
@@ -33,8 +33,8 @@ public class Update extends JPanel {
    
    public static final int NUM_OF_PLANETS = 8;
 
-   public static final String[] PLANET_NAMES = { "Mercury", "Venus", "Earth",
-         "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
+   public static final String[] PLANET_NAMES = { "Mercury", "Venus",
+         "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
    
    public static final Color[] PLANET_COLORS = { 
          Color.pink, //Mercury
@@ -113,16 +113,15 @@ public class Update extends JPanel {
       double scale = Math.min(getWidth() / 952., getHeight() / 952.);
       g2d.scale(scale, scale);
       
-      //anti alising
+      // Anti-aliasing
       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
             RenderingHints.VALUE_ANTIALIAS_ON);
       
       
       sun.draw(g);
       
-      if(ship.getOnCelestial()) {
-         arrow.draw(g, this);
-      }
+      // Josh: causes "Unable to invert transform AffineTransform" error for me
+      arrow.draw(g, this);
       
       //draw all planets
       for (Planet planet : planets) {
@@ -144,10 +143,9 @@ public class Update extends JPanel {
             for (Planet planet : planets) {
                Physics.planetaryOrbit(sun, planet);
             }
-            Physics.shipFlight(ship, planets);
+            Physics.shipFlight(ship, sun, planets);
 
             arrow.setCoordinate(ship.getAttachedCelestial().getCoordinate()); //places arrow on ship's planet
-            
 
             repaint();
          }
