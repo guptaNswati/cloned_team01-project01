@@ -2,11 +2,11 @@ package ship;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Point2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -56,8 +56,8 @@ public class Arrow extends JComponent {
       AffineTransform trans = new AffineTransform();
       trans.translate(getX(), getY() - height / 2);
       trans.rotate(angle, 0, height / 2);
-      trans.scale((double) (width / image.getWidth()),
-            (double) (height / image.getHeight()));
+      trans.scale(width / (double)image.getWidth(),
+            height / (double)image.getHeight());
       AffineTransformOp op = new AffineTransformOp(trans,
             AffineTransformOp.TYPE_BILINEAR);
       g2d.drawImage(image, op, 0, 0);

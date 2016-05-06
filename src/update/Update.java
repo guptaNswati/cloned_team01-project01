@@ -3,23 +3,25 @@ package update;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Point2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Random;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
 import celestial.Celestial;
 import celestial.Planet;
 import information.CSVReader;
 import information.Information;
-import ship.Ship;
 import physics.Constants;
 import physics.Physics;
 import ship.Arrow;
+import ship.Ship;
 
 /**
  * An update object contains all dynamic graphical elements.
@@ -131,8 +133,7 @@ public class Update extends JPanel {
 
       sun.draw(g);
 
-      // Josh: causes "Unable to invert transform AffineTransform" error for me
-      //arrow.draw(g, this);
+      arrow.draw(g, this);
 
       // Draw all planets
       for (Planet planet : planets) {
