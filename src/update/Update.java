@@ -110,7 +110,6 @@ public class Update extends JPanel {
       }
 
       ship.setAttachedCelestial(planets[2]);
-      arrow = new Arrow("image/arrow-sample.png", planets[2].getCoordinate());
       toggleKeyListener();
 
       CSVReader csv = new CSVReader();
@@ -132,8 +131,7 @@ public class Update extends JPanel {
             RenderingHints.VALUE_ANTIALIAS_ON);
 
       sun.draw(g);
-
-      arrow.draw(g, this);
+      ship.draw(g);
 
       // Draw all planets
       for (Planet planet : planets) {
@@ -144,9 +142,11 @@ public class Update extends JPanel {
          {
             for(int i = 1; i < info.size(); i++)
             {
-               if(info.get(i).getName().equals(planet.getName()) && planetWithPlayer != info.get(i).getName())
+               if (info.get(i).getName().equals(planet.getName())
+                     && planetWithPlayer != info.get(i).getName())
                {                        
-                  JOptionPane.showMessageDialog(null,this.info.get(i),"Did you know!", JOptionPane.INFORMATION_MESSAGE); 
+                  JOptionPane.showMessageDialog(null, this.info.get(i),
+                        "Did you know!", JOptionPane.INFORMATION_MESSAGE);
                   planetWithPlayer = info.get(i).getName();
                }
             }
@@ -157,8 +157,6 @@ public class Update extends JPanel {
                (int) (sun.getY() - planet.getDistanceToSun()),
                planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
       }
-
-      ship.draw(g);
    }
 
    public void run() {
@@ -170,7 +168,9 @@ public class Update extends JPanel {
             }
             Physics.shipFlight(ship, sun, planets);
 
-            arrow.setCoordinate(ship.getAttachedCelestial().getCoordinate()); //places arrow on ship's planet
+            // places arrow on ship's planet
+            ship.getArrow().setCoordinate(
+                  ship.getAttachedCelestial().getCoordinate());
 
             repaint();
          }
@@ -181,7 +181,6 @@ public class Update extends JPanel {
    private void toggleKeyListener() {
       setFocusable(true);
       requestFocusInWindow();
-      addKeyListener(arrow.getArrowKeyControl());
       addKeyListener(ship.getShipKeyControl());
    }
 }

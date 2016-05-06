@@ -2,14 +2,10 @@ package ship;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 
@@ -51,7 +47,7 @@ public class Arrow extends JComponent {
       return coordinate;
    }
 
-   public void draw(Graphics g, ImageObserver imgOb) {
+   public void draw(Graphics g) {
       Graphics2D g2d = (Graphics2D)g;
       AffineTransform trans = new AffineTransform();
       trans.translate(getX(), getY() - height / 2);
@@ -69,22 +65,5 @@ public class Arrow extends JComponent {
 
    public void setAngle(double angle) {
       this.angle = angle;
-   }
-
-   public KeyListener getArrowKeyControl() {
-      return new ArrowKeyControl();
-   }
-
-   private class ArrowKeyControl extends KeyAdapter {
-      private int keyStrokePerPI = 30;
-
-      //TODO: Make arrow not movable while ship is in flight
-      @Override
-      public void keyPressed(KeyEvent e) {
-         if (e.getKeyCode() == KeyEvent.VK_LEFT)
-            angle -= Math.PI / keyStrokePerPI;
-         if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-            angle += Math.PI / keyStrokePerPI;
-      }
    }
 }

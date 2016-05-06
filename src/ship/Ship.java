@@ -26,6 +26,7 @@ public class Ship {
    private int radius;
    private boolean onCelestial;
    private Celestial attachedCelestial;
+   private Arrow arrow;
 
    public Ship() {
       coordinate.push(new Point2D.Double(0, 0));
@@ -35,6 +36,7 @@ public class Ship {
       angle = 0;
       radius = 2;
       onCelestial = true;
+      arrow = new Arrow("image/arrow-sample.png", coordinate.peekFirst());
    }
 
    public void draw(Graphics g) {
@@ -49,6 +51,7 @@ public class Ship {
             alpha--;
          }
       }
+      arrow.draw(g);
    }
 
    public Point2D getCoordinate() {
@@ -154,6 +157,9 @@ public class Ship {
       this.attachedCelestial = Celestial;
    }
    
+   public Arrow getArrow() {
+      return arrow;
+   }
    
    public KeyListener getShipKeyControl() {
       return new ShipKeyControl();
@@ -166,12 +172,12 @@ public class Ship {
             changeAngle(-0.3);
          if (e.getKeyCode() == KeyEvent.VK_RIGHT)
             changeAngle(0.3);
-         if(e.getKeyCode() == KeyEvent.VK_UP) //increase power
+         if (e.getKeyCode() == KeyEvent.VK_UP) // increase power
             changeThrust(0.1);
-         if(e.getKeyCode() == KeyEvent.VK_DOWN) //decrease power
+         if (e.getKeyCode() == KeyEvent.VK_DOWN) // decrease power
             changeThrust(-0.1);
-         if(e.getKeyCode() == KeyEvent.VK_SPACE) { //launch from planet
-            if(onCelestial){
+         if (e.getKeyCode() == KeyEvent.VK_SPACE) { // launch from planet
+            if (onCelestial) {
                onCelestial = false;
             }
             else {
@@ -181,8 +187,7 @@ public class Ship {
                onCelestial = true;
             }
          }
+         arrow.setAngle(angle);
       }
    }
 }
-
-
