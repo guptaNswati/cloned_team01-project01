@@ -7,18 +7,21 @@ import java.awt.geom.Point2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Random;
-
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
 import celestial.Celestial;
 import celestial.Planet;
+import information.CSVReader;
+import information.Information;
 import ship.Ship;
 import physics.Constants;
 import physics.Physics;
+import player.Player;
 import ship.Arrow;
-//import ship.Ship;
+
 
 /**
  * An update object contains all dynamic graphical elements.
@@ -30,6 +33,16 @@ public class Update extends JPanel {
    private Planet [] planets;
    private Ship ship;
    private Arrow arrow;
+   
+   // temp palyer
+   Player player = new Player();;
+
+
+   // information data 
+   private ArrayList<Information> info;
+
+   // keeps track of players last planet 
+   String planetWithPlayer;
    
    public static final int NUM_OF_PLANETS = 8;
 
@@ -78,8 +91,11 @@ public class Update extends JPanel {
          11.4, //Uranus
          11.5 //Neptune
          };
+   
+   
 
    public Update() {
+	   
       super();
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
@@ -102,6 +118,9 @@ public class Update extends JPanel {
       arrow = new Arrow("image/arrow-sample.png", planets[2].getCoordinate());
       toggleKeyListener();
 
+      CSVReader csv = new CSVReader();
+      info = csv.getInfoData();
+      planetWithPlayer = "";
    }
 
    @Override
@@ -121,11 +140,25 @@ public class Update extends JPanel {
       sun.draw(g);
       
       // Josh: causes "Unable to invert transform AffineTransform" error for me
-      arrow.draw(g, this);
+      //arrow.draw(g, this);
       
       //draw all planets
       for (Planet planet : planets) {
          planet.draw(g); //draws planet
+         
+      // checks the distance between planets and player and displays information appropriately
+         if(calculateDistance((int)planet.getX(), (int)planet.getY(),(int) planet.getRadius()) < 2)
+         {
+             for(int i = 1; i < info.size(); i++)
+             {
+                 if(info.get(i).getName().equals(planet.getName()) && planetWithPlayer != info.get(i).getName())
+                 {                        
+                     JOptionPane.showMessageDialog(null,this.info.get(i),"Did you know!", JOptionPane.INFORMATION_MESSAGE); 
+                     planetWithPlayer = info.get(i).getName();
+                 }
+             }
+
+         }
          
          //draws planet orbit path
          g2d.drawOval((int)sun.getX() - planet.getDistanceToSun(), 
@@ -158,5 +191,18 @@ public class Update extends JPanel {
       requestFocusInWindow();
       addKeyListener(arrow.getArrowKeyControl());
       addKeyListener(ship.getShipKeyControl());
+   }
+   
+   /**
+    * calculates the distance between planets and palyer
+    * @param x [x-coordinate of object]
+    * @param y [y-coordinate of object]
+    * @param radius [size of object]
+    * @return distance between objects
+    */       
+   public int calculateDistance(int x, int y, int radius) 
+   {
+       int distance = (int) Math.sqrt( (((x-player.getX()) * (x-player.getX())) + ((y-player.getY()) * (y -player.getY()))) -(radius + player.getRadius()));
+       return distance;
    }
 }

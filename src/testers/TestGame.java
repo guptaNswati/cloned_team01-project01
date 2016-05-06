@@ -1,11 +1,11 @@
 package testers;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 
 import javax.swing.JFrame;
 
-import information.InformationPanel;
 import physics.Constants;
 import update.Update;
 
@@ -17,9 +17,6 @@ public class TestGame {
       JFrame frame = new JFrame("Simple Window");
       frame.setBounds(0, 0, Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-      InformationPanel infoPanel = new InformationPanel();      
-      frame.add(infoPanel);
       
       Update update = new Update();
       frame.add(update);
