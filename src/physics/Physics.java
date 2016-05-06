@@ -24,14 +24,28 @@ public class Physics {
    public static void shipGuideline(Ship ship, Planet[] planets, int frame) {
       
    }
-   
+
+   /**
+    * Calculates ship momentum and coordinates while on planet and in flight.
+    * <p>
+    * On planet:
+    * Coordinates are relative to planet, offset by the radius of the planet
+    * in relation to the angle of the ship.
+    * <p>
+    * In flight:
+    * Coordinates are 
+    * 
+    * @param ship
+    * @param sun
+    * @param planets
+    */
    public static void shipFlight(Ship ship, Celestial sun, Planet[] planets) {
       if (ship.getOnCelestial()) {
          double newX, newY;
          newX = ship.getAttachedCelestial().getX()
-               + (ship.getAttachedCelestial().getRadius() + 2) * Math.cos(ship.getAngle());
+               + (ship.getAttachedCelestial().getRadius() + ship.getRadius()) * Math.cos(ship.getAngle());
          newY = ship.getAttachedCelestial().getY()
-               + (ship.getAttachedCelestial().getRadius() + 2) * Math.sin(ship.getAngle());
+               + (ship.getAttachedCelestial().getRadius() + ship.getRadius()) * Math.sin(ship.getAngle());
          ship.setCoordinate(newX, newY);
       }
       else {
@@ -55,4 +69,16 @@ public class Physics {
          ship.setThrust(0);
       }
    }
+
+   /**
+    * Calculates the distance between a planet and a ship.
+    * 
+    * @param celestial
+    * @param ship
+    * @return
+    */
+   public static double distanceToPlanet(Celestial celestial, Ship ship) {
+      return Math.sqrt(Math.pow(celestial.getX() - ship.getX(), 2) + Math.pow(celestial.getY() - ship.getY(), 2)
+         - celestial.getRadius() - ship.getRadius());
+  }
 }

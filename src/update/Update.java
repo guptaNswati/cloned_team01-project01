@@ -19,9 +19,7 @@ import information.Information;
 import ship.Ship;
 import physics.Constants;
 import physics.Physics;
-import player.Player;
 import ship.Arrow;
-
 
 /**
  * An update object contains all dynamic graphical elements.
@@ -33,76 +31,71 @@ public class Update extends JPanel {
    private Planet [] planets;
    private Ship ship;
    private Arrow arrow;
-   
-   // temp palyer
-   Player player = new Player();;
-
 
    // information data 
    private ArrayList<Information> info;
 
    // keeps track of players last planet 
    String planetWithPlayer;
-   
+
    public static final int NUM_OF_PLANETS = 8;
 
    public static final String[] PLANET_NAMES = { "Mercury", "Venus",
          "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
-   
+
    public static final Color[] PLANET_COLORS = { 
-         Color.pink, //Mercury
+         Color.pink,   //Mercury
          Color.yellow, //Venus
-         Color.blue, //Earth
-         Color.green, //Mars
+         Color.blue,   //Earth
+         Color.green,  //Mars
          Color.orange, //Jupiter
-         Color.gray, //Saturn
-         Color.blue, //Uranus
+         Color.gray,   //Saturn
+         Color.blue,   //Uranus
          Color.magenta //Neptune
-         };
-   
+   };
+
    public static final int [] PLANET_SIZES = { 
-         5, //Mercury
-         7, //Venus
+         5,  //Mercury
+         7,  //Venus
          10, //Earth
          8,  //Mars
          22, //Jupiter
          20, //Saturn
          17, //Uranus
-         15 //Neptune
-         };
+         15  //Neptune
+   };
 
    public static final int [] PLANET_PERIODS = {
-         7286, //Mercury
-         20612, //Venus
-         37865, //Earth
-         58300, //Mars
-         81435, //Jupiter
+         7286,   //Mercury
+         20612,  //Venus
+         37865,  //Earth
+         58300,  //Mars
+         81435,  //Jupiter
          107127, //Saturn
          134883, //Uranus
-         164790 //Neptune
-         };
+         164790  //Neptune
+   };
+
    public static final double[] PLANET_MASSES = {
-         5.8, //Mercury
-         8.5, //Venus
-         8.7, //Earth
-         6.5, //Mars
+         5.8,  //Mercury
+         8.5,  //Venus
+         8.7,  //Earth
+         6.5,  //Mars
          14.5, //Jupiter
          13.2, //Saturn
          11.4, //Uranus
-         11.5 //Neptune
-         };
-   
-   
+         11.5  //Neptune
+   };
 
    public Update() {
-	   
+
       super();
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
       planets = new Planet[NUM_OF_PLANETS];
       ship = new Ship();
       Random randGen = new Random();
-      
+
       //initialize planets
       for (int i = 0; i < NUM_OF_PLANETS; i++) {
          planets[i] = new Planet(
@@ -112,7 +105,7 @@ public class Update extends JPanel {
                PLANET_MASSES[i], 
                50 * (i + 1), randGen.nextDouble() * 2 * Math.PI, 
                PLANET_PERIODS[i]);
-       }
+      }
 
       ship.setAttachedCelestial(planets[2]);
       arrow = new Arrow("image/arrow-sample.png", planets[2].getCoordinate());
@@ -131,41 +124,39 @@ public class Update extends JPanel {
       // Keep solar system centered regardless of aspect ratio
       double scale = Math.min(getWidth() / 952., getHeight() / 952.);
       g2d.scale(scale, scale);
-      
+
       // Anti-aliasing
       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
             RenderingHints.VALUE_ANTIALIAS_ON);
-      
-      
+
       sun.draw(g);
-      
+
       // Josh: causes "Unable to invert transform AffineTransform" error for me
       //arrow.draw(g, this);
-      
-      //draw all planets
+
+      // Draw all planets
       for (Planet planet : planets) {
          planet.draw(g); //draws planet
-         
-      // checks the distance between planets and player and displays information appropriately
-         if(calculateDistance((int)planet.getX(), (int)planet.getY(),(int) planet.getRadius()) < 2)
-         {
-             for(int i = 1; i < info.size(); i++)
-             {
-                 if(info.get(i).getName().equals(planet.getName()) && planetWithPlayer != info.get(i).getName())
-                 {                        
-                     JOptionPane.showMessageDialog(null,this.info.get(i),"Did you know!", JOptionPane.INFORMATION_MESSAGE); 
-                     planetWithPlayer = info.get(i).getName();
-                 }
-             }
 
+         // Checks the distance between planets and player and displays information appropriately
+         if (Physics.distanceToPlanet(planet, ship) < 2)
+         {
+            for(int i = 1; i < info.size(); i++)
+            {
+               if(info.get(i).getName().equals(planet.getName()) && planetWithPlayer != info.get(i).getName())
+               {                        
+                  JOptionPane.showMessageDialog(null,this.info.get(i),"Did you know!", JOptionPane.INFORMATION_MESSAGE); 
+                  planetWithPlayer = info.get(i).getName();
+               }
+            }
          }
-         
-         //draws planet orbit path
-         g2d.drawOval((int)sun.getX() - planet.getDistanceToSun(), 
-               (int)sun.getY() - planet.getDistanceToSun(),
+
+         // Draws planet orbit path
+         g2d.drawOval((int) (sun.getX() - planet.getDistanceToSun()), 
+               (int) (sun.getY() - planet.getDistanceToSun()),
                planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
       }
-      
+
       ship.draw(g);
    }
 
@@ -191,18 +182,5 @@ public class Update extends JPanel {
       requestFocusInWindow();
       addKeyListener(arrow.getArrowKeyControl());
       addKeyListener(ship.getShipKeyControl());
-   }
-   
-   /**
-    * calculates the distance between planets and palyer
-    * @param x [x-coordinate of object]
-    * @param y [y-coordinate of object]
-    * @param radius [size of object]
-    * @return distance between objects
-    */       
-   public int calculateDistance(int x, int y, int radius) 
-   {
-       int distance = (int) Math.sqrt( (((x-player.getX()) * (x-player.getX())) + ((y-player.getY()) * (y -player.getY()))) -(radius + player.getRadius()));
-       return distance;
    }
 }
