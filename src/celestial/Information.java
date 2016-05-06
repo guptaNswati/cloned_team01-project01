@@ -1,6 +1,5 @@
 package information;
-
-
+// creates an information object
 public class Information
 {
     private String name;
