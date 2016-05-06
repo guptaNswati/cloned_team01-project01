@@ -28,7 +28,8 @@ public class Ship {
 
    public Ship() {
       coordinate.push(new Point2D.Double(0, 0));
-      thrust = 0;
+      momentum = new Point2D.Double(0, 0);
+      thrust = 1.2;
       fuel = 100;
       angle = 0;
       onCelestial = true;
@@ -54,7 +55,7 @@ public class Ship {
 
    public void setCoordinate(double x, double y) {
       coordinate.push(new Point2D.Double(x, y));
-
+      
       if (!onCelestial && coordinate.size() > 255) {
          coordinate.removeLast();
       }
@@ -76,20 +77,29 @@ public class Ship {
       return coordinate.getFirst().getY();
    }
 
+   public void setMomentum(double x, double y) {
+      momentum.setLocation(x, y);
+   }
+
+   public double getDX() {
+      return momentum.getX();
+   }
+
+   public double getDY() {
+      return momentum.getY();
+   }
+
    public double getThrust() {
       return thrust;
    }
 
    public void setThrust(double thrust) {
-      this.thrust = thrust >= 0 ? thrust : 0;
+      this.thrust = thrust > 0 ? thrust : 0;
    }
 
-   public void increaseThrust(double thrust) {
-      this.thrust += thrust > 0 ? thrust : 0;
-   }
-
-   public void decreaseThrust(double thrust) {
-      this.thrust -= thrust > 0 ? thrust : 0;
+   public void changeThrust(double thrust) {
+      double newThrust = this.thrust + thrust;
+      this.thrust = newThrust > 0 ? newThrust : 0;
    }
 
    public double getFuel() {
@@ -118,12 +128,8 @@ public class Ship {
       this.angle = angle % (2 * Math.PI);
    }
 
-   public void increaseAngle(double angle) {
+   public void changeAngle(double angle) {
       this.angle += angle % (2 * Math.PI);
-   }
-
-   public void decreaseAngle(double angle) {
-      this.angle -= angle % (2 * Math.PI);
    }
 
    public boolean getOnCelestial() {
@@ -148,28 +154,29 @@ public class Ship {
    }
 
    private class ShipKeyControl extends KeyAdapter {
-      private int keyStrokePerPI = 30;
-
       @Override
       public void keyPressed(KeyEvent e) {
-         if (e.getKeyCode() == KeyEvent.VK_LEFT && onCelestial)
-            angle -= Math.PI / keyStrokePerPI;
-         if (e.getKeyCode() == KeyEvent.VK_RIGHT && onCelestial)
-            angle += Math.PI / keyStrokePerPI;
-         if(e.getKeyCode() == KeyEvent.VK_UP && onCelestial) //increase power
-            increaseThrust(1);
-         if(e.getKeyCode() == KeyEvent.VK_DOWN && onCelestial) //decrease power
-            decreaseThrust(1);
-         if(e.getKeyCode() == KeyEvent.VK_SPACE ) { //launch from planet
+         if (e.getKeyCode() == KeyEvent.VK_LEFT)
+            changeAngle(-0.3);
+         if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+            changeAngle(0.3);
+         if(e.getKeyCode() == KeyEvent.VK_UP) //increase power
+            changeThrust(0.1);
+         if(e.getKeyCode() == KeyEvent.VK_DOWN) //decrease power
+            changeThrust(-0.1);
+         if(e.getKeyCode() == KeyEvent.VK_SPACE) { //launch from planet
             if(onCelestial){
                onCelestial = false;
             }
             else {
-               onCelestial = true;
-               setThrust(1);
+               momentum.setLocation(0, 0);
+               setThrust(1.2);
                resetFuel();
+               onCelestial = true;
             }
          }
       }
    }
 }
+
+
