@@ -24,7 +24,7 @@ public class ThrustBox extends JTextField {
             if (newValue < 0)
                setText(ship.getThrust());
             else
-               ship.decreaseThrust(newValue);
+               ship.setThrust(newValue);
             transferFocusBackward();
          }
       });
