@@ -11,7 +11,7 @@ public class Physics {
    public static void planetaryOrbit(final Celestial sun, Planet planet) {
       double dTheta = 2 * Math.PI / planet.getPeriodInMS() * Constants.TIME_INTERVAL;
       planet.setAngleToSun((planet.getAngleToSun() + dTheta) % (2 * Math.PI));
-      
+
       // update (x,y) coordinate
       double newX, newY;
       newX = sun.getX()
@@ -20,9 +20,9 @@ public class Physics {
             + planet.getDistanceToSun() * Math.sin(planet.getAngleToSun());
       planet.setCoordinate(newX, newY);
    }
-   
+
    public static void shipGuideline(Ship ship, Planet[] planets, int frame) {
-      
+
    }
 
    /**
@@ -33,7 +33,8 @@ public class Physics {
     * in relation to the angle of the ship.
     * <p>
     * In flight:
-    * Coordinates are 
+    * Momentum is an accumulation of previous momentum and all forces on the
+    * ship. Coordinates are previous coordinates + momentum.
     * 
     * @param ship
     * @param sun
@@ -54,9 +55,9 @@ public class Physics {
          double gravityForceOfSun = Constants.GRAV_CONSTANT * sun.getMass()
                / Math.pow(Math.pow(ship.getX() - sun.getX(), 2) + Math.pow(ship.getY() - sun.getX(), 2), Constants.GRAV_FALLOFF);
          addX = ship.getThrust() * Math.cos(ship.getAngle()) + ship.getDX()
-            - Math.cos(angleToSun) * gravityForceOfSun;
+         - Math.cos(angleToSun) * gravityForceOfSun;
          addY = ship.getThrust() * Math.sin(ship.getAngle()) + ship.getDY()
-            - Math.sin(angleToSun) * gravityForceOfSun;
+         - Math.sin(angleToSun) * gravityForceOfSun;
          for (Planet planet : planets) {
             double angleToPlanet = Math.atan2(ship.getY() - planet.getY(), ship.getX() - planet.getX());
             double gravityForceOfPlanet = Constants.GRAV_CONSTANT * planet.getMass()
@@ -77,8 +78,8 @@ public class Physics {
     * @param ship
     * @return boolean
     */
-   public static boolean distanceToPlanet(Celestial celestial, Ship ship) {
+   public static boolean detectCollision(Celestial celestial, Ship ship) {
       return Math.sqrt(Math.pow(celestial.getX() - ship.getX(), 2) + Math.pow(celestial.getY() - ship.getY(), 2))
-         - celestial.getRadius() - ship.getRadius() < 0;
-  }
+            - celestial.getRadius() - ship.getRadius() < 0;
+   }
 }
