@@ -44,9 +44,9 @@ public class Physics {
       if (ship.getOnCelestial()) {
          double newX, newY;
          newX = ship.getAttachedCelestial().getX()
-               + (ship.getAttachedCelestial().getRadius() + ship.getRadius()) * Math.cos(ship.getAngle());
+               + (ship.getAttachedCelestial().getRadius() + ship.getRadius() + 1) * Math.cos(ship.getAngle());
          newY = ship.getAttachedCelestial().getY()
-               + (ship.getAttachedCelestial().getRadius() + ship.getRadius()) * Math.sin(ship.getAngle());
+               + (ship.getAttachedCelestial().getRadius() + ship.getRadius() + 1) * Math.sin(ship.getAngle());
          ship.setCoordinate(newX, newY);
       }
       else {

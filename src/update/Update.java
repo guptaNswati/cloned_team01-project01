@@ -70,14 +70,14 @@ public class Update extends JPanel {
    };
 
    public static final int [] PLANET_SIZES = { 
-         5,  //Mercury
-         7,  //Venus
+         7,  //Mercury
+         9,  //Venus
          10, //Earth
          8,  //Mars
          22, //Jupiter
          20, //Saturn
-         17, //Uranus
-         15  //Neptune
+         14, //Uranus
+         13  //Neptune
    };
 
    public static final int [] PLANET_PERIODS = {
@@ -135,7 +135,7 @@ public class Update extends JPanel {
       info = csv.getInfoData();
       planetWithPlayer = "";
 
-      add(ship.getThrustInput());
+      //add(ship.getThrustInput());
       // for testing.
       // add(new TesterButton("tester")); // comment out this line when done
    }

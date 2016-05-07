@@ -28,13 +28,13 @@ public class Constants {
    public static final int INIT_SUN_Y = 952 / 2;
    
    /**
-    * Strength of force of gravity
+    * Strength of force of gravity.
     */
-   public static final double GRAV_CONSTANT = 0.8;
+   public static final double GRAV_CONSTANT = 0.85;
    
    /**
-    * Lower value means force of gravity decreases less with distance 0.5 is
-    * constant force to infinite distance
+    * Lower value means force of gravity decreases less with distance.
+    * 0.5 is constant force to infinite distance.
     */
-   public static final double GRAV_FALLOFF = 0.65;
+   public static final double GRAV_FALLOFF = 0.7;
 }
