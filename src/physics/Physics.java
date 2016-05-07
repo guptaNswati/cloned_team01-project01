@@ -75,10 +75,10 @@ public class Physics {
     * 
     * @param celestial
     * @param ship
-    * @return
+    * @return boolean
     */
-   public static double distanceToPlanet(Celestial celestial, Ship ship) {
-      return Math.sqrt(Math.pow(celestial.getX() - ship.getX(), 2) + Math.pow(celestial.getY() - ship.getY(), 2)
-         - celestial.getRadius() - ship.getRadius());
+   public static boolean distanceToPlanet(Celestial celestial, Ship ship) {
+      return Math.sqrt(Math.pow(celestial.getX() - ship.getX(), 2) + Math.pow(celestial.getY() - ship.getY(), 2))
+         - celestial.getRadius() - ship.getRadius() < 0;
   }
 }

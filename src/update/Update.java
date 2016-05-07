@@ -163,7 +163,7 @@ public class Update extends JPanel {
          planet.draw(g, this); //draws planet
 
          // Checks the distance between planets and player and displays information appropriately
-         if (Physics.distanceToPlanet(planet, ship) < 2)
+         if (Physics.distanceToPlanet(planet, ship))
          {
             for(int i = 1; i < info.size(); i++)
             {
