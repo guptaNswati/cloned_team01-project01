@@ -149,6 +149,11 @@ public class Ship {
    
    public void setOnCelestial(boolean onCelestial) {
       this.onCelestial = onCelestial;
+      if (onCelestial) {
+         momentum.setLocation(0, 0);
+         setThrust(1.2);
+         resetFuel();
+      }
    }
 
    public Celestial getAttachedCelestial() {
@@ -175,19 +180,11 @@ public class Ship {
          if (e.getKeyCode() == KeyEvent.VK_RIGHT)
             changeAngle(0.3);
          if (e.getKeyCode() == KeyEvent.VK_UP) // increase power
-            changeThrust(0.1);
+            changeThrust(0.2);
          if (e.getKeyCode() == KeyEvent.VK_DOWN) // decrease power
-            changeThrust(-0.1);
+            changeThrust(-0.2);
          if (e.getKeyCode() == KeyEvent.VK_SPACE) { // launch from planet
-            if (onCelestial) {
-               onCelestial = false;
-            }
-            else {
-               momentum.setLocation(0, 0);
-               setThrust(1.2);
-               resetFuel();
-               onCelestial = true;
-            }
+            setOnCelestial(!onCelestial);
          }
          arrow.setAngle(angle);
          //thrustInput.setText(thrust);

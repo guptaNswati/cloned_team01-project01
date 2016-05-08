@@ -17,8 +17,8 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -47,6 +47,10 @@ public class Update extends JPanel {
    private Ship ship;
    private Arrow arrow;
 
+   // adding info_panel
+   private JPanel infoPanel;
+   private JTextArea textBox;
+ 
    // information data 
    private ArrayList<Information> info;
 
@@ -108,6 +112,20 @@ public class Update extends JPanel {
    public Update() {
 
       super();
+
+   // Editing old file and instantiating panel here for info display
+   infoPanel = new JPanel();
+   infoPanel.setSize(Constants.FRAME_WIDTH/4, Constants.FRAME_HEIGHT/4);
+
+   textBox = new JTextArea(8, 15);
+   
+   textBox.setEditable(false);
+
+   infoPanel.add(textBox);
+   infoPanel.setVisible(false);
+
+this.add(infoPanel);
+      
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
       sun.setImage("image/MrSun-sample.png");
@@ -163,17 +181,18 @@ public class Update extends JPanel {
          planet.draw(g, this); //draws planet
 
          // Checks the distance between planets and player and displays information appropriately
-         if (Physics.detectCollision(planet, ship))
-         {
-            for(int i = 1; i < info.size(); i++)
-            {
+         if (Physics.detectCollision(planet, ship)) {
+            System.out.println("Collision with " + planet.getName());
+            ship.setOnCelestial(true);
+            ship.setAttachedCelestial(planet);
+            for(int i = 1; i < info.size(); i++) {
                if (info.get(i).getName().equals(planet.getName())
-                     && planetWithPlayer != info.get(i).getName())
-               {                        
-                  JOptionPane.showMessageDialog(null, this.info.get(i),
-                        "Did you know!", JOptionPane.INFORMATION_MESSAGE);
+                     && planetWithPlayer != info.get(i).getName()) {                        
+                  textBox.setText(info.get(i).toString());
+                  infoPanel.setVisible(true);
                   planetWithPlayer = info.get(i).getName();
                }
+               //infoPanel.setVisible(false);
             }
          }
 
