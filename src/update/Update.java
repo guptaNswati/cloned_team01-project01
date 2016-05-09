@@ -18,8 +18,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JSlider;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
@@ -128,7 +128,8 @@ this.add(infoPanel);
       
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
-      sun.setImage("image/MrSun-sample.png");
+      // sun.setImage("image/MrSun-sample.png");
+      sun.setImage("resources/planets/sun.png");
 
       planets = new Planet[NUM_OF_PLANETS];
       ship = new Ship();
@@ -143,6 +144,8 @@ this.add(infoPanel);
                PLANET_MASSES[i], 
                50 * (i + 1), randGen.nextDouble() * 2 * Math.PI, 
                PLANET_PERIODS[i]);
+         planets[i].setImage(String.format("resources/planets/%s.png",
+               planets[i].getName()));
       }
 
       ship.setAttachedCelestial(planets[2]);
