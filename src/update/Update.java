@@ -156,7 +156,7 @@ this.add(infoPanel);
       info = csv.getInfoData();
       planetWithPlayer = "";
 
-      //add(ship.getThrustInput());
+      add(ship.getThrustInput());
       // for testing.
       // add(new TesterButton("tester")); // comment out this line when done
    }

@@ -27,7 +27,7 @@ public class Ship {
    private boolean onCelestial;
    private Celestial attachedCelestial;
    private Arrow arrow;
-   //private ThrustBox thrustInput;
+   private ThrustBox thrustInput;
 
    public Ship() {
       coordinate.push(new Point2D.Double(0, 0));
@@ -37,8 +37,8 @@ public class Ship {
       angle = 0;
       radius = 2;
       onCelestial = true;
-      arrow = new Arrow("image/arrow-sample.png", coordinate.peekFirst());
-      //thrustInput = new ThrustBox(this);
+      arrow = new Arrow("image/arrow-sample.png", this);
+      thrustInput = new ThrustBox(this);
    }
 
    public void draw(Graphics g) {
@@ -102,11 +102,15 @@ public class Ship {
 
    public void setThrust(double thrust) {
       this.thrust = thrust > 0 ? thrust : 0;
+      arrow.setThrust(this.thrust);
+      thrustInput.setText(this.thrust);
    }
 
    public void changeThrust(double thrust) {
       double newThrust = this.thrust + thrust;
       this.thrust = newThrust > 0 ? newThrust : 0;
+      arrow.setThrust(this.thrust);
+      thrustInput.setText(this.thrust);
    }
 
    public double getFuel() {
@@ -133,10 +137,12 @@ public class Ship {
 
    public void setAngle(double angle) {
       this.angle = angle % (2 * Math.PI);
+      arrow.setAngle(this.angle);
    }
 
    public void changeAngle(double angle) {
       this.angle += angle % (2 * Math.PI);
+      arrow.setAngle(this.angle);
    }
 
    public int getRadius() {
@@ -186,15 +192,13 @@ public class Ship {
          if (e.getKeyCode() == KeyEvent.VK_SPACE) { // launch from planet
             setOnCelestial(!onCelestial);
          }
-         arrow.setAngle(angle);
-         //thrustInput.setText(thrust);
       }
    }
    
    /**
     * @return the thrustInput box
     */
-//   public ThrustBox getThrustInput() {
-//      return thrustInput;
-//   }
+   public ThrustBox getThrustInput() {
+      return thrustInput;
+   }
 }
