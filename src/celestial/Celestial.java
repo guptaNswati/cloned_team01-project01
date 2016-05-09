@@ -58,8 +58,8 @@ public class Celestial {
     *           A Graphics object that is passed in by paintComponent method.
     */
    public void draw(Graphics g, ImageObserver imgOb) {
+      g.setColor(color);
       if (image == null) {
-         g.setColor(color);
          g.fillOval((int)coordinate.getX() - radius,
                (int)coordinate.getY() - radius, radius * 2, radius * 2);
       }
