@@ -12,6 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import javax.swing.JButton;
@@ -26,15 +27,10 @@ import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import celestial.Celestial;
-import celestial.Planet;
-import information.CSVReader;
-import information.Information;
-import physics.Constants;
-import physics.Physics;
-import ship.Arrow;
-import ship.Ship;
-import ship.Ship;
+import celestial.*;
+import information.*;
+import physics.*;
+import ship.*;
 
 /**
  * An update object contains all dynamic graphical elements. It contains a
@@ -46,6 +42,7 @@ public class Update extends JPanel {
    private Planet [] planets;
    private Ship ship;
    private Arrow arrow;
+   //private GameObjectives 
 
    // adding info_panel
    private JPanel infoPanel;
@@ -124,7 +121,7 @@ public class Update extends JPanel {
    infoPanel.add(textBox);
    infoPanel.setVisible(false);
 
-this.add(infoPanel);
+   this.add(infoPanel);
       
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
@@ -178,6 +175,7 @@ this.add(infoPanel);
 
       // Draw all planets
       for (Planet planet : planets) {
+         
          planet.draw(g, this); //draws planet
 
          // Checks the distance between planets and player and displays information appropriately
@@ -185,21 +183,31 @@ this.add(infoPanel);
             System.out.println("Collision with " + planet.getName());
             ship.setOnCelestial(true);
             ship.setAttachedCelestial(planet);
-            for(int i = 1; i < info.size(); i++) {
-               if (info.get(i).getName().equals(planet.getName())
-                     && planetWithPlayer != info.get(i).getName()) {                        
-                  textBox.setText(info.get(i).toString());
-                  infoPanel.setVisible(true);
-                  planetWithPlayer = info.get(i).getName();
-               }
-               //infoPanel.setVisible(false);
+            
+            if(Arrays.asList(planets).indexOf(planet) == GameObjectives.getObjective()){
+               //landed on right planet
+              for(int i = 1; i < info.size(); i++) {
+                 if (info.get(i).getName().equals(planet.getName())
+                       && planetWithPlayer != info.get(i).getName()) {                        
+                    textBox.setText(info.get(i).toString());
+                    infoPanel.setVisible(true);
+                    planetWithPlayer = info.get(i).getName();
+                 }
+                 //infoPanel.setVisible(false);
+              }
+              
+              GameObjectives.nextObjective();
             }
-         }
+          else{
+            //show text box that says go to other planet fool.
+             textBox.setText("Go to " + GameObjectives.getJoke(0));
+          }
+      }
 
-         // Draws planet orbit path
-         g2d.drawOval((int) (sun.getX() - planet.getDistanceToSun()), 
-               (int) (sun.getY() - planet.getDistanceToSun()),
-               planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
+      // Draws planet orbit path
+      g2d.drawOval((int) (sun.getX() - planet.getDistanceToSun()), 
+            (int) (sun.getY() - planet.getDistanceToSun()),
+            planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
       }
    }
 
@@ -216,8 +224,7 @@ this.add(infoPanel);
             Physics.shipFlight(ship, sun, planets);
 
             // places arrow on ship's planet
-            ship.getArrow().setCoordinate(
-                  ship.getAttachedCelestial().getCoordinate());
+            ship.getArrow().setCoordinate(ship.getAttachedCelestial().getCoordinate());
 
             repaint();
          }
