@@ -184,9 +184,10 @@ public class Update extends JPanel {
             ship.setOnCelestial(true);
             ship.setAttachedCelestial(planet);
             
-            if(Arrays.asList(planets).indexOf(planet) == GameObjectives.getObjective()){
+            if(Arrays.asList(planets).indexOf(planet) == GameObjectives.getPlanetObjective()){
                //landed on right planet
               for(int i = 1; i < info.size(); i++) {
+                 //display info about planet
                  if (info.get(i).getName().equals(planet.getName())
                        && planetWithPlayer != info.get(i).getName()) {                        
                     textBox.setText(info.get(i).toString());
@@ -195,12 +196,13 @@ public class Update extends JPanel {
                  }
                  //infoPanel.setVisible(false);
               }
-              
+              //go to next game objective
               GameObjectives.nextObjective();
-            }
-          else{
-            //show text box that says go to other planet fool.
-             textBox.setText("Go to " + GameObjectives.getJoke(0));
+            }else{ //landed on wrong planet
+               //show text box that says go to other planet + joke
+               textBox.setText("Go to " + PLANET_NAMES[GameObjectives.getPlanetObjective()]
+                     + "\n" + GameObjectives.getJoke(GameObjectives.getPlanetObjective()));   
+               infoPanel.setVisible(true);
           }
       }
 
