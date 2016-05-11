@@ -51,6 +51,7 @@ public class Arrow extends JComponent {
     * @param coordinate
     */
    public Arrow(String filename, Ship ship) {
+      coordinate = new Point2D.Double();
       try {
          image = ImageIO.read(new File(filename));
       } catch (IOException ex) {}
