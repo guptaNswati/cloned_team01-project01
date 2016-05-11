@@ -189,9 +189,10 @@ public class Update extends JPanel {
               for(int i = 1; i < info.size(); i++) {
                  //display info about planet
                  if (info.get(i).getName().equals(planet.getName())
-                       && planetWithPlayer != info.get(i).getName()) {                        
+                       && planetWithPlayer != info.get(i).getName()) { 
+                    GameObjectives.nextObjective();
                     textBox.setText(info.get(i).toString() + 
-                          "\nGo to this planet: " + PLANET_NAMES[GameObjectives.getPlanetObjective()]);
+                          "\n\nGOOD JOB!\nNow, go to this planet next: " + PLANET_NAMES[GameObjectives.getPlanetObjective()]);
                     infoPanel.setVisible(true);
                     planetWithPlayer = info.get(i).getName();
                     break;
@@ -199,7 +200,6 @@ public class Update extends JPanel {
                  //infoPanel.setVisible(false);
               }
               //go to next game objective
-              GameObjectives.nextObjective();
             }
               else{ //landed on wrong planet
                  System.out.println("Landed on WRONG planet! " + GameObjectives.getJoke());
