@@ -181,6 +181,7 @@ this.add(infoPanel);
 
       // Draw all planets
       for (Planet planet : planets) {
+         g2d.setColor(planet.getColor());
          // Draws planet orbit path
          g2d.drawOval((int)(sun.getX() - planet.getDistanceToSun()),
                (int)(sun.getY() - planet.getDistanceToSun()),

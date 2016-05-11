@@ -44,7 +44,7 @@ public class Celestial {
    public Celestial(Point2D.Double coordinate, Color color, String name,
          int radius, double mass) {
       this.setName(name);
-      this.color = color;
+      this.setColor(color);
       this.coordinate = new Point2D.Double();
       setCoordinate(coordinate.getX(), coordinate.getY());
       setRadius(radius);
@@ -58,7 +58,7 @@ public class Celestial {
     *           A Graphics object that is passed in by paintComponent method.
     */
    public void draw(Graphics g, ImageObserver imgOb) {
-      g.setColor(color);
+      g.setColor(getColor());
       if (image == null) {
          g.fillOval((int)coordinate.getX() - radius,
                (int)coordinate.getY() - radius, radius * 2, radius * 2);
@@ -124,5 +124,19 @@ public class Celestial {
       try {
          image = ImageIO.read(new File(filename));
       } catch (IOException ex) {}
+   }
+
+   /**
+    * @return the color
+    */
+   public Color getColor() {
+      return color;
+   }
+
+   /**
+    * @param color the color to set
+    */
+   public void setColor(Color color) {
+      this.color = color;
    }
 }
