@@ -1,7 +1,6 @@
 package physics;
 
-import celestial.Celestial;
-import celestial.Planet;
+import celestial.*;
 import ship.Ship;
 
 /**
@@ -53,7 +52,7 @@ public class Physics {
          double addX, addY;
          double angleToSun = Math.atan2(ship.getY() - sun.getY(), ship.getX() - sun.getX());
          double gravityForceOfSun = Constants.GRAV_CONSTANT * sun.getMass()
-               / Math.pow(Math.pow(ship.getX() - sun.getX(), 2) + Math.pow(ship.getY() - sun.getX(), 2), Constants.GRAV_FALLOFF);
+               / Math.pow(Math.pow(ship.getX() - sun.getX(), 2) + Math.pow(ship.getY() - sun.getY(), 2), Constants.GRAV_FALLOFF);
          addX = ship.getThrust() * Math.cos(ship.getAngle()) + ship.getDX()
          - Math.cos(angleToSun) * gravityForceOfSun;
          addY = ship.getThrust() * Math.sin(ship.getAngle()) + ship.getDY()
@@ -61,7 +60,7 @@ public class Physics {
          for (Planet planet : planets) {
             double angleToPlanet = Math.atan2(ship.getY() - planet.getY(), ship.getX() - planet.getX());
             double gravityForceOfPlanet = Constants.GRAV_CONSTANT * planet.getMass()
-                  / Math.pow(Math.pow(ship.getX() - planet.getX(), 2) + Math.pow(ship.getY() - planet.getX(), 2), Constants.GRAV_FALLOFF);
+                  / Math.pow(Math.pow(ship.getX() - planet.getX(), 2) + Math.pow(ship.getY() - planet.getY(), 2), Constants.GRAV_FALLOFF);
             addX -= Math.cos(angleToPlanet) * gravityForceOfPlanet;
             addY -= Math.sin(angleToPlanet) * gravityForceOfPlanet;
          }
@@ -80,6 +79,6 @@ public class Physics {
     */
    public static boolean detectCollision(Celestial celestial, Ship ship) {
       return Math.sqrt(Math.pow(celestial.getX() - ship.getX(), 2) + Math.pow(celestial.getY() - ship.getY(), 2))
-            - celestial.getRadius() - ship.getRadius() < 0;
+            - celestial.getRadius() - ship.getRadius() < 0 && !ship.getOnCelestial();
    }
 }
