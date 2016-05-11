@@ -65,12 +65,12 @@ public class Update extends JPanel {
    public static final Color[] PLANET_COLORS = { 
          new Color(125, 125, 125), // Mercury
          new Color(194, 124, 39), // Venus
-         new Color(27, 31, 66), // Earth
+         new Color(64, 99, 245), // Earth
          new Color(142, 96, 71), // Mars
          new Color(188, 172, 157), // Jupiter
          new Color(217, 183, 122), // Saturn
          new Color(189, 227, 230), // Uranus
-         new Color(64, 99, 245) // Neptune
+         new Color(37, 162, 204)// Neptune
    };
 
    public static final int [] PLANET_SIZES = { 
