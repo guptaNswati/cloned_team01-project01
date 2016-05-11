@@ -34,7 +34,6 @@ import physics.Constants;
 import physics.Physics;
 import ship.Arrow;
 import ship.Ship;
-import ship.Ship;
 
 /**
  * An update object contains all dynamic graphical elements. It contains a
@@ -43,14 +42,15 @@ import ship.Ship;
  */
 public class Update extends JPanel {
    private Celestial sun;
-   private Planet [] planets;
+   private Planet[] planets;
    private Ship ship;
    private Arrow arrow;
+   //private GameObjectives 
 
    // adding info_panel
    private JPanel infoPanel;
    private JTextArea textBox;
- 
+
    // information data 
    private ArrayList<Information> info;
 
@@ -112,19 +112,6 @@ public class Update extends JPanel {
    public Update() {
 
       super();
-
-   // Editing old file and instantiating panel here for info display
-   infoPanel = new JPanel();
-   infoPanel.setSize(Constants.FRAME_WIDTH/4, Constants.FRAME_HEIGHT/4);
-
-   textBox = new JTextArea(8, 15);
-   
-   textBox.setEditable(false);
-
-   infoPanel.add(textBox);
-   infoPanel.setVisible(false);
-
-this.add(infoPanel);
       
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
@@ -132,22 +119,32 @@ this.add(infoPanel);
       sun.setImage("resources/planets/sun.png");
 
       planets = new Planet[NUM_OF_PLANETS];
-      ship = new Ship();
       Random randGen = new Random();
 
       //initialize planets
       for (int i = 0; i < NUM_OF_PLANETS; i++) {
          planets[i] = new Planet(
-               PLANET_COLORS[i], 
-               PLANET_NAMES[i], 
-               PLANET_SIZES[i], 
-               PLANET_MASSES[i], 
-               50 * (i + 1), randGen.nextDouble() * 2 * Math.PI, 
+               PLANET_COLORS[i],
+               PLANET_NAMES[i],
+               PLANET_SIZES[i],
+               PLANET_MASSES[i],
+               50 * (i + 1), randGen.nextDouble() * 2 * Math.PI,
                PLANET_PERIODS[i]);
          planets[i].setImage(String.format("resources/planets/%s.png",
                planets[i].getName()));
       }
+      
+      //planet info display
+      infoPanel = new JPanel();
+      infoPanel.setSize(Constants.FRAME_WIDTH/4, Constants.FRAME_HEIGHT/4);
+      textBox = new JTextArea(8, 15);
+      textBox.setEditable(false);
+      
+      infoPanel.add(textBox);
+      infoPanel.setVisible(false);
+      this.add(infoPanel);
 
+      ship = new Ship();
       ship.setAttachedCelestial(planets[2]);
 
       toggleKeyListener();
@@ -180,30 +177,51 @@ this.add(infoPanel);
       sun.draw(g, this);
 
       // Draw all planets
-      for (Planet planet : planets) {
+      for (int planetIndex = 0; planetIndex < NUM_OF_PLANETS; planetIndex++) {
+         
+         Planet planet = planets[planetIndex];
          g2d.setColor(planet.getColor());
-         // Draws planet orbit path
-         g2d.drawOval((int)(sun.getX() - planet.getDistanceToSun()),
-               (int)(sun.getY() - planet.getDistanceToSun()),
-               planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
-
          planet.draw(g, this); //draws planet
 
          // Checks the distance between planets and player and displays information appropriately
          if (Physics.detectCollision(planet, ship)) {
-            System.out.println("Collision with " + planet.getName());
+            //System.out.println("Collision with " + planet.getName());
             ship.setOnCelestial(true);
             ship.setAttachedCelestial(planet);
-            for(int i = 1; i < info.size(); i++) {
-               if (info.get(i).getName().equals(planet.getName())
-                     && planetWithPlayer != info.get(i).getName()) {                        
-                  textBox.setText(info.get(i).toString());
-                  infoPanel.setVisible(true);
-                  planetWithPlayer = info.get(i).getName();
-               }
-               infoPanel.setVisible(false);
+
+            if(planetIndex == GameObjectives.getPlanetObjective()){
+               
+               System.out.println("Landed on right planet!");
+               
+               //landed on right planet
+              for(int i = 1; i < info.size(); i++) {
+                 //display info about planet
+                 if (info.get(i).getName().equals(planet.getName())
+                       && planetWithPlayer != info.get(i).getName()) { 
+                    GameObjectives.nextObjective();
+                    textBox.setText(info.get(i).toString() + 
+                          "\n\nGOOD JOB!\nNow, go to this planet next: " + PLANET_NAMES[GameObjectives.getPlanetObjective()]);
+                    infoPanel.setVisible(true);
+                    planetWithPlayer = info.get(i).getName();
+                    break;
+                 }
+                 //infoPanel.setVisible(false);
+              }
+              //go to next game objective
+            }
+              else{ //landed on wrong planet
+                 System.out.println("Landed on WRONG planet! " + GameObjectives.getJoke());
+
+               //show text box that says go to other planet + joke
+               textBox.setText("Go to this planet: " + PLANET_NAMES[GameObjectives.getPlanetObjective()]
+                     + "\n\nImportant: " + GameObjectives.getJoke());   
+               infoPanel.setVisible(true);
             }
          }
+      // Draws planet orbit path
+      g2d.drawOval((int) (sun.getX() - planet.getDistanceToSun()), 
+            (int) (sun.getY() - planet.getDistanceToSun()),
+            planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
       }
    }
 
@@ -215,13 +233,13 @@ this.add(infoPanel);
          @Override
          public void actionPerformed(ActionEvent e) {
             for (Planet planet : planets) {
-               Physics.planetaryOrbit(sun, planet);
+               planet.incrementAngleToSun();
+               planet.setCoordinate(Physics.planetaryOrbit(sun, planet, 1));
             }
             Physics.shipFlight(ship, sun, planets);
 
             // places arrow on ship's planet
-            ship.getArrow().setCoordinate(
-                  ship.getAttachedCelestial().getCoordinate());
+            ship.getArrow().setCoordinate(ship.getAttachedCelestial().getCoordinate());
 
             repaint();
          }
@@ -237,7 +255,7 @@ this.add(infoPanel);
       requestFocusInWindow();
       addKeyListener(ship.getShipKeyControl());
    }
-   
+
    // for testing
    class TesterButton extends JButton {
       public TesterButton(String name) {
@@ -269,7 +287,7 @@ this.add(infoPanel);
          tester.add(panel);
       }
    }
-   
+
    class PeriodSliders extends JPanel {
       PeriodSliders() {
          this.add(BorderLayout.NORTH,

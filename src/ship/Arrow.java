@@ -51,7 +51,6 @@ public class Arrow extends JComponent {
     * @param coordinate
     */
    public Arrow(String filename, Ship ship) {
-      setCoordinate(ship.getCoordinate());
       try {
          image = ImageIO.read(new File(filename));
       } catch (IOException ex) {}
