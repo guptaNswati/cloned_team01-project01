@@ -191,10 +191,11 @@ public class Update extends JPanel {
                  //display info about planet
                  if (info.get(i).getName().equals(planet.getName())
                        && planetWithPlayer != info.get(i).getName()) {                        
-                    textBox.setText(info.get(i).toString());
+                    textBox.setText(info.get(i).toString() + 
+                          "\nGo to this planet: " + PLANET_NAMES[GameObjectives.getPlanetObjective()]);
                     infoPanel.setVisible(true);
                     planetWithPlayer = info.get(i).getName();
-                    //break;
+                    break;
                  }
                  //infoPanel.setVisible(false);
               }
@@ -205,8 +206,8 @@ public class Update extends JPanel {
                  System.out.println("Landed on WRONG planet! " + GameObjectives.getJoke());
 
                //show text box that says go to other planet + joke
-               textBox.setText("Go to " + PLANET_NAMES[GameObjectives.getPlanetObjective()]
-                     + "\n" + GameObjectives.getJoke());   
+               textBox.setText("Go to this planet: " + PLANET_NAMES[GameObjectives.getPlanetObjective()]
+                     + "\n\nImportant: " + GameObjectives.getJoke());   
                infoPanel.setVisible(true);
          }
       }

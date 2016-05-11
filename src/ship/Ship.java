@@ -176,9 +176,9 @@ public class Ship {
       @Override
       public void keyPressed(KeyEvent e) {
          if (e.getKeyCode() == KeyEvent.VK_LEFT)
-            changeAngle(-0.3);
+            changeAngle(-0.15);
          if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-            changeAngle(0.3);
+            changeAngle(0.15);
          if (e.getKeyCode() == KeyEvent.VK_UP) // increase power
             changeThrust(0.5);
          if (e.getKeyCode() == KeyEvent.VK_DOWN) // decrease power
