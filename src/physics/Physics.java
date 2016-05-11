@@ -45,9 +45,8 @@ public class Physics {
          ship.resetCoordinate();
          ship.resetMomentum();
       }
-      else {
+      else
          ship.setThrust(0);
-      }
       Physics.shipGuideline(ship, sun, planets);
       ship.setHistory();
    }

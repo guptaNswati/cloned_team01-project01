@@ -30,7 +30,7 @@ public class Ship {
    public Ship() {
       coordinate.push(new Point2D.Double(0, 100));
       momentum.push(new Point2D.Double(0, 0));
-      thrust = 1.5;
+      thrust = 1.2;
       fuel = 100;
       angle = 0;
       radius = 2;
@@ -56,7 +56,7 @@ public class Ship {
             alpha--;
          }
       }
-      arrow.draw(g);
+      arrow.draw(g, this);
    }
 
    public Point2D getCoordinateFirst() {
@@ -143,17 +143,17 @@ public class Ship {
 
    public void setThrust(double thrust) {
       this.thrust = thrust > 0 ? thrust : 0;
-      arrow.setThrust(this.thrust);
       thrustInput.setText(this.thrust);
    }
 
    public void changeThrust(double thrust) {
       double newThrust = this.thrust + thrust;
-      this.thrust = newThrust > 0 ? newThrust : 0;
-      this.resetCoordinate();
-      this.resetMomentum();
-      arrow.setThrust(this.thrust);
-      thrustInput.setText(this.thrust);
+      if (newThrust >= 0 && newThrust <= 2.8) {
+         this.thrust = newThrust;
+         this.resetCoordinate();
+         this.resetMomentum();
+         thrustInput.setText(this.thrust);
+      }
    }
 
    public double getFuel() {
@@ -182,14 +182,12 @@ public class Ship {
       this.angle = angle % (2 * Math.PI);
       this.resetCoordinate();
       this.resetMomentum();
-      arrow.setAngle(this.angle);
    }
 
    public void changeAngle(double angle) {
       this.angle += angle % (2 * Math.PI);
       this.resetCoordinate();
       this.resetMomentum();
-      arrow.setAngle(this.angle);
    }
 
    public int getRadius() {
@@ -204,7 +202,7 @@ public class Ship {
       this.onCelestial = onCelestial;
       if (onCelestial) {
          setMomentum(0, 0);
-         setThrust(1.5);
+         setThrust(1.2);
          resetFuel();
       }
    }
@@ -229,13 +227,13 @@ public class Ship {
       @Override
       public void keyPressed(KeyEvent e) {
          if (e.getKeyCode() == KeyEvent.VK_LEFT)
-            changeAngle(-0.15);
+            changeAngle(-0.12);
          if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-            changeAngle(0.15);
+            changeAngle(0.12);
          if (e.getKeyCode() == KeyEvent.VK_UP) // increase power
-            changeThrust(0.5);
+            changeThrust(0.4);
          if (e.getKeyCode() == KeyEvent.VK_DOWN) // decrease power
-            changeThrust(-0.5);
+            changeThrust(-0.4);
          if (e.getKeyCode() == KeyEvent.VK_SPACE) { // launch from planet
             setOnCelestial(!onCelestial);
          }

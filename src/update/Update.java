@@ -44,7 +44,6 @@ public class Update extends JPanel {
    private Celestial sun;
    private Planet[] planets;
    private Ship ship;
-   private Arrow arrow;
    //private GameObjectives 
 
    // adding info_panel
@@ -112,7 +111,7 @@ public class Update extends JPanel {
    public Update() {
 
       super();
-      
+
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
       // sun.setImage("image/MrSun-sample.png");
@@ -133,13 +132,13 @@ public class Update extends JPanel {
          planets[i].setImage(String.format("resources/planets/%s.png",
                planets[i].getName()));
       }
-      
+
       //planet info display
       infoPanel = new JPanel();
       infoPanel.setSize(Constants.FRAME_WIDTH/4, Constants.FRAME_HEIGHT/4);
       textBox = new JTextArea(8, 15);
       textBox.setEditable(false);
-      
+
       infoPanel.add(textBox);
       infoPanel.setVisible(false);
       this.add(infoPanel);
@@ -178,13 +177,13 @@ public class Update extends JPanel {
 
       // Draw all planets
       for (int planetIndex = 0; planetIndex < NUM_OF_PLANETS; planetIndex++) {
-         
+
          Planet planet = planets[planetIndex];
          g2d.setColor(planet.getColor());
          // Draws planet orbit path
          g2d.drawOval((int) (sun.getX() - planet.getDistanceToSun()), 
-            (int) (sun.getY() - planet.getDistanceToSun()),
-            planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
+               (int) (sun.getY() - planet.getDistanceToSun()),
+               planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
          planet.draw(g, this); //draws planet
 
          // Checks the distance between planets and player and displays information appropriately
@@ -193,28 +192,28 @@ public class Update extends JPanel {
             ship.setOnCelestial(true);
             ship.setAttachedCelestial(planet);
 
-            if(planetIndex == GameObjectives.getPlanetObjective()){
-               
+            if (planetIndex == GameObjectives.getPlanetObjective()){
+
                System.out.println("Landed on right planet!");
-               
+
                //landed on right planet
-              for(int i = 1; i < info.size(); i++) {
-                 //display info about planet
-                 if (info.get(i).getName().equals(planet.getName())
-                       && planetWithPlayer != info.get(i).getName()) { 
-                    GameObjectives.nextObjective();
-                    textBox.setText(info.get(i).toString() + 
-                          "\n\nGOOD JOB!\nNow, go to this planet next: " + PLANET_NAMES[GameObjectives.getPlanetObjective()]);
-                    infoPanel.setVisible(true);
-                    planetWithPlayer = info.get(i).getName();
-                    break;
-                 }
-                 //infoPanel.setVisible(false);
-              }
-              //go to next game objective
+               for(int i = 1; i < info.size(); i++) {
+                  //display info about planet
+                  if (info.get(i).getName().equals(planet.getName())
+                        && planetWithPlayer != info.get(i).getName()) { 
+                     GameObjectives.nextObjective();
+                     textBox.setText(info.get(i).toString() + 
+                           "\n\nGOOD JOB!\nNow, go to this planet next: " + PLANET_NAMES[GameObjectives.getPlanetObjective()]);
+                     infoPanel.setVisible(true);
+                     planetWithPlayer = info.get(i).getName();
+                     break;
+                  }
+                  //infoPanel.setVisible(false);
+               }
+               //go to next game objective
             }
-              else{ //landed on wrong planet
-                 System.out.println("Landed on WRONG planet! " + GameObjectives.getJoke());
+            else { //landed on wrong planet
+               System.out.println("Landed on WRONG planet! " + GameObjectives.getJoke());
 
                //show text box that says go to other planet + joke
                textBox.setText("Go to this planet: " + PLANET_NAMES[GameObjectives.getPlanetObjective()]

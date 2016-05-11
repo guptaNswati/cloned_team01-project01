@@ -23,8 +23,6 @@ public class ThrustBox extends JTextField {
             } catch (NumberFormatException ex) {}
             if (newValue < 0)
                setText(ship.getThrust());
-            else
-               ship.setThrust(newValue);
             transferFocusBackward();
          }
       });

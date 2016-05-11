@@ -12,6 +12,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+import ship.Ship;
+
 /**
  * An arrow to draw on GUI. Also contains and inner private class for key
  * control.
@@ -35,14 +37,6 @@ public class Arrow extends JComponent {
     * Arrow's height.
     */
    private int height;
-   /**
-    * Arrow's angle with respect to horizontal x to the right.
-    */
-   private double angle;
-   /**
-    * Arrow's thrust, which determine how long to draw.
-    */
-   private double thrust;
 
    /**
     * Constructor that sets angle's position and image.
@@ -57,7 +51,6 @@ public class Arrow extends JComponent {
       } catch (IOException ex) {}
       width = 50;
       height = 6;
-      thrust = ship.getThrust();
    }
 
    @Override
@@ -85,46 +78,16 @@ public class Arrow extends JComponent {
     * @param g
     *           Graphics object for drawing.
     */
-   public void draw(Graphics g) {
-      final double ratio = 0.75;
+   public void draw(Graphics g, Ship ship) {
+      final double ratio = 0.3;
       Graphics2D g2d = (Graphics2D)g;
       AffineTransform trans = new AffineTransform();
       trans.translate(getX(), getY() - height / 2);
-      trans.rotate(angle, 0, height / 2);
-      trans.scale(width * thrust * ratio / image.getWidth(),
+      trans.rotate(ship.getAngle(), 0, height / 2);
+      trans.scale(width * (ship.getThrust() + 1.6) * ratio / image.getWidth(),
             height / (double)image.getHeight());
       AffineTransformOp op = new AffineTransformOp(trans,
             AffineTransformOp.TYPE_BILINEAR);
       g2d.drawImage(image, op, 0, 0);
-   }
-
-   public double getAngle() {
-      return angle;
-   }
-
-   public void setAngle(double angle) {
-      this.angle = angle;
-   }
-
-   /**
-    * @return the thrust
-    */
-   public double getThrust() {
-      return thrust;
-   }
-
-   /**
-    * @param thrust
-    *           the thrust to set
-    */
-   public void setThrust(double thrust) {
-      final double min = 0.6;
-      final double max = 3;
-      if (thrust <= min)
-         this.thrust = min;
-      else if (thrust >= max)
-         this.thrust = max;
-      else
-         this.thrust = thrust;
    }
 }
