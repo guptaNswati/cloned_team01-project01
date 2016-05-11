@@ -46,7 +46,7 @@ public class Celestial {
       this.setName(name);
       this.color = color;
       this.coordinate = new Point2D.Double();
-      setCoordinate(coordinate.getX(), coordinate.getY());
+      setCoordinate(coordinate);
       setRadius(radius);
       setMass(mass);
    }
@@ -76,8 +76,8 @@ public class Celestial {
     * @param y
     *           y coordinate.
     */
-   public void setCoordinate(double x, double y) {
-      coordinate.setLocation(x, y);
+   public void setCoordinate(Point2D point) {
+      coordinate.setLocation(point);
    }
 
    public double getRadius() {

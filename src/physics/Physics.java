@@ -1,27 +1,24 @@
 package physics;
 
-import celestial.*;
+import java.awt.geom.Point2D;
+
+import celestial.Celestial;
+import celestial.Planet;
 import ship.Ship;
 
 /**
  * Methods to calculate planet and ship coordinates.
  */
 public class Physics {
-   public static void planetaryOrbit(final Celestial sun, Planet planet) {
+   public static Point2D planetaryOrbit(final Celestial sun, Planet planet, int frame) {
       double dTheta = 2 * Math.PI / planet.getPeriodInMS() * Constants.TIME_INTERVAL;
-      planet.setAngleToSun((planet.getAngleToSun() + dTheta) % (2 * Math.PI));
+      double angleToSun = (planet.getAngleToSun() + dTheta * frame) % (2 * Math.PI);
 
       // update (x,y) coordinate
       double newX, newY;
-      newX = sun.getX()
-            + planet.getDistanceToSun() * Math.cos(planet.getAngleToSun());
-      newY = sun.getY()
-            + planet.getDistanceToSun() * Math.sin(planet.getAngleToSun());
-      planet.setCoordinate(newX, newY);
-   }
-
-   public static void shipGuideline(Ship ship, Planet[] planets, int frame) {
-
+      newX = sun.getX() + planet.getDistanceToSun() * Math.cos(angleToSun);
+      newY = sun.getY() + planet.getDistanceToSun() * Math.sin(angleToSun);
+      return new Point2D.Double(newX, newY);
    }
 
    /**
@@ -46,39 +43,47 @@ public class Physics {
                + (ship.getAttachedCelestial().getRadius() + ship.getRadius() + 1) * Math.cos(ship.getAngle());
          newY = ship.getAttachedCelestial().getY()
                + (ship.getAttachedCelestial().getRadius() + ship.getRadius() + 1) * Math.sin(ship.getAngle());
-         ship.setCoordinate(newX, newY);
+         ship.setCoordinateLast(newX, newY);
+         ship.resetCoordinate();
+         ship.resetMomentum();
       }
-      else {
-         double addX, addY;
-         double angleToSun = Math.atan2(ship.getY() - sun.getY(), ship.getX() - sun.getX());
-         double gravityForceOfSun = Constants.GRAV_CONSTANT * sun.getMass()
-               / Math.pow(Math.pow(ship.getX() - sun.getX(), 2) + Math.pow(ship.getY() - sun.getY(), 2), Constants.GRAV_FALLOFF);
-         addX = ship.getThrust() * Math.cos(ship.getAngle()) + ship.getDX()
-         - Math.cos(angleToSun) * gravityForceOfSun;
-         addY = ship.getThrust() * Math.sin(ship.getAngle()) + ship.getDY()
-         - Math.sin(angleToSun) * gravityForceOfSun;
-         for (Planet planet : planets) {
-            double angleToPlanet = Math.atan2(ship.getY() - planet.getY(), ship.getX() - planet.getX());
-            double gravityForceOfPlanet = Constants.GRAV_CONSTANT * planet.getMass()
-                  / Math.pow(Math.pow(ship.getX() - planet.getX(), 2) + Math.pow(ship.getY() - planet.getY(), 2), Constants.GRAV_FALLOFF);
-            addX -= Math.cos(angleToPlanet) * gravityForceOfPlanet;
-            addY -= Math.sin(angleToPlanet) * gravityForceOfPlanet;
-         }
-         ship.setMomentum(addX, addY);
-         ship.setCoordinate(ship.getX() + addX, ship.getY() + addY);
-         ship.setThrust(0);
+      Physics.shipGuideline(ship, sun, planets);
+      ship.setHistory();
+   }
+
+   public static void shipGuideline(Ship ship, Celestial sun, Planet[] planets) {
+      double addX, addY;
+      double angleToSun = Math.atan2(ship.getFirstY() - sun.getY(), ship.getFirstX() - sun.getX());
+      double gravityForceOfSun = Constants.GRAV_CONSTANT * sun.getMass()
+            / Math.pow(Math.pow(ship.getFirstX() - sun.getX(), 2) + Math.pow(ship.getFirstY() - sun.getY(), 2), Constants.GRAV_FALLOFF);
+      addX = (ship.getCoordinateSize() > 2 ? 0 : ship.getThrust()) * Math.cos(ship.getAngle())
+         + ship.getDX() - Math.cos(angleToSun) * gravityForceOfSun;
+      addY = (ship.getCoordinateSize() > 2 ? 0 : ship.getThrust()) * Math.sin(ship.getAngle())
+         + ship.getDY() - Math.sin(angleToSun) * gravityForceOfSun;
+      for (Planet planet : planets) {
+         Point2D planetCoord = Physics.planetaryOrbit(sun, planet, ship.getCoordinateSize());
+         double angleToPlanet = Math.atan2(ship.getFirstY() - planetCoord.getY(), ship.getFirstX() - planetCoord.getX());
+         double gravityForceOfPlanet = Constants.GRAV_CONSTANT * planet.getMass()
+               / Math.pow(Math.pow(ship.getFirstX() - planetCoord.getX(), 2) + Math.pow(ship.getFirstY() - planetCoord.getY(), 2), Constants.GRAV_FALLOFF);
+         addX -= Math.cos(angleToPlanet) * gravityForceOfPlanet;
+         addY -= Math.sin(angleToPlanet) * gravityForceOfPlanet;
+      }
+      ship.setMomentum(addX, addY);
+      ship.setCoordinateFirst(ship.getFirstX() + addX, ship.getFirstY() + addY);
+      if (ship.getCoordinateSize() < 510) {
+         Physics.shipGuideline(ship, sun, planets);
       }
    }
 
    /**
-    * Calculates the distance between a planet and a ship.
+    * Detects collision between a celestial object and a ship.
     * 
     * @param celestial
     * @param ship
     * @return boolean
     */
    public static boolean detectCollision(Celestial celestial, Ship ship) {
-      return Math.sqrt(Math.pow(celestial.getX() - ship.getX(), 2) + Math.pow(celestial.getY() - ship.getY(), 2))
+      return Math.sqrt(Math.pow(celestial.getX() - ship.getLastX(), 2) + Math.pow(celestial.getY() - ship.getLastY(), 2))
             - celestial.getRadius() - ship.getRadius() < 0 && !ship.getOnCelestial();
    }
 }

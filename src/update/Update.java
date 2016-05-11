@@ -18,18 +18,22 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JSlider;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import celestial.*;
-import information.*;
-import physics.*;
-import ship.*;
+import celestial.Celestial;
+import celestial.Planet;
+import information.CSVReader;
+import information.Information;
+import physics.Constants;
+import physics.Physics;
+import ship.Arrow;
+import ship.Ship;
 
 /**
  * An update object contains all dynamic graphical elements. It contains a
@@ -38,7 +42,7 @@ import ship.*;
  */
 public class Update extends JPanel {
    private Celestial sun;
-   private Planet [] planets;
+   private Planet[] planets;
    private Ship ship;
    private Arrow arrow;
    //private GameObjectives 
@@ -46,7 +50,7 @@ public class Update extends JPanel {
    // adding info_panel
    private JPanel infoPanel;
    private JTextArea textBox;
- 
+
    // information data 
    private ArrayList<Information> info;
 
@@ -119,11 +123,11 @@ public class Update extends JPanel {
       //initialize planets
       for (int i = 0; i < NUM_OF_PLANETS; i++) {
          planets[i] = new Planet(
-               PLANET_COLORS[i], 
-               PLANET_NAMES[i], 
-               PLANET_SIZES[i], 
-               PLANET_MASSES[i], 
-               50 * (i + 1), randGen.nextDouble() * 2 * Math.PI, 
+               PLANET_COLORS[i],
+               PLANET_NAMES[i],
+               PLANET_SIZES[i],
+               PLANET_MASSES[i],
+               50 * (i + 1), randGen.nextDouble() * 2 * Math.PI,
                PLANET_PERIODS[i]);
       }
       
@@ -177,10 +181,9 @@ public class Update extends JPanel {
 
          // Checks the distance between planets and player and displays information appropriately
          if (Physics.detectCollision(planet, ship)) {
-            System.out.println("Collision with " + planet.getName());
+            //System.out.println("Collision with " + planet.getName());
             ship.setOnCelestial(true);
             ship.setAttachedCelestial(planet);
-            
             if(planetIndex == GameObjectives.getPlanetObjective()){
                
                System.out.println("Landed on right planet!");
@@ -226,7 +229,8 @@ public class Update extends JPanel {
          @Override
          public void actionPerformed(ActionEvent e) {
             for (Planet planet : planets) {
-               Physics.planetaryOrbit(sun, planet);
+               planet.incrementAngleToSun();
+               planet.setCoordinate(Physics.planetaryOrbit(sun, planet, 1));
             }
             Physics.shipFlight(ship, sun, planets);
 
@@ -247,7 +251,7 @@ public class Update extends JPanel {
       requestFocusInWindow();
       addKeyListener(ship.getShipKeyControl());
    }
-   
+
    // for testing
    class TesterButton extends JButton {
       public TesterButton(String name) {
@@ -279,7 +283,7 @@ public class Update extends JPanel {
          tester.add(panel);
       }
    }
-   
+
    class PeriodSliders extends JPanel {
       PeriodSliders() {
          this.add(BorderLayout.NORTH,
