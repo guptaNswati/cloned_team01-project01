@@ -30,7 +30,7 @@ public class Ship {
    //private ThrustBox thrustInput;
 
    public Ship() {
-      coordinate.push(new Point2D.Double(0, 0));
+      coordinate.push(new Point2D.Double(0, 100));
       momentum = new Point2D.Double(0, 0);
       thrust = 1.2;
       fuel = 100;
@@ -180,9 +180,9 @@ public class Ship {
          if (e.getKeyCode() == KeyEvent.VK_RIGHT)
             changeAngle(0.3);
          if (e.getKeyCode() == KeyEvent.VK_UP) // increase power
-            changeThrust(0.2);
+            changeThrust(0.5);
          if (e.getKeyCode() == KeyEvent.VK_DOWN) // decrease power
-            changeThrust(-0.2);
+            changeThrust(-0.5);
          if (e.getKeyCode() == KeyEvent.VK_SPACE) { // launch from planet
             setOnCelestial(!onCelestial);
          }

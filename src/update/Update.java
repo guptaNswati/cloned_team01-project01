@@ -109,26 +109,12 @@ public class Update extends JPanel {
    public Update() {
 
       super();
-
-   // Editing old file and instantiating panel here for info display
-   infoPanel = new JPanel();
-   infoPanel.setSize(Constants.FRAME_WIDTH/4, Constants.FRAME_HEIGHT/4);
-
-   textBox = new JTextArea(8, 15);
-   
-   textBox.setEditable(false);
-
-   infoPanel.add(textBox);
-   infoPanel.setVisible(false);
-
-   this.add(infoPanel);
       
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
       sun.setImage("image/MrSun-sample.png");
 
       planets = new Planet[NUM_OF_PLANETS];
-      ship = new Ship();
       Random randGen = new Random();
 
       //initialize planets
@@ -141,7 +127,18 @@ public class Update extends JPanel {
                50 * (i + 1), randGen.nextDouble() * 2 * Math.PI, 
                PLANET_PERIODS[i]);
       }
+      
+      //planet info display
+      infoPanel = new JPanel();
+      infoPanel.setSize(Constants.FRAME_WIDTH/4, Constants.FRAME_HEIGHT/4);
+      textBox = new JTextArea(8, 15);
+      textBox.setEditable(false);
+      
+      infoPanel.add(textBox);
+      infoPanel.setVisible(false);
+      this.add(infoPanel);
 
+      ship = new Ship();
       ship.setAttachedCelestial(planets[2]);
 
       toggleKeyListener();
@@ -174,8 +171,9 @@ public class Update extends JPanel {
       sun.draw(g, this);
 
       // Draw all planets
-      for (Planet planet : planets) {
+      for (int planetIndex = 0; planetIndex < NUM_OF_PLANETS; planetIndex++) {
          
+         Planet planet = planets[planetIndex];
          planet.draw(g, this); //draws planet
 
          // Checks the distance between planets and player and displays information appropriately
@@ -184,7 +182,10 @@ public class Update extends JPanel {
             ship.setOnCelestial(true);
             ship.setAttachedCelestial(planet);
             
-            if(Arrays.asList(planets).indexOf(planet) == GameObjectives.getPlanetObjective()){
+            if(planetIndex == GameObjectives.getPlanetObjective()){
+               
+               System.out.println("Landed on right planet!");
+               
                //landed on right planet
               for(int i = 1; i < info.size(); i++) {
                  //display info about planet
@@ -193,17 +194,21 @@ public class Update extends JPanel {
                     textBox.setText(info.get(i).toString());
                     infoPanel.setVisible(true);
                     planetWithPlayer = info.get(i).getName();
+                    //break;
                  }
                  //infoPanel.setVisible(false);
               }
               //go to next game objective
               GameObjectives.nextObjective();
-            }else{ //landed on wrong planet
+            }
+              else{ //landed on wrong planet
+                 System.out.println("Landed on WRONG planet! " + GameObjectives.getJoke());
+
                //show text box that says go to other planet + joke
                textBox.setText("Go to " + PLANET_NAMES[GameObjectives.getPlanetObjective()]
-                     + "\n" + GameObjectives.getJoke(GameObjectives.getPlanetObjective()));   
+                     + "\n" + GameObjectives.getJoke());   
                infoPanel.setVisible(true);
-          }
+         }
       }
 
       // Draws planet orbit path
