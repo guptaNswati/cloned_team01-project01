@@ -30,7 +30,8 @@ public class MainMenu implements ActionListener{
 	private JButton exitButton;
 	private JButton rulesButton;
 	private JButton helpButton;
-	private JButton closeHelpButton;
+	private JButton closeHelp;
+	JTextArea instructionTextBox;
 	
 	MainMenu()
 	{
@@ -38,16 +39,16 @@ public class MainMenu implements ActionListener{
 		menuFrame.setBounds(0, 0, 400, 380);
 		menuFrame.setLocationRelativeTo(null);
 		menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		menuFrame.setLayout(new FlowLayout());
+		menuFrame.setLayout(new GridLayout(0, 1));
 		
 		 JLabel label = new JLabel("Welcome to Planet Hopper!!");
 		label.setForeground(Color.BLUE);
-		 menuFrame.add(label);
+		 menuFrame.add(label, BorderLayout.NORTH);
 	
 		menuPanel = new JPanel();
-		menuPanel.setSize(new Dimension(menuFrame.getWidth(), menuFrame.getHeight()));	
+//		menuPanel.setSize(new Dimension(100, 50));	
 		menuPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		menuPanel.setLayout(new GridLayout(1, 1));
+		menuPanel.setLayout(new FlowLayout());
 		
 
 		startButton = new JButton("Start");
@@ -67,15 +68,25 @@ public class MainMenu implements ActionListener{
 		menuPanel.add(rulesButton);	
 		menuPanel.add(exitButton);
 		
-		menuFrame.add(menuPanel);
+		menuFrame.add(menuPanel, BorderLayout.CENTER);
 		
 		helpPanel = new JPanel();
-		helpPanel.setPreferredSize(new Dimension(menuFrame.getWidth() - 100 , menuFrame.getHeight() - 140));
+//		helpPanel.setPreferredSize(new Dimension(menuFrame.getWidth()/2 , menuFrame.getHeight() - 200));
 		helpPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
-		closeHelpButton = new JButton("Close");
-		closeHelpButton.addActionListener(this);
-		helpPanel.add(closeHelpButton, BorderLayout.SOUTH);
+		instructionTextBox = new JTextArea();
+		instructionTextBox.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));			
+		instructionTextBox.setBackground(Color.BLACK);
+		instructionTextBox.setForeground(Color.green);
+		instructionTextBox.setText("Instructions: \n \n Left/Right Arrow: Ship angle "
+				+ "\n \n Up/Down Arrow: Ship thrust \n \n Space: Ship launch/reset\n" );			
+		instructionTextBox.setEditable(false);		
+		instructionTextBox.setVisible(false);		
+		helpPanel.add(instructionTextBox);
+		
+		closeHelp = new JButton("Close");
+		closeHelp.addActionListener(this);
+		helpPanel.add(closeHelp, BorderLayout.PAGE_END);
 		
 		menuFrame.add(helpPanel, BorderLayout.PAGE_END);			
 		helpPanel.setVisible(false);
@@ -107,25 +118,14 @@ public class MainMenu implements ActionListener{
 		
 		if (e.getSource() == this.helpButton)
 		{
-			JTextArea instructionBox = new JTextArea();
-			instructionBox.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));			
-			instructionBox.setBackground(Color.BLACK);
-			instructionBox.setForeground(Color.green);
-			instructionBox.setText("Instructions: \n \n Press spacebar to launch ship and reset \n \n "
-					+ "Press left key for moving left \n \n "
-					+ "Press right key for moving right \n \n "
-					+ "Press up key for moving up \n \n "
-					+ "Press down key for moving down \n" );			
-			instructionBox.setEditable(false);	
-			
-			helpPanel.add(instructionBox);						
+			instructionTextBox.setVisible(true);
 			helpPanel.setVisible(true);		
 			}
 		
-		if(e.getSource() == closeHelpButton)
+		if(e.getSource() == closeHelp)
 		{
-			helpPanel.setVisible(false);
-			
+			instructionTextBox.setVisible(false);
+			helpPanel.setVisible(false);						
 		}		
 	}
 	
