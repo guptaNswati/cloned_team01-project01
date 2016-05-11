@@ -45,10 +45,10 @@ public class Physics {
          ship.resetCoordinate();
          ship.resetMomentum();
       }
-      else
-         ship.setThrust(0);
       Physics.shipGuideline(ship, sun, planets);
-      ship.setHistory();
+      ship.shiftCoordinate();
+      if (!ship.getOnCelestial())
+         ship.setThrust(0);
    }
 
    /**
@@ -79,7 +79,7 @@ public class Physics {
          addX -= Math.cos(angleToPlanet) * gravityForceOfPlanet;
          addY -= Math.sin(angleToPlanet) * gravityForceOfPlanet;
       }
-      ship.setMomentum(addX, addY);
+      ship.setFirstMomentum(addX, addY);
       ship.setFirstCoordinate(ship.getFirstX() + addX, ship.getFirstY() + addY);
       if (ship.getCoordinateSize() < 510) {
          Physics.shipGuideline(ship, sun, planets);

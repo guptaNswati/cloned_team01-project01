@@ -30,7 +30,7 @@ public class Ship {
    public Ship() {
       coordinate.push(new Point2D.Double(0, 100));
       momentum.push(new Point2D.Double(0, 0));
-      thrust = 1.2;
+      thrust = 1.6;
       fuel = 100;
       angle = 0;
       radius = 2;
@@ -50,6 +50,7 @@ public class Ship {
          alpha = alpha + 0.5;
       }
       if (!onCelestial) {
+         alpha = 255;
          for (Point2D hist : history) {
             g.setColor(new Color(255, 255, 255, (int)alpha));
             g.fillOval((int)hist.getX(), (int)hist.getY(), 1, 1);
@@ -95,6 +96,22 @@ public class Ship {
       coordinate.add(new Point2D.Double(x, y));
    }
 
+   public void shiftCoordinate() {
+      history.push(coordinate.removeLast());
+      
+      if (!onCelestial)
+         momentum.removeLast();
+
+      if (!onCelestial && history.size() > 255)
+         history.removeLast();
+      else if(onCelestial && history.size() != 0) {
+         // Remove all but first coordinate when on planet
+         // This is so ship's previous positions on planet
+         // aren't drawn in "position history line"
+         history.clear(); 
+      }
+   }
+
    public void resetCoordinate() {
       Point2D lastElement = coordinate.getLast();
       coordinate.clear();
@@ -105,20 +122,6 @@ public class Ship {
       return history.getFirst();
    }
 
-   public void setHistory() {
-      history.push(coordinate.removeLast());;
-      
-      if (!onCelestial && history.size() > 255) {
-         history.removeLast();
-      }
-      else if(onCelestial && history.size() != 0) {
-         // Remove all but first coordinate when on planet
-         // This is so ship's previous positions on planet
-         // aren't drawn in "position history line"
-         history.clear(); 
-      }
-   }
-
    public double getDX() {
       return momentum.getFirst().getX();
    }
@@ -127,8 +130,16 @@ public class Ship {
       return momentum.getFirst().getY();
    }
 
-   public void setMomentum(double x, double y) {
+   public int getMomentumSize() {
+      return momentum.size();
+   }
+
+   public void setFirstMomentum(double x, double y) {
       momentum.push(new Point2D.Double(x, y));
+   }
+
+   public void setLastMomentum(double x, double y) {
+      momentum.add(new Point2D.Double(x, y));
    }
 
    public void resetMomentum() {
@@ -153,7 +164,10 @@ public class Ship {
          this.resetCoordinate();
          this.resetMomentum();
          thrustInput.setText(this.thrust);
+         System.out.println(fuel);
       }
+      if (!onCelestial)
+         expendFuel();
    }
 
    public double getFuel() {
@@ -161,13 +175,7 @@ public class Ship {
    }
 
    public void expendFuel() {
-      if (fuel > 0) {
-         fuel -= this.thrust * 0.01;
-         if (fuel <= 0) {
-            fuel = 0;
-            thrust = 0;
-         }
-      }
+      fuel -= fuel > 0 ? 1 : 0;
    }
    
    public void resetFuel() {
@@ -180,14 +188,10 @@ public class Ship {
 
    public void setAngle(double angle) {
       this.angle = angle % (2 * Math.PI);
-      this.resetCoordinate();
-      this.resetMomentum();
    }
 
    public void changeAngle(double angle) {
       this.angle += angle % (2 * Math.PI);
-      this.resetCoordinate();
-      this.resetMomentum();
    }
 
    public int getRadius() {
@@ -201,8 +205,8 @@ public class Ship {
    public void setOnCelestial(boolean onCelestial) {
       this.onCelestial = onCelestial;
       if (onCelestial) {
-         setMomentum(0, 0);
-         setThrust(1.2);
+         setLastMomentum(0, 0);
+         setThrust(1.6);
          resetFuel();
       }
    }
@@ -227,16 +231,19 @@ public class Ship {
       @Override
       public void keyPressed(KeyEvent e) {
          if (e.getKeyCode() == KeyEvent.VK_LEFT)
-            changeAngle(-0.12);
+            changeAngle(-0.15);
          if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-            changeAngle(0.12);
-         if (e.getKeyCode() == KeyEvent.VK_UP) // increase power
-            changeThrust(0.4);
+            changeAngle(0.15);
+         if (e.getKeyCode() == KeyEvent.VK_UP) { // increase power
+            if (onCelestial)
+               changeThrust(0.4);
+            else if (fuel > 0)
+               changeThrust(0.01);
+         }
          if (e.getKeyCode() == KeyEvent.VK_DOWN) // decrease power
             changeThrust(-0.4);
-         if (e.getKeyCode() == KeyEvent.VK_SPACE) { // launch from planet
+         if (e.getKeyCode() == KeyEvent.VK_SPACE) // launch from planet
             setOnCelestial(!onCelestial);
-         }
       }
    }
    
