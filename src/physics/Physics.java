@@ -28,9 +28,7 @@ public class Physics {
     * Coordinates are relative to planet, offset by the radius of the planet
     * in relation to the angle of the ship.
     * <p>
-    * In flight:
-    * Momentum is an accumulation of previous momentum and all forces on the
-    * ship. Coordinates are previous coordinates + momentum.
+    * Build guideline and pass current coordinates to history.
     * 
     * @param ship
     * @param sun
@@ -43,14 +41,28 @@ public class Physics {
                + (ship.getAttachedCelestial().getRadius() + ship.getRadius() + 1) * Math.cos(ship.getAngle());
          newY = ship.getAttachedCelestial().getY()
                + (ship.getAttachedCelestial().getRadius() + ship.getRadius() + 1) * Math.sin(ship.getAngle());
-         ship.setCoordinateLast(newX, newY);
+         ship.setLastCoordinate(newX, newY);
          ship.resetCoordinate();
          ship.resetMomentum();
+      }
+      else {
+         ship.setThrust(0);
       }
       Physics.shipGuideline(ship, sun, planets);
       ship.setHistory();
    }
 
+   /**
+    * Calculates the ship guideline's next coordinates and momentum.
+    * Recurses until guideline is full.
+    * <p>
+    * Momentum is an accumulation of previous momentum and all forces on the
+    * ship. Coordinates are previous coordinates + momentum.
+    * 
+    * @param ship
+    * @param sun
+    * @param planets
+    */
    public static void shipGuideline(Ship ship, Celestial sun, Planet[] planets) {
       double addX, addY;
       double angleToSun = Math.atan2(ship.getFirstY() - sun.getY(), ship.getFirstX() - sun.getX());
@@ -69,14 +81,15 @@ public class Physics {
          addY -= Math.sin(angleToPlanet) * gravityForceOfPlanet;
       }
       ship.setMomentum(addX, addY);
-      ship.setCoordinateFirst(ship.getFirstX() + addX, ship.getFirstY() + addY);
+      ship.setFirstCoordinate(ship.getFirstX() + addX, ship.getFirstY() + addY);
       if (ship.getCoordinateSize() < 510) {
          Physics.shipGuideline(ship, sun, planets);
       }
    }
 
    /**
-    * Detects collision between a celestial object and a ship.
+    * Detects collision between a celestial object and a ship by checking
+    * the distance between the edges of 2 circles.
     * 
     * @param celestial
     * @param ship

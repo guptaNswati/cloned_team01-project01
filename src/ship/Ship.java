@@ -30,7 +30,7 @@ public class Ship {
    public Ship() {
       coordinate.push(new Point2D.Double(0, 100));
       momentum.push(new Point2D.Double(0, 0));
-      thrust = 1.2;
+      thrust = 1.5;
       fuel = 100;
       angle = 0;
       radius = 2;
@@ -87,11 +87,11 @@ public class Ship {
       return coordinate.getLast().getY();
    }
 
-   public void setCoordinateFirst(double x, double y) {
+   public void setFirstCoordinate(double x, double y) {
       coordinate.push(new Point2D.Double(x, y));
    }
 
-   public void setCoordinateLast(double x, double y) {
+   public void setLastCoordinate(double x, double y) {
       coordinate.add(new Point2D.Double(x, y));
    }
 
@@ -143,8 +143,6 @@ public class Ship {
 
    public void setThrust(double thrust) {
       this.thrust = thrust > 0 ? thrust : 0;
-      this.resetCoordinate();
-      this.resetMomentum();
       arrow.setThrust(this.thrust);
       thrustInput.setText(this.thrust);
    }
@@ -206,7 +204,7 @@ public class Ship {
       this.onCelestial = onCelestial;
       if (onCelestial) {
          setMomentum(0, 0);
-         setThrust(1.2);
+         setThrust(1.5);
          resetFuel();
       }
    }

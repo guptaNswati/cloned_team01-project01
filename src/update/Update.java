@@ -63,14 +63,14 @@ public class Update extends JPanel {
          "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
 
    public static final Color[] PLANET_COLORS = { 
-         new Color(125, 125, 125), // Mercury
-         new Color(194, 124, 39), // Venus
-         new Color(64, 99, 245), // Earth
-         new Color(142, 96, 71), // Mars
-         new Color(188, 172, 157), // Jupiter
-         new Color(217, 183, 122), // Saturn
-         new Color(189, 227, 230), // Uranus
-         new Color(37, 162, 204)// Neptune
+         new Color(125, 125, 125, 64), // Mercury
+         new Color(194, 124, 39, 64),  // Venus
+         new Color(64, 99, 245, 64),   // Earth
+         new Color(142, 96, 71, 64),   // Mars
+         new Color(188, 172, 157, 64), // Jupiter
+         new Color(217, 183, 122, 64), // Saturn
+         new Color(189, 227, 230, 64), // Uranus
+         new Color(37, 162, 204, 64)   // Neptune
    };
 
    public static final int [] PLANET_SIZES = { 
@@ -181,6 +181,10 @@ public class Update extends JPanel {
          
          Planet planet = planets[planetIndex];
          g2d.setColor(planet.getColor());
+         // Draws planet orbit path
+         g2d.drawOval((int) (sun.getX() - planet.getDistanceToSun()), 
+            (int) (sun.getY() - planet.getDistanceToSun()),
+            planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
          planet.draw(g, this); //draws planet
 
          // Checks the distance between planets and player and displays information appropriately
@@ -218,10 +222,6 @@ public class Update extends JPanel {
                infoPanel.setVisible(true);
             }
          }
-      // Draws planet orbit path
-      g2d.drawOval((int) (sun.getX() - planet.getDistanceToSun()), 
-            (int) (sun.getY() - planet.getDistanceToSun()),
-            planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
       }
    }
 
