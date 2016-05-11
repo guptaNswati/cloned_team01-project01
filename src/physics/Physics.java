@@ -1,7 +1,6 @@
 package physics;
 
-import celestial.Celestial;
-import celestial.Planet;
+import celestial.*;
 import ship.Ship;
 
 /**

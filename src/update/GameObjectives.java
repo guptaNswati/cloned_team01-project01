@@ -1,5 +1,4 @@
 package update;
-import celestial.*;
 
 
 public class GameObjectives{
