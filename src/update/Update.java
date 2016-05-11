@@ -26,15 +26,10 @@ import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import celestial.Celestial;
-import celestial.Planet;
-import information.CSVReader;
-import information.Information;
-import physics.Constants;
-import physics.Physics;
-import ship.Arrow;
-import ship.Ship;
-import ship.Ship;
+import celestial.*;
+import information.*;
+import physics.*;
+import ship.*;
 
 /**
  * An update object contains all dynamic graphical elements. It contains a
@@ -43,14 +38,14 @@ import ship.Ship;
  */
 public class Update extends JPanel {
    private Celestial sun;
-   private Planet [] planets;
+   private Planet[] planets;
    private Ship ship;
    private Arrow arrow;
 
    // adding info_panel
    private JPanel infoPanel;
    private JTextArea textBox;
- 
+
    // information data 
    private ArrayList<Information> info;
 
@@ -113,19 +108,19 @@ public class Update extends JPanel {
 
       super();
 
-   // Editing old file and instantiating panel here for info display
-   infoPanel = new JPanel();
-   infoPanel.setSize(Constants.FRAME_WIDTH/4, Constants.FRAME_HEIGHT/4);
+      // Editing old file and instantiating panel here for info display
+      infoPanel = new JPanel();
+      infoPanel.setSize(Constants.FRAME_WIDTH/4, Constants.FRAME_HEIGHT/4);
 
-   textBox = new JTextArea(8, 15);
-   
-   textBox.setEditable(false);
+      textBox = new JTextArea(8, 15);
 
-   infoPanel.add(textBox);
-   infoPanel.setVisible(false);
+      textBox.setEditable(false);
 
-this.add(infoPanel);
-      
+      infoPanel.add(textBox);
+      infoPanel.setVisible(false);
+
+      this.add(infoPanel);
+
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
       sun.setImage("image/MrSun-sample.png");
@@ -137,11 +132,11 @@ this.add(infoPanel);
       //initialize planets
       for (int i = 0; i < NUM_OF_PLANETS; i++) {
          planets[i] = new Planet(
-               PLANET_COLORS[i], 
-               PLANET_NAMES[i], 
-               PLANET_SIZES[i], 
-               PLANET_MASSES[i], 
-               50 * (i + 1), randGen.nextDouble() * 2 * Math.PI, 
+               PLANET_COLORS[i],
+               PLANET_NAMES[i],
+               PLANET_SIZES[i],
+               PLANET_MASSES[i],
+               50 * (i + 1), randGen.nextDouble() * 2 * Math.PI,
                PLANET_PERIODS[i]);
       }
 
@@ -182,12 +177,12 @@ this.add(infoPanel);
 
          // Checks the distance between planets and player and displays information appropriately
          if (Physics.detectCollision(planet, ship)) {
-            System.out.println("Collision with " + planet.getName());
+            //System.out.println("Collision with " + planet.getName());
             ship.setOnCelestial(true);
             ship.setAttachedCelestial(planet);
             for(int i = 1; i < info.size(); i++) {
                if (info.get(i).getName().equals(planet.getName())
-                     && planetWithPlayer != info.get(i).getName()) {                        
+                     && planetWithPlayer != info.get(i).getName()) {
                   textBox.setText(info.get(i).toString());
                   infoPanel.setVisible(true);
                   planetWithPlayer = info.get(i).getName();
@@ -211,7 +206,8 @@ this.add(infoPanel);
          @Override
          public void actionPerformed(ActionEvent e) {
             for (Planet planet : planets) {
-               Physics.planetaryOrbit(sun, planet);
+               planet.incrementAngleToSun();
+               planet.setCoordinate(Physics.planetaryOrbit(sun, planet, 1));
             }
             Physics.shipFlight(ship, sun, planets);
 
@@ -233,7 +229,7 @@ this.add(infoPanel);
       requestFocusInWindow();
       addKeyListener(ship.getShipKeyControl());
    }
-   
+
    // for testing
    class TesterButton extends JButton {
       public TesterButton(String name) {
@@ -265,7 +261,7 @@ this.add(infoPanel);
          tester.add(panel);
       }
    }
-   
+
    class PeriodSliders extends JPanel {
       PeriodSliders() {
          this.add(BorderLayout.NORTH,
