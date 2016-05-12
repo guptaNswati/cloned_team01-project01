@@ -308,8 +308,8 @@ public class Ship {
 
       g2d.setColor(Color.white);
       g2d.setStroke(new BasicStroke(0));
-      g2d.fillPolygon(new int[] {470, 466, 466, 470},
-                      new int[] {0, -4, 4, 0}, 4);
+      g2d.fillPolygon(new int[] {470, 464, 464, 470},
+                      new int[] {0, -6, 6, 0}, 4);
    }
 
    public ThrustBox getThrustInput() {
