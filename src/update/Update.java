@@ -39,9 +39,6 @@ public class Update extends JPanel {
    private JPanel infoPanel;
    private JTextArea textBox;
    
-   // temp palyer
-   Player player = new Player();;
-
 
    // information data 
    private ArrayList<Information> info;
@@ -112,7 +109,7 @@ public class Update extends JPanel {
        textBox.setEditable(false);
        
        infoPanel.add(textBox);
-       infoPanel.setVisible(false);
+//       infoPanel.setVisible(false);
        
        this.add(infoPanel);
     		  
@@ -174,9 +171,9 @@ public class Update extends JPanel {
                  {        
                 	 textBox.setText(info.get(i).toString());
                 	 infoPanel.setVisible(true);
-//                     JOptionPane.showMessageDialog(null,this.info.get(i),"Did you know!", JOptionPane.INFORMATION_MESSAGE); 
                      planetWithPlayer = info.get(i).getName();
                  }
+                 else
                  infoPanel.setVisible(false);
              }
 
@@ -213,18 +210,5 @@ public class Update extends JPanel {
       requestFocusInWindow();
       addKeyListener(arrow.getArrowKeyControl());
       addKeyListener(ship.getShipKeyControl());
-   }
-   
-   /**
-    * calculates the distance between planets and palyer
-    * @param x [x-coordinate of object]
-    * @param y [y-coordinate of object]
-    * @param radius [size of object]
-    * @return distance between objects
-    */       
-   public int calculateDistance(int x, int y, int radius) 
-   {
-       int distance = (int) Math.sqrt( (((x-player.getX()) * (x-player.getX())) + ((y-player.getY()) * (y -player.getY()))) -(radius + player.getRadius()));
-       return distance;
    }
 }
