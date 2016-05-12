@@ -15,9 +15,6 @@ import javax.swing.JTextArea;
 import javax.swing.SpringLayout;
 import javax.swing.border.EtchedBorder;
 
-import physics.Constants;
-import update.Update;
-
 public class MainMenu implements ActionListener {
    private JFrame menuFrame;
    private JPanel menuPanel;
@@ -107,22 +104,7 @@ public class MainMenu implements ActionListener {
    public void actionPerformed(ActionEvent e) {
       // TODO Auto-generated method stub
       if (e.getSource() == this.startButton) {
-         JFrame frame = new JFrame("Game Window");
-         frame.setBounds(0, 0, Constants.FRAME_WIDTH,
-               Constants.FRAME_HEIGHT);
-         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-         Update update = new Update();
-         frame.add(update);
-
-         frame.setResizable(true);
-         frame.setVisible(true);
-
-         frame.add(update);
-         update.setBackground(Color.black);
-         frame.add(BorderLayout.CENTER, update);
-
-         update.run();
+         main.Main.main(null);
          menuFrame.setVisible(false);
       }
 
