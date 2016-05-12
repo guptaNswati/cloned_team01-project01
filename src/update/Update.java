@@ -28,14 +28,10 @@ import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import celestial.Celestial;
-import celestial.Planet;
-import information.CSVReader;
-import information.Information;
-import information.SidePanel;
+import celestial.*;
+import information.*;
 import menu.Menu;
-import physics.Constants;
-import physics.Physics;
+import physics.*;
 import ship.Ship;
 
 /**
@@ -46,6 +42,7 @@ import ship.Ship;
 public class Update extends JPanel {
    private Celestial sun;
    private Planet[] planets;
+   private Starfield stars;
    private Ship ship;
    //private GameObjectives;
 
@@ -66,7 +63,7 @@ public class Update extends JPanel {
    public static final String[] PLANET_NAMES = { "Mercury", "Venus",
          "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
 
-   public static final Color[] PLANET_COLORS = { 
+   public static final Color[] PLANET_COLORS = {
          new Color(125, 125, 125, 64), // Mercury
          new Color(194, 124, 39, 64),  // Venus
          new Color(64, 99, 245, 64),   // Earth
@@ -77,7 +74,7 @@ public class Update extends JPanel {
          new Color(37, 162, 204, 64)   // Neptune
    };
 
-   public static final int [] PLANET_SIZES = { 
+   public static final int [] PLANET_SIZES = {
          7,  //Mercury
          9,  //Venus
          10, //Earth
@@ -110,6 +107,7 @@ public class Update extends JPanel {
          11.5  //Neptune
    };
 
+
    /**
     * Instantiate and initialize all members.
     */
@@ -119,10 +117,11 @@ public class Update extends JPanel {
 
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
-      // sun.setImage("image/MrSun-sample.png");
+      //sun.setImage("image/MrSun-sample.png");
       sun.setImage("resources/planets/sun.png");
 
       planets = new Planet[NUM_OF_PLANETS];
+      stars = new Starfield();
       Random randGen = new Random();
 
       //initialize planets
@@ -170,8 +169,7 @@ public class Update extends JPanel {
       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
             RenderingHints.VALUE_ANTIALIAS_ON);
 
-      ship.draw(g);
-      target.draw(g, this);
+      stars.draw(g);
       sun.draw(g, this);
 
       // Draw all planets
@@ -225,6 +223,8 @@ public class Update extends JPanel {
          }
       }
 
+      ship.draw(g);
+      target.draw(g, this);
       menu.draw(g);
    }
 
