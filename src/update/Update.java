@@ -60,22 +60,31 @@ public class Update extends JPanel {
    private Menu menu;
 
    private Target target;
+   
+   // stars randomly drawn
+   private static final int NUM_OF_STARS = 320;
+   private static final int MAX_STAR_RADIUS = 3;
+   private static final int STAR_HORIZONTAL_AREA = 1150;
+   private static final int STAR_VERTICAL_AREA = 1150;
+   private int[] starX_Coordinate;
+   private int[] starY_Coordinate;
+   private int[] starRadius;
+   
+   public static final Color[] STAR_COLORS = { 
+	         new Color(125, 125, 125, 64), 
+	         new Color(194, 124, 39, 64),  
+	         new Color(64, 99, 245, 64),  
+	         new Color(142, 96, 71, 64),   
+	         new Color(188, 172, 157, 64), 
+	         new Color(217, 183, 122, 64), 
+	         new Color(189, 227, 230, 64), 
+	         new Color(37, 162, 204, 64)   
+	   };
 
    public static final int NUM_OF_PLANETS = 8;
 
    public static final String[] PLANET_NAMES = { "Mercury", "Venus",
-         "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
-
-   public static final Color[] PLANET_COLORS = { 
-         new Color(125, 125, 125, 64), // Mercury
-         new Color(194, 124, 39, 64),  // Venus
-         new Color(64, 99, 245, 64),   // Earth
-         new Color(142, 96, 71, 64),   // Mars
-         new Color(188, 172, 157, 64), // Jupiter
-         new Color(217, 183, 122, 64), // Saturn
-         new Color(189, 227, 230, 64), // Uranus
-         new Color(37, 162, 204, 64)   // Neptune
-   };
+         "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };  
 
    public static final int [] PLANET_SIZES = { 
          7,  //Mercury
@@ -109,7 +118,8 @@ public class Update extends JPanel {
          11.4, //Uranus
          11.5  //Neptune
    };
-
+   
+   
    /**
     * Instantiate and initialize all members.
     */
@@ -121,6 +131,17 @@ public class Update extends JPanel {
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
       // sun.setImage("image/MrSun-sample.png");
       sun.setImage("resources/planets/sun.png");
+           
+      // Initializing stars x and y coordinates    
+      starX_Coordinate = new int[NUM_OF_STARS];
+      starY_Coordinate = new int[NUM_OF_STARS];
+      starRadius = new int[NUM_OF_STARS];      
+      Random starsRandomGen = new Random();      
+      for (int i = 0; i < NUM_OF_STARS; i++) {
+          starX_Coordinate[i] = starsRandomGen.nextInt(STAR_HORIZONTAL_AREA);
+          starY_Coordinate[i] = starsRandomGen.nextInt(STAR_VERTICAL_AREA);
+          starRadius[i] = starsRandomGen.nextInt(MAX_STAR_RADIUS);
+      }
 
       planets = new Planet[NUM_OF_PLANETS];
       Random randGen = new Random();
@@ -128,7 +149,7 @@ public class Update extends JPanel {
       //initialize planets
       for (int i = 0; i < NUM_OF_PLANETS; i++) {
          planets[i] = new Planet(
-               PLANET_COLORS[i],
+               STAR_COLORS[i],
                PLANET_NAMES[i],
                PLANET_SIZES[i],
                PLANET_MASSES[i],
@@ -173,6 +194,15 @@ public class Update extends JPanel {
       ship.draw(g);
       target.draw(g, this);
       sun.draw(g, this);
+         
+      // drawing stars 
+      for (int j = 0; j < STAR_COLORS.length; j++)
+      {
+    	  g2d.setColor(STAR_COLORS[j]);
+    	  for (int i = 0; i < NUM_OF_STARS; i++) {
+    		  g2d.fillOval(starX_Coordinate[i], starY_Coordinate[i], starRadius[i], starRadius[i]);
+    	  }
+      }
 
       // Draw all planets
       for (int planetIndex = 0; planetIndex < NUM_OF_PLANETS; planetIndex++) {
