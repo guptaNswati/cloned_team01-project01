@@ -61,6 +61,8 @@ public class Update extends JPanel {
    
    private Menu menu;
 
+   private Target target;
+
    public static final int NUM_OF_PLANETS = 8;
 
    public static final String[] PLANET_NAMES = { "Mercury", "Venus",
@@ -149,6 +151,7 @@ public class Update extends JPanel {
       CSVReader csv = new CSVReader();
       info = csv.getInfoData();
 
+      target = new Target();
       // for period testing
       // add(new TesterButton("Test Period"));
    }
@@ -170,6 +173,7 @@ public class Update extends JPanel {
             RenderingHints.VALUE_ANTIALIAS_ON);
 
       ship.draw(g);
+      target.draw(g, this);
       sun.draw(g, this);
 
       // Draw all planets
@@ -238,6 +242,7 @@ public class Update extends JPanel {
                planet.setCoordinate(Physics.planetaryOrbit(sun, planet, 1));
             }
             Physics.shipFlight(ship, sun, planets);
+            target.resetTarget(planets[GameObjectives.getPlanetObjective()]);
 
             repaint();
          }
@@ -247,6 +252,20 @@ public class Update extends JPanel {
 
    public Ship getShip() {
       return ship;
+   }
+
+   /**
+    * @return the planets
+    */
+   public Planet[] getPlanets() {
+      return planets;
+   }
+
+   /**
+    * @param planets the planets to set
+    */
+   public void setPlanets(Planet[] planets) {
+      this.planets = planets;
    }
 
    public void linkWithSidePanel(SidePanel sidePanel) {
@@ -328,7 +347,7 @@ public class Update extends JPanel {
          JTextField[] values = valueGen();
          JSlider[] sliders = sliderGen();
          for (int i = 0; i < NUM_OF_PLANETS; i++) {
-            pairListeners(values[i], sliders[i], planets[i]);
+            pairListeners(values[i], sliders[i], getPlanets()[i]);
             panel.add(labels[i]);
             panel.add(values[i]);
             panel.add(sliders[i]);
@@ -365,7 +384,7 @@ public class Update extends JPanel {
       private JSlider[] sliderGen() {
          JSlider[] sliders = new JSlider[NUM_OF_PLANETS];
          int i = 0;
-         for (Planet planet : planets) {
+         for (Planet planet : getPlanets()) {
             sliders[i] = new JSlider(1000, 200000, planet.getPeriodInMS());
             i++;
          }
@@ -375,7 +394,7 @@ public class Update extends JPanel {
       private JTextField[] valueGen() {
          JTextField[] values = new JTextField[NUM_OF_PLANETS];
          int i = 0;
-         for (Planet planet : planets) {
+         for (Planet planet : getPlanets()) {
             values[i] = new JTextField(10);
             values[i].setHorizontalAlignment(SwingConstants.CENTER);
             values[i].setText(Integer.toString(planet.getPeriodInMS()));
@@ -387,7 +406,7 @@ public class Update extends JPanel {
       private JLabel[] labelGen() {
          JLabel[] labels = new JLabel[NUM_OF_PLANETS];
          int i = 0;
-         for(Planet planet: planets){
+         for(Planet planet: getPlanets()){
             labels[i] = new JLabel(planet.getName(), SwingConstants.CENTER);
             i++;
          }
