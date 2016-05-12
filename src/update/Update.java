@@ -28,10 +28,15 @@ import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import celestial.*;
-import information.*;
-import menu.*;
-import physics.*;
+import celestial.Celestial;
+import celestial.Planet;
+import information.CSVReader;
+import information.Information;
+import information.SidePanel;
+import menu.Menu;
+import physics.Constants;
+import physics.Physics;
+import ship.Arrow;
 import ship.Ship;
 
 /**
@@ -43,16 +48,20 @@ public class Update extends JPanel {
    private Celestial sun;
    private Planet[] planets;
    private Ship ship;
+   private Arrow arrow;
    //private GameObjectives;
 
    // adding info_panel
-   private JPanel infoPanel;
-   private JTextArea textBox;
+   private JTextArea jokeTextBox;
+   
+   //private GameObjectives 
 
    // information data 
    private ArrayList<Information> info;
    
    private Menu menu;
+
+   private Target target;
 
    public static final int NUM_OF_PLANETS = 8;
 
@@ -132,16 +141,6 @@ public class Update extends JPanel {
                planets[i].getName()));
       }
 
-      //planet info display
-      infoPanel = new JPanel();
-      infoPanel.setSize(Constants.FRAME_WIDTH/4, Constants.FRAME_HEIGHT/4);
-      textBox = new JTextArea(8, 15);
-      textBox.setEditable(false);
-
-      infoPanel.add(textBox);
-      infoPanel.setVisible(false);
-      this.add(infoPanel);
-      
       menu = new Menu();
 
       ship = new Ship();
@@ -152,9 +151,9 @@ public class Update extends JPanel {
       CSVReader csv = new CSVReader();
       info = csv.getInfoData();
 
-      add(ship.getThrustInput());
-      // for testing.
-      // add(new TesterButton("tester")); // comment out this line when done
+      target = new Target();
+      // for period testing
+      // add(new TesterButton("Test Period"));
    }
 
    /**
@@ -172,7 +171,9 @@ public class Update extends JPanel {
       // Anti-aliasing
       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
             RenderingHints.VALUE_ANTIALIAS_ON);
+
       ship.draw(g);
+      target.draw(g, this);
       sun.draw(g, this);
 
       // Draw all planets
@@ -201,9 +202,11 @@ public class Update extends JPanel {
                   if (info.get(i).getName().equals(planet.getName())
                         && ship.getAttachedCelestial().getName() != info.get(i).getName()) { 
                      GameObjectives.nextObjective();
-                     textBox.setText(info.get(i).toString() + 
-                           "\n\nGOOD JOB!\nNow, go to this planet next: " + PLANET_NAMES[GameObjectives.getPlanetObjective()]);
-                     infoPanel.setVisible(true);
+                     jokeTextBox.setText(info.get(i).toString()
+                           + "\n\nGOOD JOB!\nNow, go to this planet next: "
+                           + PLANET_NAMES[GameObjectives
+                                 .getPlanetObjective()]);
+                     jokeTextBox.setVisible(true);
                      break;
                   }
                   //infoPanel.setVisible(false);
@@ -214,9 +217,12 @@ public class Update extends JPanel {
                System.out.println("Landed on WRONG planet! " + GameObjectives.getJoke());
 
                //show text box that says go to other planet + joke
-               textBox.setText("Go to this planet: " + PLANET_NAMES[GameObjectives.getPlanetObjective()]
+               jokeTextBox
+                     .setText("Go to this planet: "
+                           + PLANET_NAMES[GameObjectives
+                                 .getPlanetObjective()]
                      + "\n\nImportant: " + GameObjectives.getJoke());   
-               infoPanel.setVisible(true);
+               jokeTextBox.setVisible(true);
             }
          }
       }
@@ -236,11 +242,34 @@ public class Update extends JPanel {
                planet.setCoordinate(Physics.planetaryOrbit(sun, planet, 1));
             }
             Physics.shipFlight(ship, sun, planets);
+            target.resetTarget(planets[GameObjectives.getPlanetObjective()]);
 
             repaint();
          }
       });
       timer.start();
+   }
+
+   public Ship getShip() {
+      return ship;
+   }
+
+   /**
+    * @return the planets
+    */
+   public Planet[] getPlanets() {
+      return planets;
+   }
+
+   /**
+    * @param planets the planets to set
+    */
+   public void setPlanets(Planet[] planets) {
+      this.planets = planets;
+   }
+
+   public void linkWithSidePanel(SidePanel sidePanel) {
+      jokeTextBox = sidePanel.getJokeTextBox();
    }
 
    /**
@@ -250,7 +279,6 @@ public class Update extends JPanel {
       setFocusable(true);
       requestFocusInWindow();
       addKeyListener(new KeyControl());
-   }
 
    private class KeyControl extends KeyAdapter {
       @Override
@@ -327,7 +355,7 @@ public class Update extends JPanel {
          JTextField[] values = valueGen();
          JSlider[] sliders = sliderGen();
          for (int i = 0; i < NUM_OF_PLANETS; i++) {
-            pairListeners(values[i], sliders[i], planets[i]);
+            pairListeners(values[i], sliders[i], getPlanets()[i]);
             panel.add(labels[i]);
             panel.add(values[i]);
             panel.add(sliders[i]);
@@ -364,7 +392,7 @@ public class Update extends JPanel {
       private JSlider[] sliderGen() {
          JSlider[] sliders = new JSlider[NUM_OF_PLANETS];
          int i = 0;
-         for (Planet planet : planets) {
+         for (Planet planet : getPlanets()) {
             sliders[i] = new JSlider(1000, 200000, planet.getPeriodInMS());
             i++;
          }
@@ -374,7 +402,7 @@ public class Update extends JPanel {
       private JTextField[] valueGen() {
          JTextField[] values = new JTextField[NUM_OF_PLANETS];
          int i = 0;
-         for (Planet planet : planets) {
+         for (Planet planet : getPlanets()) {
             values[i] = new JTextField(10);
             values[i].setHorizontalAlignment(SwingConstants.CENTER);
             values[i].setText(Integer.toString(planet.getPeriodInMS()));
@@ -386,7 +414,7 @@ public class Update extends JPanel {
       private JLabel[] labelGen() {
          JLabel[] labels = new JLabel[NUM_OF_PLANETS];
          int i = 0;
-         for(Planet planet: planets){
+         for(Planet planet: getPlanets()){
             labels[i] = new JLabel(planet.getName(), SwingConstants.CENTER);
             i++;
          }
