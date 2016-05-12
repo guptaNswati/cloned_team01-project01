@@ -7,7 +7,10 @@ import celestial.Planet;
 import ship.Ship;
 
 /**
- * Methods to calculate planet and ship coordinates.
+ * Methods to calculate planet coordinates,
+ * and ship coordinates, momentum, and collisions.
+ * 
+ * @author Joshua Fan
  */
 public class Physics {
    public static Point2D planetaryOrbit(final Celestial sun, Planet planet, int frame) {
@@ -66,7 +69,8 @@ public class Physics {
       double addX, addY;
       double angleToSun = Math.atan2(ship.getFirstY() - sun.getY(), ship.getFirstX() - sun.getX());
       double gravityForceOfSun = Constants.GRAV_CONSTANT * sun.getMass()
-            / Math.pow(Math.pow(ship.getFirstX() - sun.getX(), 2) + Math.pow(ship.getFirstY() - sun.getY(), 2), Constants.GRAV_FALLOFF);
+            / Math.pow(Math.pow(ship.getFirstX() - sun.getX(), 2)
+                     + Math.pow(ship.getFirstY() - sun.getY(), 2), Constants.GRAV_FALLOFF);
       addX = (ship.getCoordinateSize() > 2 ? 0 : ship.getThrust()) * Math.cos(ship.getAngle())
          + ship.getDX() - Math.cos(angleToSun) * gravityForceOfSun;
       addY = (ship.getCoordinateSize() > 2 ? 0 : ship.getThrust()) * Math.sin(ship.getAngle())
@@ -75,7 +79,8 @@ public class Physics {
          Point2D planetCoord = Physics.planetaryOrbit(sun, planet, ship.getCoordinateSize());
          double angleToPlanet = Math.atan2(ship.getFirstY() - planetCoord.getY(), ship.getFirstX() - planetCoord.getX());
          double gravityForceOfPlanet = Constants.GRAV_CONSTANT * planet.getMass()
-               / Math.pow(Math.pow(ship.getFirstX() - planetCoord.getX(), 2) + Math.pow(ship.getFirstY() - planetCoord.getY(), 2), Constants.GRAV_FALLOFF);
+               / Math.pow(Math.pow(ship.getFirstX() - planetCoord.getX(), 2)
+                        + Math.pow(ship.getFirstY() - planetCoord.getY(), 2), Constants.GRAV_FALLOFF);
          addX -= Math.cos(angleToPlanet) * gravityForceOfPlanet;
          addY -= Math.sin(angleToPlanet) * gravityForceOfPlanet;
       }

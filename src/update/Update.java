@@ -36,7 +36,6 @@ import information.SidePanel;
 import menu.Menu;
 import physics.Constants;
 import physics.Physics;
-import ship.Arrow;
 import ship.Ship;
 
 /**
@@ -48,17 +47,16 @@ public class Update extends JPanel {
    private Celestial sun;
    private Planet[] planets;
    private Ship ship;
-   private Arrow arrow;
    //private GameObjectives;
 
    // adding info_panel
    private JTextArea jokeTextBox;
-   
+
    //private GameObjectives 
 
    // information data 
    private ArrayList<Information> info;
-   
+
    private Menu menu;
 
    private Target target;
@@ -205,7 +203,7 @@ public class Update extends JPanel {
                      jokeTextBox.setText(info.get(i).toString()
                            + "\n\nGOOD JOB!\nNow, go to this planet next: "
                            + PLANET_NAMES[GameObjectives
-                                 .getPlanetObjective()]);
+                                          .getPlanetObjective()]);
                      jokeTextBox.setVisible(true);
                      break;
                   }
@@ -218,15 +216,15 @@ public class Update extends JPanel {
 
                //show text box that says go to other planet + joke
                jokeTextBox
-                     .setText("Go to this planet: "
-                           + PLANET_NAMES[GameObjectives
-                                 .getPlanetObjective()]
-                     + "\n\nImportant: " + GameObjectives.getJoke());   
+               .setText("Go to this planet: "
+                     + PLANET_NAMES[GameObjectives
+                                    .getPlanetObjective()]
+                                          + "\n\nImportant: " + GameObjectives.getJoke());   
                jokeTextBox.setVisible(true);
             }
          }
       }
-      
+
       menu.draw(g);
    }
 
@@ -255,14 +253,14 @@ public class Update extends JPanel {
    }
 
    /**
-    * @return the planets
+    * @return planets array
     */
    public Planet[] getPlanets() {
       return planets;
    }
 
    /**
-    * @param planets the planets to set
+    * @param the planets to set
     */
    public void setPlanets(Planet[] planets) {
       this.planets = planets;
@@ -279,8 +277,9 @@ public class Update extends JPanel {
       setFocusable(true);
       requestFocusInWindow();
       addKeyListener(new KeyControl());
+   }
 
-   private class KeyControl extends KeyAdapter {
+   class KeyControl extends KeyAdapter {
       @Override
       public void keyPressed(KeyEvent e) {
          if (menu.getIsShown())
