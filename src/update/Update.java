@@ -272,6 +272,14 @@ public class Update extends JPanel {
       jokeTextBox = sidePanel.getJokeTextBox();
    }
 
+   /**
+    * Called by constructor to enable JPanel to listen to key listener.
+    */
+   private void toggleKeyListener() {
+      setFocusable(true);
+      requestFocusInWindow();
+      addKeyListener(new KeyControl());
+
    private class KeyControl extends KeyAdapter {
       @Override
       public void keyPressed(KeyEvent e) {
