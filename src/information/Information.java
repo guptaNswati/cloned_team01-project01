@@ -1,7 +1,5 @@
 package information;
 
-import javax.swing.JOptionPane;
-
 public class Information
 {
    private String name;

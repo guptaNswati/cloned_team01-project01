@@ -1,16 +1,23 @@
 package ship;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
 
 import celestial.Celestial;
 //import ship.Arrow.ArrowKeyControl;
+import physics.Constants;
 
+/**
+ * The ship class contains data used for physics calculations on itself,
+ * and methods to manipulate that data.
+ * 
+ * @author Joshua Fan
+ */
 public class Ship {
    // End of list is current position
    private LinkedList<Point2D> coordinate = new LinkedList<Point2D>();
@@ -39,6 +46,12 @@ public class Ship {
       thrustInput = new ThrustBox(this);
    }
 
+   /**
+    * Draw ship, guideline, history line,
+    * thrust arrow, and off-screen arrow.
+    * 
+    * @param g
+    */
    public void draw(Graphics g) {
       g.setColor(Color.white);
       g.fillOval((int)coordinate.getLast().getX() - 2,
@@ -58,12 +71,20 @@ public class Ship {
          }
       }
       arrow.draw(g, this);
+      if (distanceFromSun() > 470)
+         drawOffScreenArrow(g);
    }
 
+   /**
+    * Head of guideline
+    */
    public Point2D getCoordinateFirst() {
       return coordinate.getFirst();
    }
 
+   /**
+    * Tail of guideline, which is ship's current coordinate
+    */
    public Point2D getCoordinateLast() {
       return coordinate.getLast();
    }
@@ -72,18 +93,30 @@ public class Ship {
       return coordinate.size();
    }
 
+   /**
+    * @return x coordinate farthest in the future
+    */
    public double getFirstX() {
       return coordinate.getFirst().getX();
    }
 
+   /**
+    * @return current ship x coordinate
+    */
    public double getLastX() {
       return coordinate.getLast().getX();
    }
 
+   /**
+    * @return y coordinate farthest in the future
+    */
    public double getFirstY() {
       return coordinate.getFirst().getY();
    }
 
+   /**
+    * @return current ship y coordinate
+    */
    public double getLastY() {
       return coordinate.getLast().getY();
    }
@@ -96,6 +129,10 @@ public class Ship {
       coordinate.add(new Point2D.Double(x, y));
    }
 
+   /**
+    * Shift last coordinate of guideline into history.
+    * Trim guideline, momentum, and history linked lists.
+    */
    public void shiftCoordinate() {
       history.push(coordinate.removeLast());
       
@@ -105,13 +142,16 @@ public class Ship {
       if (!onCelestial && history.size() > 255)
          history.removeLast();
       else if(onCelestial && history.size() != 0) {
-         // Remove all but first coordinate when on planet
-         // This is so ship's previous positions on planet
+         // Clear history when on planet
+         // so ship's previous positions on planet
          // aren't drawn in "position history line"
          history.clear(); 
       }
    }
 
+   /**
+    * Clear guideline, leaving only the current coordinate
+    */
    public void resetCoordinate() {
       Point2D lastElement = coordinate.getLast();
       coordinate.clear();
@@ -122,22 +162,43 @@ public class Ship {
       return history.getFirst();
    }
 
+   /**
+    * @return x component of momentum farthest in the future
+    */
    public double getDX() {
       return momentum.getFirst().getX();
    }
 
+   /**
+    * @return y component of momentum farthest in the future
+    */
    public double getDY() {
       return momentum.getFirst().getY();
    }
 
+   /**
+    * Set momentum farthest in the future
+    * 
+    * @param x
+    * @param y
+    */
    public void setFirstMomentum(double x, double y) {
       momentum.push(new Point2D.Double(x, y));
    }
 
+   /**
+    * Set current momentum
+    * 
+    * @param x
+    * @param y
+    */
    public void setLastMomentum(double x, double y) {
       momentum.add(new Point2D.Double(x, y));
    }
 
+   /**
+    * Clear momentum prediction, leaving only the current momentum
+    */
    public void resetMomentum() {
       Point2D lastElement = momentum.getLast();
       momentum.clear();
@@ -153,6 +214,12 @@ public class Ship {
       thrustInput.setText(this.thrust);
    }
 
+   /**
+    * If thrust changes, clear future coordinates and momentum
+    * so guideline can be rebuilt. Expend fuel if in flight.
+    * 
+    * @param thrust
+    */
    public void changeThrust(double thrust) {
       double newThrust = this.thrust + thrust;
       if (newThrust >= 0 && newThrust <= 2.8) {
@@ -196,7 +263,13 @@ public class Ship {
    public boolean getOnCelestial() {
       return onCelestial;
    }
-   
+
+   /**
+    * When ship "lands" (collides) on planet,
+    * reinitialize ship state and clear momentum
+    * 
+    * @param onCelestial
+    */
    public void setOnCelestial(boolean onCelestial) {
       this.onCelestial = onCelestial;
       if (onCelestial) {
@@ -213,14 +286,32 @@ public class Ship {
    public void setAttachedCelestial(Celestial Celestial) {
       attachedCelestial = Celestial;
    }
-   
-   public Arrow getArrow() {
-      return arrow;
+
+   private double distanceFromSun() {
+      return Math.sqrt(Math.pow(getLastX() - Constants.INIT_SUN_X, 2)
+                     + Math.pow(getLastY() - Constants.INIT_SUN_Y, 2));
    }
 
    /**
-    * @return the thrustInput box
+    * Draw arrow that points to ship while it is off screen.
+    * 
+    * @param g
     */
+   private void drawOffScreenArrow(Graphics g) {
+      Graphics2D g2d = (Graphics2D) g.create();
+
+      AffineTransform trans = AffineTransform.getTranslateInstance(
+            Constants.INIT_SUN_X, Constants.INIT_SUN_Y);
+      trans.concatenate(AffineTransform.getRotateInstance(
+            Math.atan2(getLastY() - Constants.INIT_SUN_Y, getLastX() - Constants.INIT_SUN_X)));
+      g2d.transform(trans);
+
+      g2d.setColor(Color.white);
+      g2d.setStroke(new BasicStroke(0));
+      g2d.fillPolygon(new int[] {470, 466, 466, 470},
+                      new int[] {0, -4, 4, 0}, 4);
+   }
+
    public ThrustBox getThrustInput() {
       return thrustInput;
    }
