@@ -1,4 +1,4 @@
-package testers;
+package main;
 
 import java.awt.BorderLayout;
 
@@ -12,7 +12,7 @@ import update.Update;
 /**
  * Testing class that tests Sprint 1 which is a running solar system.
  */
-public class TestGame {
+public class Main {
    public static void main(String[] args) {
       JFrame frame = new JFrame("Planet Hopper");
       frame.setBounds(0, 0, Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);

@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.Point2D;
@@ -26,13 +28,10 @@ import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import celestial.Celestial;
-import celestial.Planet;
-import information.CSVReader;
-import information.Information;
-import physics.Constants;
-import physics.Physics;
-import ship.Arrow;
+import celestial.*;
+import information.*;
+import menu.*;
+import physics.*;
 import ship.Ship;
 
 /**
@@ -44,7 +43,7 @@ public class Update extends JPanel {
    private Celestial sun;
    private Planet[] planets;
    private Ship ship;
-   //private GameObjectives 
+   //private GameObjectives;
 
    // adding info_panel
    private JPanel infoPanel;
@@ -52,9 +51,8 @@ public class Update extends JPanel {
 
    // information data 
    private ArrayList<Information> info;
-
-   // keeps track of players last planet 
-   String planetWithPlayer;
+   
+   private Menu menu;
 
    public static final int NUM_OF_PLANETS = 8;
 
@@ -127,7 +125,8 @@ public class Update extends JPanel {
                PLANET_NAMES[i],
                PLANET_SIZES[i],
                PLANET_MASSES[i],
-               50 * (i + 1), randGen.nextDouble() * 2 * Math.PI,
+               50 * (i + 1),
+               randGen.nextDouble() * 2 * Math.PI,
                PLANET_PERIODS[i]);
          planets[i].setImage(String.format("resources/planets/%s.png",
                planets[i].getName()));
@@ -142,6 +141,8 @@ public class Update extends JPanel {
       infoPanel.add(textBox);
       infoPanel.setVisible(false);
       this.add(infoPanel);
+      
+      menu = new Menu();
 
       ship = new Ship();
       ship.setAttachedCelestial(planets[2]);
@@ -150,7 +151,6 @@ public class Update extends JPanel {
 
       CSVReader csv = new CSVReader();
       info = csv.getInfoData();
-      planetWithPlayer = "";
 
       add(ship.getThrustInput());
       // for testing.
@@ -199,12 +199,11 @@ public class Update extends JPanel {
                for(int i = 1; i < info.size(); i++) {
                   //display info about planet
                   if (info.get(i).getName().equals(planet.getName())
-                        && planetWithPlayer != info.get(i).getName()) { 
+                        && ship.getAttachedCelestial().getName() != info.get(i).getName()) { 
                      GameObjectives.nextObjective();
                      textBox.setText(info.get(i).toString() + 
                            "\n\nGOOD JOB!\nNow, go to this planet next: " + PLANET_NAMES[GameObjectives.getPlanetObjective()]);
                      infoPanel.setVisible(true);
-                     planetWithPlayer = info.get(i).getName();
                      break;
                   }
                   //infoPanel.setVisible(false);
@@ -221,6 +220,8 @@ public class Update extends JPanel {
             }
          }
       }
+      
+      menu.draw(g);
    }
 
    /**
@@ -242,13 +243,37 @@ public class Update extends JPanel {
       timer.start();
    }
 
+   private class KeyControl extends KeyAdapter {
+      @Override
+      public void keyPressed(KeyEvent e) {
+         if (menu.getIsShown())
+            menu.toggleIsShown();
+         else {
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) // rotate angle counter-clockwise
+               ship.changeAngle(-0.15);
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) // rotate angle clockwise
+               ship.changeAngle(0.15);
+            if (e.getKeyCode() == KeyEvent.VK_UP) { // increase thrust
+               if (ship.getOnCelestial())
+                  ship.changeThrust(0.4);
+               else if (ship.getFuel() > 0)
+                  ship.changeThrust(0.01);
+            }
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) // decrease thrust
+               ship.changeThrust(-0.4);
+            if (e.getKeyCode() == KeyEvent.VK_SPACE) // launch from planet
+               ship.setOnCelestial(!ship.getOnCelestial());
+         }
+      }
+   }
+
    /**
     * Called by constructor to enable JPanel to listen to key listener.
     */
    private void toggleKeyListener() {
       setFocusable(true);
       requestFocusInWindow();
-      addKeyListener(ship.getShipKeyControl());
+      addKeyListener(new KeyControl());
    }
 
    // for testing

@@ -217,31 +217,7 @@ public class Ship {
    public Arrow getArrow() {
       return arrow;
    }
-   
-   public KeyListener getShipKeyControl() {
-      return new ShipKeyControl();
-   }
 
-   private class ShipKeyControl extends KeyAdapter {
-      @Override
-      public void keyPressed(KeyEvent e) {
-         if (e.getKeyCode() == KeyEvent.VK_LEFT)
-            changeAngle(-0.15);
-         if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-            changeAngle(0.15);
-         if (e.getKeyCode() == KeyEvent.VK_UP) { // increase power
-            if (onCelestial)
-               changeThrust(0.4);
-            else if (fuel > 0)
-               changeThrust(0.01);
-         }
-         if (e.getKeyCode() == KeyEvent.VK_DOWN) // decrease power
-            changeThrust(-0.4);
-         if (e.getKeyCode() == KeyEvent.VK_SPACE) // launch from planet
-            setOnCelestial(!onCelestial);
-      }
-   }
-   
    /**
     * @return the thrustInput box
     */
