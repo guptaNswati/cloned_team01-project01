@@ -1,15 +1,11 @@
 package ship;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 import ship.Ship;
@@ -18,76 +14,44 @@ import ship.Ship;
  * An arrow to draw on GUI. Also contains and inner private class for key
  * control.
  * 
- * @author TerryTsao
+ * @author Terry Tsao and Joshua Fan
  */
 public class Arrow extends JComponent {
-   /**
-    * Arrow's coordinate.
-    */
-   private Point2D coordinate;
-   /**
-    * Arrow's image.
-    */
-   private BufferedImage image;
-   /**
-    * Arrow's width.
-    */
-   private int width;
-   /**
-    * Arrow's height.
-    */
-   private int height;
+   private int size;
 
    /**
-    * Constructor that sets angle's position and image.
+    * Constructor that sets arrow size.
     * 
     * @param filename
     * @param coordinate
     */
-   public Arrow(String filename, Ship ship) {
-      coordinate = new Point2D.Double();
-      try {
-         image = ImageIO.read(new File(filename));
-      } catch (IOException ex) {}
-      width = 50;
-      height = 6;
-   }
-
-   @Override
-   public int getX() {
-      return (int)coordinate.getX();
-   }
-
-   @Override
-   public int getY() {
-      return (int)coordinate.getY();
-   }
-
-   public void setCoordinate(Point2D coordinate) {
-      this.coordinate = coordinate;
-   }
-
-   public Point2D getCoordinate() {
-      return coordinate;
+   public Arrow() {
+      size = 4;
    }
 
    /**
-    * Transform the image with translation, rotation, and scale operations to
-    * draw on screen.
+    * Draw a vector arrow from the ship.
+    * Magnitude and angle indicate ship thrust.
+    * 
+    * Reference: http://stackoverflow.com/questions/4112701/drawing-a-line-with-arrow-in-java
     * 
     * @param g
-    *           Graphics object for drawing.
+    * @param ship
     */
-   public void draw(Graphics g, Ship ship) {
-      final double ratio = 0.3;
-      Graphics2D g2d = (Graphics2D)g;
-      AffineTransform trans = new AffineTransform();
-      trans.translate(getX(), getY() - height / 2);
-      trans.rotate(ship.getAngle(), 0, height / 2);
-      trans.scale(width * (ship.getThrust() + 1.6) * ratio / image.getWidth(),
-            height / (double)image.getHeight());
-      AffineTransformOp op = new AffineTransformOp(trans,
-            AffineTransformOp.TYPE_BILINEAR);
-      g2d.drawImage(image, op, 0, 0);
-   }
+   void draw(Graphics g, Ship ship) {
+      Graphics2D g2d = (Graphics2D) g.create();
+
+      int len = (int)(ship.getThrust() * 10 + size + 3);
+      AffineTransform trans = AffineTransform.getTranslateInstance(ship.getLastX(), ship.getLastY());
+      trans.concatenate(AffineTransform.getRotateInstance(ship.getAngle()));
+      g2d.transform(trans);
+
+      // Draw horizontal arrow starting in (6, 0)
+      g2d.setColor(Color.red);
+      g2d.setStroke(new BasicStroke(2));
+      g2d.drawLine(6, 0, len, 0);
+      g2d.setStroke(new BasicStroke(1));
+      g2d.fillPolygon(new int[] {len+2, len-size+2, len-size+2, len+2},
+                      new int[] {0, -size, size, 0}, 4);
+  }
 }

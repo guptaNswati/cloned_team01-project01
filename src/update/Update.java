@@ -181,14 +181,13 @@ public class Update extends JPanel {
          Planet planet = planets[planetIndex];
          g2d.setColor(planet.getColor());
          // Draws planet orbit path
-         g2d.drawOval((int) (sun.getX() - planet.getDistanceToSun()), 
-               (int) (sun.getY() - planet.getDistanceToSun()),
+         g2d.drawOval((int)(sun.getX() - planet.getDistanceToSun()), 
+               (int)(sun.getY() - planet.getDistanceToSun()),
                planet.getDistanceToSun() * 2, planet.getDistanceToSun() * 2);
          planet.draw(g, this); //draws planet
 
          // Checks the distance between planets and player and displays information appropriately
          if (Physics.detectCollision(planet, ship)) {
-            //System.out.println("Collision with " + planet.getName());
             ship.setOnCelestial(true);
             ship.setAttachedCelestial(planet);
 
@@ -236,9 +235,6 @@ public class Update extends JPanel {
                planet.setCoordinate(Physics.planetaryOrbit(sun, planet, 1));
             }
             Physics.shipFlight(ship, sun, planets);
-
-            // places arrow on ship's planet
-            ship.getArrow().setCoordinate(ship.getAttachedCelestial().getCoordinate());
 
             repaint();
          }

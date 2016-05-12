@@ -35,7 +35,7 @@ public class Ship {
       angle = 0;
       radius = 2;
       onCelestial = true;
-      arrow = new Arrow("image/arrow-sample.png", this);
+      arrow = new Arrow();
       thrustInput = new ThrustBox(this);
    }
 
@@ -130,10 +130,6 @@ public class Ship {
       return momentum.getFirst().getY();
    }
 
-   public int getMomentumSize() {
-      return momentum.size();
-   }
-
    public void setFirstMomentum(double x, double y) {
       momentum.push(new Point2D.Double(x, y));
    }
@@ -164,10 +160,9 @@ public class Ship {
          this.resetCoordinate();
          this.resetMomentum();
          thrustInput.setText(this.thrust);
-         System.out.println(fuel);
+         if (!onCelestial)
+            expendFuel();
       }
-      if (!onCelestial)
-         expendFuel();
    }
 
    public double getFuel() {
