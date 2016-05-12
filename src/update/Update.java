@@ -32,6 +32,7 @@ import celestial.Celestial;
 import celestial.Planet;
 import information.CSVReader;
 import information.Information;
+import information.SidePanel;
 import menu.Menu;
 import physics.Constants;
 import physics.Physics;
@@ -51,8 +52,7 @@ public class Update extends JPanel {
    //private GameObjectives;
 
    // adding info_panel
-   private JPanel infoPanel;
-   private JTextArea textBox;
+   private JTextArea jokeTextBox;
    
    //private GameObjectives 
 
@@ -116,19 +116,7 @@ public class Update extends JPanel {
    public Update() {
 
       super();
-      // Editing old file and instantiating panel here for info display
-      infoPanel = new JPanel();
-       infoPanel.setSize(Constants.FRAME_WIDTH/4, Constants.FRAME_HEIGHT/4);
-       
-       textBox = new JTextArea(8, 15);  
-      
-       textBox.setEditable(false);
-       
-       infoPanel.add(textBox);
-       infoPanel.setVisible(false);
-       
-       this.add(infoPanel);
-    		  
+
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
       // sun.setImage("image/MrSun-sample.png");
@@ -151,16 +139,6 @@ public class Update extends JPanel {
                planets[i].getName()));
       }
 
-      //planet info display
-      infoPanel = new JPanel();
-      infoPanel.setSize(Constants.FRAME_WIDTH/4, Constants.FRAME_HEIGHT/4);
-      textBox = new JTextArea(8, 15);
-      textBox.setEditable(false);
-
-      infoPanel.add(textBox);
-      infoPanel.setVisible(false);
-      this.add(infoPanel);
-      
       menu = new Menu();
 
       ship = new Ship();
@@ -171,9 +149,8 @@ public class Update extends JPanel {
       CSVReader csv = new CSVReader();
       info = csv.getInfoData();
 
-      add(ship.getThrustInput());
-      // for testing.
-      // add(new TesterButton("tester")); // comment out this line when done
+      // for period testing
+      // add(new TesterButton("Test Period"));
    }
 
    /**
@@ -221,9 +198,11 @@ public class Update extends JPanel {
                   if (info.get(i).getName().equals(planet.getName())
                         && ship.getAttachedCelestial().getName() != info.get(i).getName()) { 
                      GameObjectives.nextObjective();
-                     textBox.setText(info.get(i).toString() + 
-                           "\n\nGOOD JOB!\nNow, go to this planet next: " + PLANET_NAMES[GameObjectives.getPlanetObjective()]);
-                     infoPanel.setVisible(true);
+                     jokeTextBox.setText(info.get(i).toString()
+                           + "\n\nGOOD JOB!\nNow, go to this planet next: "
+                           + PLANET_NAMES[GameObjectives
+                                 .getPlanetObjective()]);
+                     jokeTextBox.setVisible(true);
                      break;
                   }
                   //infoPanel.setVisible(false);
@@ -234,9 +213,12 @@ public class Update extends JPanel {
                System.out.println("Landed on WRONG planet! " + GameObjectives.getJoke());
 
                //show text box that says go to other planet + joke
-               textBox.setText("Go to this planet: " + PLANET_NAMES[GameObjectives.getPlanetObjective()]
+               jokeTextBox
+                     .setText("Go to this planet: "
+                           + PLANET_NAMES[GameObjectives
+                                 .getPlanetObjective()]
                      + "\n\nImportant: " + GameObjectives.getJoke());   
-               infoPanel.setVisible(true);
+               jokeTextBox.setVisible(true);
             }
          }
       }
@@ -261,6 +243,14 @@ public class Update extends JPanel {
          }
       });
       timer.start();
+   }
+
+   public Ship getShip() {
+      return ship;
+   }
+
+   public void linkWithSidePanel(SidePanel sidePanel) {
+      jokeTextBox = sidePanel.getJokeTextBox();
    }
 
    private class KeyControl extends KeyAdapter {
