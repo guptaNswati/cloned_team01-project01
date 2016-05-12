@@ -14,7 +14,7 @@ import ship.Ship;
  * An arrow to draw on GUI. Also contains and inner private class for key
  * control.
  * 
- * @author Terry Tsao and Joshua Fan
+ * @author Terry Tsao
  */
 public class Arrow extends JComponent {
    private int size;
@@ -46,11 +46,11 @@ public class Arrow extends JComponent {
       trans.concatenate(AffineTransform.getRotateInstance(ship.getAngle()));
       g2d.transform(trans);
 
-      // Draw horizontal arrow starting in (6, 0)
+      // Draw horizontal arrow starting at (6, 0)
       g2d.setColor(Color.red);
       g2d.setStroke(new BasicStroke(2));
       g2d.drawLine(6, 0, len, 0);
-      g2d.setStroke(new BasicStroke(1));
+      g2d.setStroke(new BasicStroke(0));
       g2d.fillPolygon(new int[] {len+2, len-size+2, len-size+2, len+2},
                       new int[] {0, -size, size, 0}, 4);
   }
