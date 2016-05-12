@@ -2,7 +2,14 @@ package celestial;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /**
  * An object of class Celestial has 4 members, coordinate, color, name, radius.
@@ -15,6 +22,7 @@ public class Celestial {
    private String name;
    private int radius;
    private double mass;
+   private BufferedImage image;
 
    /**
     * A default parameter that does nothing.
@@ -33,11 +41,12 @@ public class Celestial {
     * @param radius
     *           The radius of a celestial
     */
-   public Celestial(Point2D.Double coordinate, Color color, String name, int radius, double mass) {
+   public Celestial(Point2D.Double coordinate, Color color, String name,
+         int radius, double mass) {
       this.setName(name);
-      this.color = color;
+      this.setColor(color);
       this.coordinate = new Point2D.Double();
-      setCoordinate(coordinate.getX(), coordinate.getY());
+      setCoordinate(coordinate);
       setRadius(radius);
       setMass(mass);
    }
@@ -48,10 +57,15 @@ public class Celestial {
     * @param g
     *           A Graphics object that is passed in by paintComponent method.
     */
-   public void draw(Graphics g) {
-      g.setColor(color);
-      g.fillOval((int)coordinate.getX() - radius, (int)coordinate.getY() - radius, radius * 2,
-            radius * 2);
+   public void draw(Graphics g, ImageObserver imgOb) {
+      g.setColor(getColor());
+      if (image == null) {
+         g.fillOval((int)coordinate.getX() - radius,
+               (int)coordinate.getY() - radius, radius * 2, radius * 2);
+      }
+      else
+         g.drawImage(image, (int)coordinate.getX() - radius,
+               (int)coordinate.getY() - radius, radius * 2, radius * 2, imgOb);
    }
 
    /**
@@ -62,9 +76,8 @@ public class Celestial {
     * @param y
     *           y coordinate.
     */
-   public void setCoordinate(double x, double y) {
-      // TODO: validator
-      coordinate.setLocation(x, y);
+   public void setCoordinate(Point2D point) {
+      coordinate.setLocation(point);
    }
 
    public double getRadius() {
@@ -83,7 +96,7 @@ public class Celestial {
       this.mass = mass > 0 ? mass : 1;
    }
 
-   public Point2D getCoordinate(){
+   public Point2D getCoordinate() {
       return coordinate;
    }
 
@@ -95,13 +108,35 @@ public class Celestial {
       return coordinate.getY();
    }
 
-public String getName()
-{
-    return name;
-}
+   public String getName() {
+      return name;
+   }
 
-public void setName(String name)
-{
-    this.name = name;
-}
+   public void setName(String name) {
+      this.name = name;
+   }
+
+   public Image getImage() {
+      return image;
+   }
+
+   public void setImage(String filename) {
+      try {
+         image = ImageIO.read(new File(filename));
+      } catch (IOException ex) {}
+   }
+
+   /**
+    * @return the color
+    */
+   public Color getColor() {
+      return color;
+   }
+
+   /**
+    * @param color the color to set
+    */
+   public void setColor(Color color) {
+      this.color = color;
+   }
 }

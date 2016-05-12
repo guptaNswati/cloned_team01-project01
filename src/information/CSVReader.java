@@ -9,43 +9,32 @@ import java.io.FileNotFoundException;
  * @author swati
  *
  */
-public class CSVReader
-{
-    private ArrayList<Information> infoData;
-   
-    public CSVReader()
-    {
-        infoData = new ArrayList<Information>();
-        
-        try 
-        {
-            Scanner input = new Scanner (new File("resources/info.txt"));
-            
-            int count = 0;
-           
-            while(input.hasNext())
-            {      
-                //reads given file line by line and splits every line into tokens                  
-                String[] token = input.nextLine().split(",");
-                String[] tokens = token[1].split("#");               
-                infoData.add(new Information(token[0], tokens));
- 
-              count++;
-            }
-            input.close();       
-        } 
-    
-        catch (FileNotFoundException e) 
-    {
-        System.out.println("File not found!");
-    }
-    
+public class CSVReader {
+   private ArrayList<Information> infoData;
+
+   public CSVReader() {
+      infoData = new ArrayList<Information>();
+
+      try {
+         Scanner input = new Scanner (new File("resources/info.txt"));
+
+         while(input.hasNext()) {      
+            //reads given file line by line and splits every line into tokens                  
+            String[] token = input.nextLine().split(",");
+            String[] tokens = token[1].split("##");               
+            infoData.add(new Information(token[0], tokens));
+         }
+         input.close();       
+      } 
+
+      catch (FileNotFoundException e) {
+         System.out.println("File not found!");
+      }
    }
-    /**
-     * @return the info
-     */
-    public ArrayList<Information> getInfoData()
-    {
-        return this.infoData;
-    }
+   /**
+    * @return the info
+    */
+   public ArrayList<Information> getInfoData() {
+      return this.infoData;
+   }
 }

@@ -14,7 +14,7 @@ import update.Update;
  */
 public class TestGame {
    public static void main(String[] args) {
-      JFrame frame = new JFrame("Simple Window");
+      JFrame frame = new JFrame("Planet Hopper");
       frame.setBounds(0, 0, Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       
