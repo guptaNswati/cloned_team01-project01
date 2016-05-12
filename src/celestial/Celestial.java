@@ -21,6 +21,7 @@ public class Celestial {
    private Color color;
    private String name;
    private int radius;
+   private int width; // for saturn
    private double mass;
    private BufferedImage image;
 
@@ -47,7 +48,11 @@ public class Celestial {
       this.setColor(color);
       this.coordinate = new Point2D.Double();
       setCoordinate(coordinate);
-      setRadius(radius);
+      this.radius = radius;
+      if (this.name.equalsIgnoreCase("Saturn"))
+         width = 57 * radius / 20;
+      else
+         width = radius * 2;
       setMass(mass);
    }
 
@@ -64,8 +69,8 @@ public class Celestial {
                (int)coordinate.getY() - radius, radius * 2, radius * 2);
       }
       else
-         g.drawImage(image, (int)coordinate.getX() - radius,
-               (int)coordinate.getY() - radius, radius * 2, radius * 2, imgOb);
+         g.drawImage(image, (int)coordinate.getX() - width / 2,
+               (int)coordinate.getY() - radius, width, radius * 2, imgOb);
    }
 
    /**
