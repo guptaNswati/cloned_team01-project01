@@ -278,31 +278,31 @@ public class Update extends JPanel {
          if (menu.getIsShown())
             menu.toggleIsShown();
          else {
-            if (e.getKeyCode() == KeyEvent.VK_LEFT) // rotate angle counter-clockwise
+            int key = e.getKeyCode();
+            switch (key) {
+            case KeyEvent.VK_LEFT: // rotate angle counter-clockwise
                ship.changeAngle(-0.15);
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT) // rotate angle clockwise
+               break;
+            case KeyEvent.VK_RIGHT: // rotate angle clockwise
                ship.changeAngle(0.15);
-            if (e.getKeyCode() == KeyEvent.VK_UP) { // increase thrust
+               break;
+            case KeyEvent.VK_UP: // increase thrust
                if (ship.getOnCelestial())
                   ship.changeThrust(0.4);
                else if (ship.getFuel() > 0)
                   ship.changeThrust(0.01);
-            }
-            if (e.getKeyCode() == KeyEvent.VK_DOWN) // decrease thrust
+               break;
+            case KeyEvent.VK_DOWN: // decrease thrust
                ship.changeThrust(-0.4);
-            if (e.getKeyCode() == KeyEvent.VK_SPACE) // launch from planet
+               break;
+            case KeyEvent.VK_SPACE: // launch from planet
                ship.setOnCelestial(!ship.getOnCelestial());
+               break;
+            case KeyEvent.VK_ESCAPE: // show menu
+               menu.toggleIsShown();
+            }
          }
       }
-   }
-
-   /**
-    * Called by constructor to enable JPanel to listen to key listener.
-    */
-   private void toggleKeyListener() {
-      setFocusable(true);
-      requestFocusInWindow();
-      addKeyListener(new KeyControl());
    }
 
    // for testing
