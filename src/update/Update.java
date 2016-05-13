@@ -1,32 +1,34 @@
 package update;
 
-import java.awt.BorderLayout;
+//import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
+//import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+//import java.awt.event.WindowAdapter;
+//import java.awt.event.WindowEvent;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+//import javax.swing.JButton;
+//import javax.swing.JFrame;
+//import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
+//import javax.swing.JSlider;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+//import javax.swing.JTextField;
+//import javax.swing.SwingConstants;
 import javax.swing.Timer;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+//import javax.swing.event.ChangeEvent;
+//import javax.swing.event.ChangeListener;
 
 import celestial.*;
 import information.*;
@@ -57,6 +59,8 @@ public class Update extends JPanel {
    private Menu menu;
 
    private Target target;
+   
+   private double scale;
 
    public static final int NUM_OF_PLANETS = 8;
 
@@ -143,7 +147,7 @@ public class Update extends JPanel {
       ship = new Ship();
       ship.setAttachedCelestial(planets[2]);
 
-      toggleKeyListener();
+      addInputListener();
 
       CSVReader csv = new CSVReader();
       info = csv.getInfoData();
@@ -162,7 +166,7 @@ public class Update extends JPanel {
       Graphics2D g2d = (Graphics2D)g;
 
       // Keep solar system centered regardless of aspect ratio
-      double scale = Math.min(getWidth() / 952., getHeight() / 952.);
+      scale = Math.min(getWidth() / 952., getHeight() / 952.);
       g2d.scale(scale, scale);
 
       // Anti-aliasing
@@ -190,6 +194,7 @@ public class Update extends JPanel {
 
             if (planetIndex == GameObjectives.getPlanetObjective()){
 
+               System.out.println("Landed on right planet!");
 
                //landed on right planet
                for(int i = 1; i < info.size(); i++) {
@@ -209,6 +214,8 @@ public class Update extends JPanel {
                //go to next game objective
             }
             else { //landed on wrong planet
+               System.out.println("Landed on WRONG planet! " + GameObjectives.getJoke());
+
                //show text box that says go to other planet + joke
                jokeTextBox
                .setText("Go to this planet: "
@@ -270,10 +277,11 @@ public class Update extends JPanel {
    /**
     * Called by constructor to enable JPanel to listen to key listener.
     */
-   private void toggleKeyListener() {
+   private void addInputListener() {
       setFocusable(true);
       requestFocusInWindow();
       addKeyListener(new KeyControl());
+      addMouseMotionListener(new MouseControl());
    }
 
    class KeyControl extends KeyAdapter {
@@ -299,7 +307,8 @@ public class Update extends JPanel {
             case KeyEvent.VK_DOWN: // decrease thrust
                ship.changeThrust(-0.4);
                break;
-            case KeyEvent.VK_SPACE: // launch from planet
+            case KeyEvent.VK_ENTER: // launch from planet
+            case KeyEvent.VK_SPACE:
                ship.setOnCelestial(!ship.getOnCelestial());
                break;
             case KeyEvent.VK_ESCAPE: // show menu
@@ -308,8 +317,25 @@ public class Update extends JPanel {
          }
       }
    }
+   
+   class MouseControl implements MouseMotionListener {
+      public void mouseMoved(MouseEvent e) {
+         ship.setAngle(Math.atan2(e.getY() / scale - ship.getLastY(),
+                                  e.getX() / scale - ship.getLastX()));
+         if (ship.getOnCelestial())
+            ship.setThrust(Math.sqrt(Math.pow(e.getX() / scale - ship.getLastX(), 2)
+                                   + Math.pow(e.getY() / scale - ship.getLastY(), 2)) * 0.015);
+      }
+      
+      public void mouseDragged(MouseEvent e) {
+         ship.setAngle(Math.atan2(e.getY() / scale - ship.getLastY(),
+                                  e.getX() / scale - ship.getLastX()));
+         if (!ship.getOnCelestial() && ship.getFuel() > 0)
+            ship.changeThrust(0.01);
+      }
+   }
 
-   // for testing
+/*   // for testing
    class TesterButton extends JButton {
       public TesterButton(String name) {
          super(name);
@@ -416,5 +442,5 @@ public class Update extends JPanel {
          }
          return labels;
       }
-   }
+   }*/
 }

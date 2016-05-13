@@ -58,7 +58,7 @@ public class Ship {
             (int)coordinate.getLast().getY() - 2, 4, 4);
       double alpha = 1;
       for (Point2D coord : coordinate) {
-         g.setColor(new Color(0, 160, 255, (int)alpha));
+         g.setColor(new Color(0, 255, 255, (int)alpha));
          g.fillOval((int)coord.getX(), (int)coord.getY(), 1, 1);
          alpha = alpha + 0.5;
       }
@@ -150,7 +150,7 @@ public class Ship {
    }
 
    /**
-    * Clear guideline, leaving only the current coordinate
+    * Clear guideline, leaving only the current coordinate.
     */
    public void resetCoordinate() {
       Point2D lastElement = coordinate.getLast();
@@ -177,7 +177,7 @@ public class Ship {
    }
 
    /**
-    * Set momentum farthest in the future
+    * Set momentum farthest in the future.
     * 
     * @param x
     * @param y
@@ -187,7 +187,7 @@ public class Ship {
    }
 
    /**
-    * Set current momentum
+    * Set current momentum.
     * 
     * @param x
     * @param y
@@ -197,7 +197,7 @@ public class Ship {
    }
 
    /**
-    * Clear momentum prediction, leaving only the current momentum
+    * Clear momentum prediction, leaving only the current momentum.
     */
    public void resetMomentum() {
       Point2D lastElement = momentum.getLast();
@@ -210,8 +210,10 @@ public class Ship {
    }
 
    public void setThrust(double thrust) {
-      this.thrust = thrust > 0 ? thrust : 0;
-      thrustInput.setText(this.thrust);
+      if (thrust >= 0 && thrust <= 2.8) {
+         this.thrust = thrust;
+         thrustInput.setText(thrust);
+      }
    }
 
    /**
@@ -226,7 +228,7 @@ public class Ship {
          this.thrust = newThrust;
          this.resetCoordinate();
          this.resetMomentum();
-         thrustInput.setText(this.thrust);
+         thrustInput.setText(newThrust);
          if (!onCelestial)
             expendFuel();
       }
@@ -266,7 +268,7 @@ public class Ship {
 
    /**
     * When ship "lands" (collides) on planet,
-    * reinitialize ship state and clear momentum
+    * reinitialize ship state and clear momentum.
     * 
     * @param onCelestial
     */

@@ -14,6 +14,9 @@ public class Starfield {
    private int[] radius;
    private Color[] color;
 
+   /**
+    * Initialize coordinates, radii, and color of stars.
+    */
    public Starfield() {
       xCoord = new int[NUM_OF_STARS];
       yCoord = new int[NUM_OF_STARS];
