@@ -20,7 +20,6 @@ public class GameObjectives{
    public static boolean nextObjective() {
       if(currentPlanetObjective < 7 ){
          currentPlanetObjective++;
-         System.out.println("Set next objective!"+ currentPlanetObjective);
          return true;
       }
       
