@@ -190,7 +190,6 @@ public class Update extends JPanel {
 
             if (planetIndex == GameObjectives.getPlanetObjective()){
 
-               System.out.println("Landed on right planet!");
 
                //landed on right planet
                for(int i = 1; i < info.size(); i++) {
@@ -210,8 +209,6 @@ public class Update extends JPanel {
                //go to next game objective
             }
             else { //landed on wrong planet
-               System.out.println("Landed on WRONG planet! " + GameObjectives.getJoke());
-
                //show text box that says go to other planet + joke
                jokeTextBox
                .setText("Go to this planet: "
