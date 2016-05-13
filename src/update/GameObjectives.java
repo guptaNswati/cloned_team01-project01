@@ -1,11 +1,12 @@
 package update;
 
+import java.util.Random;
 
 public class GameObjectives{
    
    private static int [] planetNumber = {5, 4, 3, 2, 0, 1, 6, 7};
    private static int currentPlanetObjective = 0;   
-   private static String [] jokes ={
+   private static String [] jokes = {
       "Q: What is big, round, and blue? A: Uranus",
       "Did you know Uranus is dark and gassy?", 
       "Humans have never attempted to colonize Uranus",
@@ -25,7 +26,6 @@ public class GameObjectives{
       
       currentPlanetObjective = 0;
       return false;
-      
    }
    
    public static int getPlanetObjective() {
@@ -41,7 +41,8 @@ public class GameObjectives{
    }
    
    public static String getJoke() {
-      return jokes[currentPlanetObjective];
+      Random rand = new Random();
+      return jokes[rand.nextInt(7)];
    }
    
 }
