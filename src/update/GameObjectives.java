@@ -1,5 +1,6 @@
 package update;
 
+import java.util.Random;
 
 public class GameObjectives{
    
@@ -41,7 +42,8 @@ public class GameObjectives{
    }
    
    public static String getJoke() {
-      return jokes[currentPlanetObjective];
+      Random rand = new Random();
+      return jokes[rand.nextInt(7)];
    }
    
 }
