@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.Point2D;
@@ -277,6 +279,7 @@ public class Update extends JPanel {
       setFocusable(true);
       requestFocusInWindow();
       addKeyListener(new KeyControl());
+      addMouseMotionListener(new MouseControl());
    }
 
    class KeyControl extends KeyAdapter {
@@ -311,8 +314,20 @@ public class Update extends JPanel {
          }
       }
    }
+   
+   class MouseControl implements MouseMotionListener {
+      public void mouseMoved(MouseEvent e) {
+         ship.setAngle(Math.atan2(e.getY() - ship.getLastY(), e.getX() - ship.getLastX()));
+      }
+      
+      public void mouseDragged(MouseEvent e) {
+         ship.setAngle(Math.atan2(e.getY() - ship.getLastY(), e.getX() - ship.getLastX()));
+         if (!ship.getOnCelestial() && ship.getFuel() > 0)
+            ship.changeThrust(0.01);
+      }
+   }
 
-   // for testing
+/*   // for testing
    class TesterButton extends JButton {
       public TesterButton(String name) {
          super(name);
@@ -419,5 +434,5 @@ public class Update extends JPanel {
          }
          return labels;
       }
-   }
+   }*/
 }
