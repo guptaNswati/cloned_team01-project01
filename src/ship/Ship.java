@@ -67,7 +67,7 @@ public class Ship {
          for (Point2D hist : history) {
             g.setColor(new Color(255, 255, 255, (int)alpha));
             g.fillOval((int)hist.getX(), (int)hist.getY(), 1, 1);
-            alpha--;
+            alpha = alpha - 0.2;
          }
       }
       arrow.draw(g, this);
@@ -139,7 +139,7 @@ public class Ship {
       if (!onCelestial)
          momentum.removeLast();
 
-      if (!onCelestial && history.size() > 255)
+      if (!onCelestial && history.size() > 1275)
          history.removeLast();
       else if(onCelestial && history.size() != 0) {
          // Clear history when on planet

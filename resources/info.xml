@@ -29,7 +29,7 @@
     <celestial>
         <name>Earth</name>
         <basic>The only known planet to support life is the largest of the terrestrial planets. It is the only planet in our solar system not to be named after a Greek or Roman deity.</basic>
-        <temperature></temperature>
+        <temperature>14 °C</temperature>
         <mass>5.97 × 10^24 kg</mass>
         <diameter>12714 km</diameter>
         <distance>149598262 km</distance>
