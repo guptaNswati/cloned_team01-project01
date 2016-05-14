@@ -19,10 +19,15 @@ public class Menu {
       isShown = !isShown;
    }
 
+   /**
+    * Draw banner and instruction overlay text.
+    * 
+    * @param g
+    */
    public void draw(Graphics g) {
       if (isShown) {
          g.setColor(new Color(0, 0, 0, 128));
-         g.fillRect(0, 0, 1000, 1000);
+         g.fillRect(0, 0, 1000, 1150);
          g.setColor(Color.white);
          g.setFont(new Font("Arial", Font.BOLD, 72));
          g.drawString("PLANET HOPPER", 180, 380);

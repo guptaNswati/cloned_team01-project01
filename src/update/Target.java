@@ -41,10 +41,10 @@ public class Target {
       Graphics2D g2d = (Graphics2D)g;
       AffineTransform trans = new AffineTransform();
       trans.translate(coordinate.getX() - size / 2,
-            coordinate.getY() - size / 2);
+                      coordinate.getY() - size / 2);
       trans.rotate(angle, size / 2, size / 2);
       trans.scale(size / image.getWidth(),
-            size / image.getHeight());
+                  size / image.getHeight());
       AffineTransformOp op =
             new AffineTransformOp(trans, AffineTransformOp.TYPE_BILINEAR);
       g2d.drawImage(image, op, 0, 0);

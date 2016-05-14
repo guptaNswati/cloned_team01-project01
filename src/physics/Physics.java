@@ -96,9 +96,8 @@ public class Physics {
       }
       ship.setFirstMomentum(addX, addY);
       ship.setFirstCoordinate(ship.getFirstX() + addX, ship.getFirstY() + addY);
-      if (ship.getCoordinateSize() < 510) {
+      if (ship.getCoordinateSize() < 510)
          Physics.shipGuideline(ship, sun, planets);
-      }
    }
 
    /**

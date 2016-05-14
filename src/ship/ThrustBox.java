@@ -15,7 +15,7 @@ public class ThrustBox extends JTextField {
       setHorizontalAlignment(SwingConstants.CENTER);
       setBackground(Color.yellow);
       setPreferredSize(new Dimension(20, 50));
-      setFont(new Font("Arial", Font.BOLD, 17));
+      setFont(new Font("Arial", Font.BOLD, 22));
       addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
