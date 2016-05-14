@@ -26,7 +26,7 @@ public class Information
     */
    public Information() {
       try {
-         File inputFile = new File("resources/info.xml");
+         File inputFile = new File("resources/Info.xml");
          DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
          DocumentBuilder dBuilder;
          dBuilder = dbFactory.newDocumentBuilder();

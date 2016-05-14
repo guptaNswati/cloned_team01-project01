@@ -3,7 +3,7 @@ package update;
 import java.util.Random;
 
 public class GameObjectives{
-   private static int[] objectivePlanet = {5, 3, 7, 4, 0, 5, 1, 2};
+   private static int[] objectivePlanet = {5, 3, 7, 4, 0, 6, 1, 2};
    private static int currentObjectiveIndex = 0;
    private static String[] jokes = {
       "Q: What is big, round, and blue? A: Uranus",
