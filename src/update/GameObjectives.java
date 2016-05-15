@@ -3,8 +3,17 @@ package update;
 import java.util.Random;
 
 public class GameObjectives{
+   /**
+    * Stores the sequence of game objective regarding which planet to go to.
+    */
    private static int[] objectivePlanet = {5, 3, 7, 4, 0, 6, 1, 2};
+   /**
+    * The current game objective.
+    */
    private static int currentObjectiveIndex = 0;
+   /**
+    * A collection of jokes.
+    */
    private static String[] jokes = {
       "Q: What is big, round, and blue? A: Uranus",
       "Did you know Uranus is dark and gassy?",
@@ -16,6 +25,12 @@ public class GameObjectives{
       "Uranus has more moons than Earth. In fact, 27 of them!"
    };
 
+   /**
+    * Changes current objective to next one, or go back to first if hits the
+    * end.
+    * 
+    * @return false if hits the end and loops around; true if otherwise.
+    */
    public static boolean nextObjective() {
       if (currentObjectiveIndex < 7 ) {
          currentObjectiveIndex++;
@@ -26,10 +41,22 @@ public class GameObjectives{
       return false;
    }
 
+   /**
+    * Get the index of the planet of game objective.
+    * 
+    * @return The index of targeted planet.
+    */
    public static int getPlanetObjective() {
       return objectivePlanet[currentObjectiveIndex];
    }
 
+   /**
+    * Sets the index of objective.
+    * 
+    * @param objNum
+    *           Objective index number.
+    * @return true if valid argument, false otherwise.
+    */
    public boolean setObjective(int objNum) {
       if (objNum >= 0 && objNum <= objectivePlanet.length) {
          currentObjectiveIndex = objNum;
@@ -38,6 +65,11 @@ public class GameObjectives{
       return false;
    }
 
+   /**
+    * Gets a random joke.
+    * 
+    * @return a random joke.
+    */
    public static String getJoke() {
       Random rand = new Random();
       return jokes[rand.nextInt(7)];
