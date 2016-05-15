@@ -80,6 +80,10 @@ For implementing planet and player movement, we may use Slick2D and Java Swing.
 ###### *Prototype UI*
 ![Prototype UI](image/PlanetHopper.jpg)
 _* Image contains art subject to copyright. Strictly for academic purposes._
+
+###### *UML Diagram*
+![UML Diagram](resources/UML Diagram.png)
+
 <a name="2.0"></a>
 
 ## 2.0 Team and Constraints
