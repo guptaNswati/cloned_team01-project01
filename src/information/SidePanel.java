@@ -25,13 +25,37 @@ import javax.swing.SwingConstants;
 import update.Update;
 
 public class SidePanel extends JPanel {
+   /**
+    * Scroll pane makes text area scrollable.
+    */
    private JScrollPane scrollPane;
+   /**
+    * Text box for info.
+    */
    private JTextArea infoTextBox;
+   /**
+    * Panel for current stat.
+    */
    private JPanel statPane;
+   /**
+    * A button to go to menu.
+    */
    private JButton menuButton;
+   /**
+    * Text box to show fuel level.
+    */
    private JTextField fuelBox;
+   /**
+    * Text box for thrust control pre-launch.
+    */
    private JTextField thrustBox;
 
+   /**
+    * Initialize all members.
+    * 
+    * @param update
+    *           The object where everything runs.
+    */
    public SidePanel(Update update) {
       setLayout(new BorderLayout());
       initInfoTextBox();
@@ -93,6 +117,12 @@ public class SidePanel extends JPanel {
       statPane.setBorder(BorderFactory.createLineBorder(Color.black, 3));
    }
 
+   /**
+    * Menu button initializer.
+    * 
+    * @param update
+    *           The object where everything runs.
+    */
    private void initMenuButton(Update update) {
       menuButton = new JButton("MENU");
       menuButton.setBorder(BorderFactory.createLineBorder(Color.black, 3));
@@ -108,6 +138,9 @@ public class SidePanel extends JPanel {
       });
    }
 
+   /**
+    * Initialize fuel box.
+    */
    private void initFuelBox() {
       fuelBox = new JTextField();
       fuelBox.setHorizontalAlignment(SwingConstants.CENTER);
@@ -117,6 +150,9 @@ public class SidePanel extends JPanel {
       fuelBox.setFont(new Font("Arial", Font.BOLD, 22));
    }
 
+   /**
+    * Initialize thrust box.
+    */
    private void initThrustBox() {
       thrustBox = new JTextField();
       thrustBox.setHorizontalAlignment(SwingConstants.CENTER);
