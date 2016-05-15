@@ -1,4 +1,4 @@
-# team01-project01
+# team01- project01
 Project folder:
 PlanetHopper/
 
@@ -7,11 +7,11 @@ Brief description of submitted files:
 
 src/celestial/Celestial.java
    - An object of class Celestial has 4 members, coordinate, color, name, radius.
-   - It has a default and a 4 parameter constructor, and getters and setters. 
+   - It has a default and a 4 parameter constructor, and getters and setters.
    - It has also a draw method to draw the celestial on GUI.
 
 src/celestial/Planet.java
-   - An object of a Planet class inherits from Celestial. 
+   - An object of a Planet class inherits from Celestial.
    - Three additional members, distanceToSun, periodInMS, angleToSun.
 
 src/celestial/Starfield.java
@@ -54,52 +54,40 @@ src/update/Target.java
    - The target icon object.
 
 src/update/Update.java
-   - An update object contains all dynamic graphical elements. 
-   - It contains a paintComponent method necessary for GUI. 
+   - An update object contains all dynamic graphical elements.
+   - It contains a paintComponent method necessary for GUI.
    - The run method updates physical coordinates and GUI elements.
 
 
-   
+
 resources/planets
-   -Pictures of all planets and the sun
-   
+   - Pictures of all planets and the sun
+
 resources/info.xml
-   -Data about each planet that's displayed in game.
-   
+   - Data about each planet that's displayed in game.
+
 resources/Run.jpg
-   -Screenshot of opening screen
+   - Screenshot of opening screen
 
 resources/Screen\ Recording.mp4
-   -Video recording of gameplay
-   
+   - Video recording of gameplay
+
 resources/Target.png
-   -Picture of target markers that circle target planet (for landing).
-   
+   - Picture of target markers that circle target planet (for landing).
+
 resources/UML\ Diagram.png
-   -UML Diagram of significant classes of Planet Hopper.
-   
+   - UML Diagram of significant classes of Planet Hopper.
 
-   
+
+
 image/PlanetHopper.jpg
-   -Picture of Planet Hopper prototype.
-   
+   - Picture of Planet Hopper prototype.
 
-   
+
+
 Project1Proposal.md
-   -Project proposal of Planet Hopper
-   
+   - Project proposal of Planet Hopper
+
 
 README.md
-   -Overview of all submitted files.
-
-
-
-
-
-
-
-
-
-
-
-
+   - Overview of all submitted files.
