@@ -59,6 +59,7 @@ src/update/Update.java
    - The run method updates physical coordinates and GUI elements.
 
 
+   ==============================================================================
 
 resources/planets
    - Pictures of all planets and the sun
@@ -79,15 +80,18 @@ resources/UML\ Diagram.png
    - UML Diagram of significant classes of Planet Hopper.
 
 
+   ==============================================================================
 
 image/PlanetHopper.jpg
    - Picture of Planet Hopper prototype.
 
 
-
+   ==============================================================================
+   
 Project1Proposal.md
    - Project proposal of Planet Hopper
 
 
+   ==============================================================================
 README.md
    - Overview of all submitted files.
