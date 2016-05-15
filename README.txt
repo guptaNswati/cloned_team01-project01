@@ -1,3 +1,4 @@
+# team01-project01
 Project folder:
 PlanetHopper/
 
@@ -57,6 +58,52 @@ src/update/Update.java
    - It contains a paintComponent method necessary for GUI. 
    - The run method updates physical coordinates and GUI elements.
 
-README.txt
-   - Description of submitted files
+==============================================================================
+
+   
+resources/planets
+   -Pictures of all planets and the sun
+   
+resources/info.xml
+   -Data about each planet that's displayed in game.
+   
+resources/Run.jpg
+   -Screenshot of opening screen
+
+resources/Screen\ Recording.mp4
+   -Video recording of gameplay
+   
+resources/Target.png
+   -Picture of target markers that circle target planet (for landing).
+   
+resources/UML\ Diagram.png
+   -UML Diagram of significant classes of Planet Hopper.
+   
+   ==============================================================================
+
+   
+image/PlanetHopper.jpg
+   -Picture of Planet Hopper prototype.
+   
+   ==============================================================================
+
+   
+Project1Proposal.md
+   -Project proposal of Planet Hopper
+   
+   ==============================================================================
+   
+README.md
+   -Overview of all submitted files.
+
+
+
+
+
+
+
+
+
+
+
 
