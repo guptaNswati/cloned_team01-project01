@@ -3,7 +3,7 @@ package update;
 import java.util.Random;
 
 /**
- * Controls game's objectives.
+ * Store data on and control game objectives.
  */
 public class GameObjectives{
    /**

@@ -1,7 +1,7 @@
 package physics;
 
 /**
- * A class that contains constants that will be used in calculations.
+ * Contains constants for use in calculations.
  */
 public class Constants {
    /**

@@ -1,5 +1,5 @@
 /**
- * In game version of the menu.
+ * Overlay version of the menu.
  */
 
 package menu;

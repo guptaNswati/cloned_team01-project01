@@ -1,5 +1,5 @@
 /**
- * Button version of menu.
+ * Button version of the menu.
  */
 
 package menu;

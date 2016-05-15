@@ -1,5 +1,5 @@
 /**
- * Creates stars in the universe in the GUI background.
+ * Creates stars in the game background.
  */
 
 package celestial;

@@ -1,5 +1,5 @@
 /**
- * The side panel of the GUI.
+ * GUI side panel.
  */
 
 package information;
@@ -26,7 +26,7 @@ import update.Update;
 
 public class SidePanel extends JPanel {
    /**
-    * Scroll pane makes text area scrollable.
+    * Scrollable container for infoTextBox.
     */
    private JScrollPane scrollPane;
    /**
@@ -34,7 +34,7 @@ public class SidePanel extends JPanel {
     */
    private JTextArea infoTextBox;
    /**
-    * Panel for current stat.
+    * Container for fuel and thrust boxes.
     */
    private JPanel statPane;
    /**
@@ -73,7 +73,7 @@ public class SidePanel extends JPanel {
    }
 
    /**
-    * Scrollable container for infoTextBox.
+    * Initialize and stylize scroll pane.
     */
    private void initScrollPane() {
       scrollPane = new JScrollPane(infoTextBox);
@@ -83,7 +83,7 @@ public class SidePanel extends JPanel {
    }
 
    /**
-    * Text box for information and jokes.
+    * Initialize and stylize text box.
     */
    private void initInfoTextBox() {
       infoTextBox = new JTextArea(8, 30);
@@ -110,7 +110,7 @@ public class SidePanel extends JPanel {
    }
 
    /**
-    * Container for fuel and thrust boxes.
+    * Initialize and stylize stat pane.
     */
    private void initStatPane() {
       statPane = new JPanel(new BorderLayout());
@@ -118,7 +118,7 @@ public class SidePanel extends JPanel {
    }
 
    /**
-    * Menu button initializer.
+    * Initialize and stylize menu button.
     * 
     * @param update
     *           The object where everything runs.
@@ -139,7 +139,7 @@ public class SidePanel extends JPanel {
    }
 
    /**
-    * Initialize fuel box.
+    * Initialize and stylize fuel box.
     */
    private void initFuelBox() {
       fuelBox = new JTextField();
@@ -151,7 +151,7 @@ public class SidePanel extends JPanel {
    }
 
    /**
-    * Initialize thrust box.
+    * Initialize and stylize thrust box.
     */
    private void initThrustBox() {
       thrustBox = new JTextField();

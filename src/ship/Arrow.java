@@ -9,8 +9,7 @@ import java.awt.geom.AffineTransform;
 import javax.swing.JComponent;
 
 /**
- * An arrow to draw on GUI. Also contains and inner private class for key
- * control.
+ * Arrow to indicate ship angle/thrust.
  * 
  * @author Terry Tsao
  */

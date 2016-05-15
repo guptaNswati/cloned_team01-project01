@@ -9,24 +9,24 @@ Brief description of submitted files:
 src/celestial/Celestial.java
    - An object of class Celestial has 4 members, coordinate, color, name, radius.
    - It has a default and a 4 parameter constructor, and getters and setters.
-   - It has also a draw method to draw the celestial on GUI.
+   - It has a draw method to draw the celestial body on GUI.
 
 src/celestial/Planet.java
    - An object of a Planet class inherits from Celestial.
    - Three additional members, distanceToSun, periodInMS, angleToSun.
 
 src/celestial/Starfield.java
-   - Creates stars in the universe in the GUI background.
+   - Creates stars in the game background.
    
 ---
 
 ###### Information
 
 src/information/Information.java
-   - Process planets information file.
+   - Process and store celestial bodies' information.
 
 src/information/SidePanel.java
-   - The side panel of the GUI.
+   - GUI side panel.
    
 ---
 
@@ -40,17 +40,17 @@ src/main/Main.java
 ###### Menu
 
 src/menu/MainMenu.java
-   - Button version of menu.
+   - Button version of the menu.
 
 src/menu/Menu.java
-   - In game version of the menu.
+   - Overlay version of the menu.
    
 ---
 
 ###### Physics
 
 src/physics/Constants.java
-   - A class that contains constants that will be used in calculations.
+   - Contains constants for use in calculations.
 
 src/physics/Physics.java
    - Methods to calculate planet coordinates, and ship coordinates, momentum, and collisions.
@@ -60,7 +60,7 @@ src/physics/Physics.java
 ###### Ship
 
 src/ship/Arrow.java
-   - An arrow to draw on GUI. Also contains and inner private class for key control.
+   - Arrow to indicate ship angle/thrust.
 
 src/ship/Ship.java
    - The ship class contains data used for physics calculations on itself, and methods to manipulate that data.
@@ -70,10 +70,10 @@ src/ship/Ship.java
 ###### Update
 
 src/update/GameObjectives.java
-   - Controls game's objectives.
+   - Store data on and control game objectives.
 
 src/update/Target.java
-   - The target icon object.
+   - Draws a target marker indicating the objective.
 
 src/update/Update.java
    - An update object contains all dynamic graphical elements.
@@ -85,10 +85,10 @@ src/update/Update.java
 ###### Resources
 
 resources/planets
-   - Pictures of all planets and the sun
+   - Pictures of all planets and the sun.
 
 resources/info.xml
-   - Data about each planet that's displayed in game.
+   - Data about each planet displayed in-game.
 
 resources/Run.jpg
    - Running screenshot.
@@ -96,13 +96,13 @@ resources/Run.jpg
 ![Running screenshot](resources/Run.png?token=AOcnylhWOPnpVm-f-vvbURAQQdPoII2Zks5XQdl2wA%3D%3D)
 
 resources/Screen Recording.mp4
-   - Video recording of gameplay
+   - Video recording of gameplay.
 
 resources/Target.png
-   - Picture of target markers that circle target planet (for landing).
+   - Image for target marker indicating objective.
 
 resources/UML Diagram.png
-   - UML Diagram of significant classes of Planet Hopper.
+   - UML Diagram of significant classes in Planet Hopper.
 
 ![UML Diagram](resources/UML%20Diagram.png?token=AOcnyknBODC1WY1AVeUr4kD-F2POimQJks5XQdmgwA%3D%3D)
 
@@ -119,8 +119,6 @@ image/PlanetHopper.jpg
    
 Project1Proposal.md
    - Project proposal of Planet Hopper.
-
----
 
 README.md
    - Overview of all submitted files.

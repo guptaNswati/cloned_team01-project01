@@ -1,5 +1,5 @@
 /**
- * Process planets information file.
+ * Process and store celestial bodies' information.
  */
 
 package information;

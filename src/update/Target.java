@@ -1,5 +1,5 @@
 /**
- * The target icon object.
+ * Draws a target marker indicating the objective.
  */
 
 package update;
