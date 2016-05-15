@@ -44,6 +44,9 @@ public class SidePanel extends JPanel {
       add(scrollPane, BorderLayout.NORTH);
    }
 
+   /**
+    * Scrollable container for infoTextBox.
+    */
    private void initScrollPane() {
       scrollPane = new JScrollPane(infoTextBox);
       scrollPane.setPreferredSize(new Dimension(150, 600));
@@ -51,6 +54,9 @@ public class SidePanel extends JPanel {
       scrollPane.setBorder(null);
    }
 
+   /**
+    * Text box for information and jokes.
+    */
    private void initInfoTextBox() {
       infoTextBox = new JTextArea(8, 30);
       infoTextBox.setEditable(false);
@@ -75,6 +81,9 @@ public class SidePanel extends JPanel {
       });
    }
 
+   /**
+    * Container for fuel and thrust boxes.
+    */
    private void initStatPane() {
       statPane = new JPanel(new BorderLayout());
       statPane.setBorder(BorderFactory.createLineBorder(Color.black, 3));

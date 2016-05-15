@@ -292,7 +292,7 @@ public class Ship {
    }
 
    /**
-    * Draw arrow that points to ship while it is off screen.
+    * Draws an arrow that points to ship while it is off screen.
     * 
     * @param g
     */

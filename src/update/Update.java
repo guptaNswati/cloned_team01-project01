@@ -108,7 +108,6 @@ public class Update extends JPanel {
 
       sun = new Celestial(new Point2D.Double(Constants.INIT_SUN_X,
             Constants.INIT_SUN_Y), Color.red, "Sun", 30, 21.4);
-      //sun.setImage("image/MrSun-sample.png");
       sun.setImage("resources/planets/sun.png");
 
       planets = new Planet[NUM_OF_PLANETS];
