@@ -15,13 +15,31 @@ import javax.imageio.ImageIO;
 import celestial.Planet;
 
 public class Target {
+   /**
+    * Rotation speed of target icon.
+    */
    private static final double ROT_SPEED = 0.03;
 
+   /**
+    * Stores the image of target.
+    */
    private BufferedImage image;
+   /**
+    * Size of the icon.
+    */
    private double size;
+   /**
+    * Coordinate of the icon.
+    */
    private Point2D coordinate;
+   /**
+    * Angle of the icon.
+    */
    private double angle;
 
+   /**
+    * Initialize all members with default value.
+    */
    public Target() {
       coordinate = new Point2D.Double();
       size = 1;
@@ -31,12 +49,26 @@ public class Target {
       } catch (IOException ex) {}
    }
 
+   /**
+    * Reset target member values according to the planet's relevant value.
+    * 
+    * @param planet
+    *           The planet the target is on.
+    */
    public void resetTarget(Planet planet) {
       size = planet.getRadius() * 3;
       coordinate = planet.getCoordinate();
       angle -= ROT_SPEED; // rotation speed
    }
 
+   /**
+    * Draw the target on GUI.
+    * 
+    * @param g
+    *           Graphics object to draw on.
+    * @param imgOb
+    *           Image observer.
+    */
    public void draw(Graphics g, ImageObserver imgOb) {
       Graphics2D g2d = (Graphics2D)g;
       AffineTransform trans = new AffineTransform();
