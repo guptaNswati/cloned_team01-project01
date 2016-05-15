@@ -139,11 +139,9 @@ _* Image contains art subject to copyright. Strictly for academic purposes._
 #### 3.1 Project Deliverables
 
 * Project Proposal
-* Installation instructions
-* User Manual
 * Source Code
 * Screen Shots
-* Presentation about final product and its development
+* Presentation about final product
 
 <a name="3.2"></a>
 
