@@ -12,7 +12,7 @@ public class Constants {
    /**
     * Initial JFrame width.
     */
-   public static final int FRAME_WIDTH = 1000;
+   public static final int FRAME_WIDTH = 1150;
    /**
     * Initial JFrame height.
     */
@@ -35,6 +35,7 @@ public class Constants {
    /**
     * Lower value means force of gravity decreases less with distance.
     * 0.5 is constant force to infinite distance.
+    * 1.0 is realistic force falloff rate, proportional to distance^2.
     */
    public static final double GRAV_FALLOFF = 0.7;
 }

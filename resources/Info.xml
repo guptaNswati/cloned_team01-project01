@@ -1,0 +1,83 @@
+<info>
+    <celestial>
+        <name>Sun</name>
+        <basic>Also called "Sol", it is at the centre of our solar system and is responsible for the Earth’s climate and weather.</basic>
+        <temperature>5500 °C</temperature>
+        <mass>Accounts for some 99.86 % of the total mass of the Solar System</mass>
+        <diameter>1392684 km where one million Earths could fit inside the Sun</diameter>
+        <distance>from earth is approx 149.6 million km. It takes about 8 minutes and 19 seconds for light to reach us.</distance>
+        <period></period>
+    </celestial>
+    <celestial>
+        <name>Mercury</name>
+        <basic>The smallest planet in the Solar System is the closest planet to the Sun and due to its proximity it is not easily seen except during twilight. A year on Mercury is just 88 days long.</basic>
+        <temperature>-173 to 427°C</temperature>
+        <mass>3.29 × 10^23 kg</mass>
+        <diameter>4879 km</diameter>
+        <distance>57909227 km</distance>
+        <period>88 days</period>
+    </celestial>
+    <celestial>
+        <name>Venus</name>
+        <basic>Also known as the Morning Star and the Evening Star is named after the Roman goddess of love and beauty. It has similar size and mass as Earth and is therefore regarded as the Earth’s sister planet. Venus rotates in the opposite direction to most other planets.</basic>
+        <temperature>462 °C</temperature>
+        <mass>4.87 × 10^24 kg</mass>
+        <diameter>12104 km</diameter>
+        <distance>108209475 km</distance>
+        <period>225 days</period>
+    </celestial>
+    <celestial>
+        <name>Earth</name>
+        <basic>The only known planet to support life is the largest of the terrestrial planets. It is the only planet in our solar system not to be named after a Greek or Roman deity.</basic>
+        <temperature>14 °C</temperature>
+        <mass>5.97 × 10^24 kg</mass>
+        <diameter>12714 km</diameter>
+        <distance>149598262 km</distance>
+        <period>365.26 days</period>
+    </celestial>
+    <celestial>
+        <name>Mars</name>
+        <basic>Named after the Roman god of war is home to the tallest mountain in the solar system.</basic>
+        <temperature>-87 to -5 °C</temperature>
+        <mass>6.39 × 10^23 kg</mass>
+        <diameter>:6792 km</diameter>
+        <distance>227943824 km</distance>
+        <period>687 days</period>
+    </celestial>
+    <celestial>
+        <name>Jupiter</name>
+        <basic>It is two and a half times more massive than all the other planets in the solar system combined. It is made primarily of gases and is therefore known as a “gas giant”. It has the shortest day of all the planets.</basic>
+        <temperature>-108°C</temperature>
+        <mass>1.90 × 10^27 kg</mass>
+        <diameter>142984 km</diameter>
+        <distance>778340821 km</distance>
+        <period>4333 days</period>
+    </celestial>
+    <celestial>
+        <name>Saturn</name>
+        <basic>It has 150 moons and smaller moonlets.</basic>
+        <temperature>-139 °C</temperature>
+        <mass>5.68 × 10^26 kg</mass>
+        <diameter>120536 km</diameter>
+        <distance>1426666422 km</distance>
+        <period>10756 days</period>
+    </celestial>
+    <celestial>
+        <name>Uranus</name>
+        <basic>The first planet discovered with the use of a telescope.</basic>
+        <temperature>-197 °C</temperature>
+        <mass>8.68 × 10^25 kg</mass>
+        <diameter>51118 km</diameter>
+        <distance>2870658186 km</distance>
+        <period>30687 days</period>
+    </celestial>
+    <celestial>
+        <name>Neptune</name>
+        <basic>Named after the Roman god of the sea. Its position was determined using mathematical predictions.</basic>
+        <temperature>-201 °C</temperature>
+        <mass>1.02 × 10^26 kg</mass>
+        <diameter>49528 km</diameter>
+        <distance>4498396441 km</distance>
+        <period>60190 days</period>
+    </celestial>
+</info>

@@ -32,7 +32,6 @@ public class Ship {
    private boolean onCelestial;
    private Celestial attachedCelestial;
    private Arrow arrow;
-   private ThrustBox thrustInput;
 
    public Ship() {
       coordinate.push(new Point2D.Double(0, 100));
@@ -43,7 +42,7 @@ public class Ship {
       radius = 2;
       onCelestial = true;
       arrow = new Arrow();
-      thrustInput = new ThrustBox(this);
+      //thrustInput = new ThrustBox(this);
    }
 
    /**
@@ -58,7 +57,7 @@ public class Ship {
             (int)coordinate.getLast().getY() - 2, 4, 4);
       double alpha = 1;
       for (Point2D coord : coordinate) {
-         g.setColor(new Color(0, 160, 255, (int)alpha));
+         g.setColor(new Color(0, 255, 255, (int)alpha));
          g.fillOval((int)coord.getX(), (int)coord.getY(), 1, 1);
          alpha = alpha + 0.5;
       }
@@ -67,7 +66,7 @@ public class Ship {
          for (Point2D hist : history) {
             g.setColor(new Color(255, 255, 255, (int)alpha));
             g.fillOval((int)hist.getX(), (int)hist.getY(), 1, 1);
-            alpha--;
+            alpha = alpha - 0.2;
          }
       }
       arrow.draw(g, this);
@@ -139,7 +138,7 @@ public class Ship {
       if (!onCelestial)
          momentum.removeLast();
 
-      if (!onCelestial && history.size() > 255)
+      if (!onCelestial && history.size() > 1275)
          history.removeLast();
       else if(onCelestial && history.size() != 0) {
          // Clear history when on planet
@@ -150,7 +149,7 @@ public class Ship {
    }
 
    /**
-    * Clear guideline, leaving only the current coordinate
+    * Clear guideline, leaving only the current coordinate.
     */
    public void resetCoordinate() {
       Point2D lastElement = coordinate.getLast();
@@ -177,7 +176,7 @@ public class Ship {
    }
 
    /**
-    * Set momentum farthest in the future
+    * Set momentum farthest in the future.
     * 
     * @param x
     * @param y
@@ -187,7 +186,7 @@ public class Ship {
    }
 
    /**
-    * Set current momentum
+    * Set current momentum.
     * 
     * @param x
     * @param y
@@ -197,7 +196,7 @@ public class Ship {
    }
 
    /**
-    * Clear momentum prediction, leaving only the current momentum
+    * Clear momentum prediction, leaving only the current momentum.
     */
    public void resetMomentum() {
       Point2D lastElement = momentum.getLast();
@@ -210,8 +209,9 @@ public class Ship {
    }
 
    public void setThrust(double thrust) {
-      this.thrust = thrust > 0 ? thrust : 0;
-      thrustInput.setText(this.thrust);
+      if (thrust >= 0 && thrust <= 2.8) {
+         this.thrust = thrust;
+      }
    }
 
    /**
@@ -226,7 +226,6 @@ public class Ship {
          this.thrust = newThrust;
          this.resetCoordinate();
          this.resetMomentum();
-         thrustInput.setText(this.thrust);
          if (!onCelestial)
             expendFuel();
       }
@@ -266,7 +265,7 @@ public class Ship {
 
    /**
     * When ship "lands" (collides) on planet,
-    * reinitialize ship state and clear momentum
+    * reinitialize ship state and clear momentum.
     * 
     * @param onCelestial
     */
@@ -293,7 +292,7 @@ public class Ship {
    }
 
    /**
-    * Draw arrow that points to ship while it is off screen.
+    * Draws an arrow that points to ship while it is off screen.
     * 
     * @param g
     */
@@ -310,9 +309,5 @@ public class Ship {
       g2d.setStroke(new BasicStroke(0));
       g2d.fillPolygon(new int[] {470, 464, 464, 470},
                       new int[] {0, -6, 6, 0}, 4);
-   }
-
-   public ThrustBox getThrustInput() {
-      return thrustInput;
    }
 }

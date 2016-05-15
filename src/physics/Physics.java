@@ -13,6 +13,15 @@ import ship.Ship;
  * @author Joshua Fan
  */
 public class Physics {
+   /**
+    * Calculates the coordinates of a planet at a given number of frames
+    * into the future.
+    * 
+    * @param sun
+    * @param planet
+    * @param frame
+    * @return
+    */
    public static Point2D planetaryOrbit(final Celestial sun, Planet planet, int frame) {
       double dTheta = 2 * Math.PI / planet.getPeriodInMS() * Constants.TIME_INTERVAL;
       double angleToSun = (planet.getAngleToSun() + dTheta * frame) % (2 * Math.PI);
@@ -56,6 +65,7 @@ public class Physics {
 
    /**
     * Calculates the ship guideline's next coordinates and momentum.
+    * Calculations for the future accommodate the future positions of planets.
     * Recurses until guideline is full.
     * <p>
     * Momentum is an accumulation of previous momentum and all forces on the
@@ -86,9 +96,8 @@ public class Physics {
       }
       ship.setFirstMomentum(addX, addY);
       ship.setFirstCoordinate(ship.getFirstX() + addX, ship.getFirstY() + addY);
-      if (ship.getCoordinateSize() < 510) {
+      if (ship.getCoordinateSize() < 510)
          Physics.shipGuideline(ship, sun, planets);
-      }
    }
 
    /**

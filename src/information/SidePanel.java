@@ -1,46 +1,71 @@
 package information;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import update.Update;
 
 public class SidePanel extends JPanel {
-   private JTextField thrustInput;
-   private JTextArea jokeTextBox, infoTextBox;
    private JScrollPane scrollPane;
+   private JTextArea infoTextBox;
+   private JPanel statPane;
+   private JButton menuButton;
+   private JTextField fuelBox;
+   private JTextField thrustBox;
 
    public SidePanel(Update update) {
       setLayout(new BorderLayout());
-      thrustInput = update.getShip().getThrustInput();
-      initJokeTextBox();
+      initInfoTextBox();
+      initStatPane();
+      initMenuButton(update);
+      initFuelBox();
+      initThrustBox();
       initScrollPane();
 
-      add(thrustInput, BorderLayout.SOUTH);
+      add(statPane, BorderLayout.SOUTH);
+      statPane.add(menuButton, BorderLayout.NORTH);
+      statPane.add(fuelBox, BorderLayout.WEST);
+      statPane.add(thrustBox, BorderLayout.EAST);
       add(scrollPane, BorderLayout.NORTH);
    }
 
+   /**
+    * Scrollable container for infoTextBox.
+    */
    private void initScrollPane() {
-      scrollPane = new JScrollPane(jokeTextBox);
-      scrollPane.setPreferredSize(new Dimension(150, 200));
+      scrollPane = new JScrollPane(infoTextBox);
+      scrollPane.setPreferredSize(new Dimension(150, 600));
+      scrollPane.getViewport().setBackground(Color.black);
+      scrollPane.setBorder(null);
    }
 
-   private void initJokeTextBox() {
-      jokeTextBox = new JTextArea(8, 30);
-      jokeTextBox.setEditable(false);
-      jokeTextBox.setVisible(false);
-      jokeTextBox.setLineWrap(true);
-      jokeTextBox.setWrapStyleWord(true);
-      jokeTextBox.setMargin(new Insets(2, 2, 2, 2));
-      jokeTextBox.addKeyListener(new KeyListener() {
+   /**
+    * Text box for information and jokes.
+    */
+   private void initInfoTextBox() {
+      infoTextBox = new JTextArea(8, 30);
+      infoTextBox.setEditable(false);
+      infoTextBox.setLineWrap(true);
+      infoTextBox.setWrapStyleWord(true);
+      infoTextBox.setMargin(new Insets(20, 0, 2, 20));
+      infoTextBox.setBackground(Color.black);
+      infoTextBox.setForeground(Color.white);
+      infoTextBox.addKeyListener(new KeyListener() {
          @Override
          public void keyTyped(KeyEvent e) {
             transferFocusBackward();
@@ -57,47 +82,54 @@ public class SidePanel extends JPanel {
    }
 
    /**
-    * @return the thrustInput
+    * Container for fuel and thrust boxes.
     */
-   public JTextField getThrustInput() {
-      return thrustInput;
+   private void initStatPane() {
+      statPane = new JPanel(new BorderLayout());
+      statPane.setBorder(BorderFactory.createLineBorder(Color.black, 3));
    }
 
-   /**
-    * @param thrustInput
-    *           the thrustInput to set
-    */
-   public void setThrustInput(JTextField thrustInput) {
-      this.thrustInput = thrustInput;
+   private void initMenuButton(Update update) {
+      menuButton = new JButton("MENU");
+      menuButton.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+      menuButton.setBackground(Color.white);
+      menuButton.setOpaque(true);
+
+      menuButton.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            update.getMenu().toggleIsShown();
+            transferFocusBackward();
+         }
+      });
    }
 
-   /**
-    * @return the jokeTextBox
-    */
-   public JTextArea getJokeTextBox() {
-      return jokeTextBox;
+   private void initFuelBox() {
+      fuelBox = new JTextField();
+      fuelBox.setHorizontalAlignment(SwingConstants.CENTER);
+      fuelBox.setBackground(Color.yellow);
+      fuelBox.setPreferredSize(new Dimension(75, 50));
+      fuelBox.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+      fuelBox.setFont(new Font("Arial", Font.BOLD, 22));
    }
 
-   /**
-    * @param jokeTextBox
-    *           the jokeTextBox to set
-    */
-   public void setJokeTextBox(JTextArea jokeTextBox) {
-      this.jokeTextBox = jokeTextBox;
+   private void initThrustBox() {
+      thrustBox = new JTextField();
+      thrustBox.setHorizontalAlignment(SwingConstants.CENTER);
+      thrustBox.setBackground(Color.yellow);
+      thrustBox.setPreferredSize(new Dimension(75, 50));
+      thrustBox.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+      thrustBox.setFont(new Font("Arial", Font.BOLD, 22));
    }
 
-   /**
-    * @return the infoTextBox
-    */
+   public JTextField getFuelBox() {
+      return fuelBox;
+   }
+
+   public JTextField getThrustBox() {
+      return thrustBox;
+   }
+
    public JTextArea getInfoTextBox() {
       return infoTextBox;
-   }
-
-   /**
-    * @param infoTextBox
-    *           the infoTextBox to set
-    */
-   public void setInfoTextBox(JTextArea infoTextBox) {
-      this.infoTextBox = infoTextBox;
    }
 }
