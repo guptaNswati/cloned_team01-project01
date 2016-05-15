@@ -13,8 +13,8 @@ import javax.imageio.ImageIO;
 
 /**
  * An object of class Celestial has 4 members, coordinate, color, name, radius.
- * It has a default and a 4 parameter constructor, and getters and setters. It
- * has also a draw method to draw the celestial on GUI.
+ * It has a default and a 4 parameter constructor, and getters and setters. 
+ * It has also a draw method to draw the celestial on GUI.
  */
 public class Celestial {
    private Point2D coordinate;

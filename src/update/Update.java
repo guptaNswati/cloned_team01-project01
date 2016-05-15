@@ -25,9 +25,9 @@ import physics.*;
 import ship.Ship;
 
 /**
- * An update object contains all dynamic graphical elements. It contains a
- * paintComponent method necessary for GUI. The run method updates physical
- * coordinates and GUI elements at regular intervals.
+ * An update object contains all dynamic graphical elements. 
+ * It contains a paintComponent method necessary for GUI. 
+ * The run method updates physical coordinates and GUI elements.
  */
 public class Update extends JPanel {
    private Celestial sun;

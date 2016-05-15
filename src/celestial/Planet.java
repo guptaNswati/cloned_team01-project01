@@ -6,8 +6,8 @@ import java.awt.geom.Point2D;
 import physics.Constants;
 
 /**
- * An object of a Planet class inherits from Celestial. It also has three
- * additional members, distanceToSun, periodInMS, angleToSun.
+ * An object of a Planet class inherits from Celestial. 
+ * Three additional members, distanceToSun, periodInMS, angleToSun.
  */
 
 public class Planet extends Celestial {
