@@ -60,7 +60,8 @@ public class Information
     * Returns the info for the named planet as a string with line breaks.
     * 
     * @param name
-    * @return
+    *           planet name
+    * @return info for the planet
     */
    public String getCelestial(String name) {
       String tempInfo = "";
@@ -74,7 +75,8 @@ public class Information
     * Converts a string to Title Case.
     * 
     * @param string
-    * @return
+    *           A string
+    * @return Title case of the string.
     */
    private String toTitleCase(String string) {
       String[] tokens = string.split("\\s");

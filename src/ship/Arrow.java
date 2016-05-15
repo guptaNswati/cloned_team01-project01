@@ -8,8 +8,6 @@ import java.awt.geom.AffineTransform;
 
 import javax.swing.JComponent;
 
-import ship.Ship;
-
 /**
  * An arrow to draw on GUI. Also contains and inner private class for key
  * control.
@@ -21,9 +19,6 @@ public class Arrow extends JComponent {
 
    /**
     * Constructor that sets arrow size.
-    * 
-    * @param filename
-    * @param coordinate
     */
    public Arrow() {
       size = 4;

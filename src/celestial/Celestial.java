@@ -73,14 +73,6 @@ public class Celestial {
                (int)coordinate.getY() - radius, width, radius * 2, imgOb);
    }
 
-   /**
-    * Setter for coordinate.
-    * 
-    * @param x
-    *           x coordinate.
-    * @param y
-    *           y coordinate.
-    */
    public void setCoordinate(Point2D point) {
       coordinate.setLocation(point);
    }

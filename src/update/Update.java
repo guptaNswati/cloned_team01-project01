@@ -18,10 +18,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
-import celestial.*;
-import information.*;
+import celestial.Celestial;
+import celestial.Planet;
+import celestial.Starfield;
+import information.Information;
+import information.SidePanel;
 import menu.Menu;
-import physics.*;
+import physics.Constants;
+import physics.Physics;
 import ship.Ship;
 
 /**
@@ -232,7 +236,8 @@ public class Update extends JPanel {
    }
 
    /**
-    * @param the planets to set
+    * @param planets
+    *           the planets to set
     */
    public void setPlanets(Planet[] planets) {
       this.planets = planets;
@@ -300,6 +305,7 @@ public class Update extends JPanel {
     * in-flight angle and thrust control by dragging mouse.
     */
    class MouseControl implements MouseMotionListener {
+      @Override
       public void mouseMoved(MouseEvent e) {
          ship.setAngle(Math.atan2(e.getY() / scale - ship.getLastY(),
                                   e.getX() / scale - ship.getLastX()));
@@ -308,6 +314,7 @@ public class Update extends JPanel {
                                    + Math.pow(e.getY() / scale - ship.getLastY(), 2)) * 0.015);
       }
       
+      @Override
       public void mouseDragged(MouseEvent e) {
          ship.setAngle(Math.atan2(e.getY() / scale - ship.getLastY(),
                                   e.getX() / scale - ship.getLastX()));
