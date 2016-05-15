@@ -32,7 +32,6 @@ public class Ship {
    private boolean onCelestial;
    private Celestial attachedCelestial;
    private Arrow arrow;
-   private ThrustBox thrustInput;
 
    public Ship() {
       coordinate.push(new Point2D.Double(0, 100));
@@ -43,7 +42,7 @@ public class Ship {
       radius = 2;
       onCelestial = true;
       arrow = new Arrow();
-      thrustInput = new ThrustBox(this);
+      //thrustInput = new ThrustBox(this);
    }
 
    /**
@@ -212,7 +211,6 @@ public class Ship {
    public void setThrust(double thrust) {
       if (thrust >= 0 && thrust <= 2.8) {
          this.thrust = thrust;
-         thrustInput.setText(thrust);
       }
    }
 
@@ -228,7 +226,6 @@ public class Ship {
          this.thrust = newThrust;
          this.resetCoordinate();
          this.resetMomentum();
-         thrustInput.setText(newThrust);
          if (!onCelestial)
             expendFuel();
       }
@@ -312,9 +309,5 @@ public class Ship {
       g2d.setStroke(new BasicStroke(0));
       g2d.fillPolygon(new int[] {470, 464, 464, 470},
                       new int[] {0, -6, 6, 0}, 4);
-   }
-
-   public ThrustBox getThrustInput() {
-      return thrustInput;
    }
 }

@@ -32,9 +32,10 @@ public class Menu {
          g.setFont(new Font("Arial", Font.BOLD, 72));
          g.drawString("PLANET HOPPER", 180, 380);
          g.setFont(new Font("Arial", Font.BOLD, 18));
-         g.drawString("LEFT / RIGHT : Ship angle", 362, 630);
-         g.drawString("UP / DOWN : Ship thrust", 382, 670);
-         g.drawString("ENTER : Launch/reset ship", 416, 710);
+         g.drawString("MOUSE : Ship angle/thrust", 412, 630);
+         g.drawString("LEFT / RIGHT : Ship angle", 362, 670);
+         g.drawString("UP / DOWN : Ship thrust", 380, 710);
+         g.drawString("ENTER : Launch/reset ship", 416, 750);
          g.setFont(new Font("Arial", Font.BOLD, 24));
          g.drawString("Controls", 439, 580);
          g.setColor(new Color(255, 255, 255, (int)(Math.sin(System.currentTimeMillis() * Math.PI / 500) * 127 + 128)));

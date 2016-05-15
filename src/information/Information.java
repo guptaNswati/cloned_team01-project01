@@ -61,9 +61,9 @@ public class Information
    public String getCelestial(String name) {
       String tempInfo = "";
       for (String key : elementNames) {
-         tempInfo += toTitleCase(key) + ": " + info.get(name).get(key).toString() + "\n";
+         tempInfo += toTitleCase(key) + ": " + info.get(name).get(key).toString() + "\n\n";
       }
-      return tempInfo;
+      return tempInfo.trim();
    }
 
    /**

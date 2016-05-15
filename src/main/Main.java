@@ -11,7 +11,7 @@ import physics.Constants;
 import update.Update;
 
 /**
- * Testing class that tests Sprint 1 which is a running solar system.
+ * Main class that initializes game panes.
  */
 public class Main {
    public static void main(String[] args) {
@@ -28,8 +28,8 @@ public class Main {
       frame.setVisible(true);
 
       frame.add(update, BorderLayout.CENTER);
-      frame.add(sidePanel, BorderLayout.EAST);
       update.setBackground(Color.black);
+      frame.add(sidePanel, BorderLayout.EAST);
       sidePanel.setBackground(Color.black);
 
       update.run();

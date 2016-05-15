@@ -9,7 +9,7 @@ public class Starfield {
    private static final int NUM_OF_STARS = 1000;
    private static final int MAX_STAR_RADIUS = 3;
    private static final int STAR_HORIZONTAL_AREA = 1000;
-   private static final int STAR_VERTICAL_AREA = 1150;
+   private static final int STAR_VERTICAL_AREA = 1000;
    private Point[] coordinate;
    private int[] radius;
    private Color[] color;

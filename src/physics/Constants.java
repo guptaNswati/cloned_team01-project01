@@ -12,7 +12,7 @@ public class Constants {
    /**
     * Initial JFrame width.
     */
-   public static final int FRAME_WIDTH = 1000;
+   public static final int FRAME_WIDTH = 1150;
    /**
     * Initial JFrame height.
     */

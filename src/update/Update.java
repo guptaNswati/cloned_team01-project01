@@ -15,6 +15,7 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 import celestial.*;
@@ -33,15 +34,13 @@ public class Update extends JPanel {
    private Planet[] planets;
    private Starfield stars;
    private Ship ship;
-   //private GameObjectives;
 
    // adding info_panel
    private JTextArea infoTextBox;
-
-   //private GameObjectives 
+   private JTextField fuelBox;
+   private JTextField thrustBox;
 
    // information data 
-   //private ArrayList<Information> info;
    private Information info = new Information();
 
    private Menu menu;
@@ -179,16 +178,14 @@ public class Update extends JPanel {
                //landed on right planet
                GameObjectives.nextObjective();
                infoTextBox.setText(info.getCelestial(planet.getName())
-                     + "\n\nGOOD JOB!\nNow, go to this planet next: "
+                     + "\n\n\n\nGOOD JOB!\nNow, go to this planet next: "
                      + PLANET_NAMES[GameObjectives
                                     .getPlanetObjective()]);
-               infoTextBox.setVisible(true);
             } else {
                //landed on wrong planet
                infoTextBox.setText("Go to this planet: "
                      + PLANET_NAMES[GameObjectives.getPlanetObjective()]
                      + "\n\nImportant: " + GameObjectives.getJoke());
-               infoTextBox.setVisible(true);
             }
          }
       }
@@ -211,11 +208,17 @@ public class Update extends JPanel {
             }
             Physics.shipFlight(ship, sun, planets);
             target.resetTarget(planets[GameObjectives.getPlanetObjective()]);
+            fuelBox.setText(String.format("%d", (int)ship.getFuel()));
+            thrustBox.setText(String.format("%.1f", ship.getThrust()));
 
             repaint();
          }
       });
       timer.start();
+   }
+
+   public Menu getMenu() {
+      return menu;
    }
 
    public Ship getShip() {
@@ -238,6 +241,8 @@ public class Update extends JPanel {
 
    public void linkWithSidePanel(SidePanel sidePanel) {
       infoTextBox = sidePanel.getInfoTextBox();
+      fuelBox = sidePanel.getFuelBox();
+      thrustBox = sidePanel.getThrustBox();
    }
 
    /**
@@ -262,18 +267,22 @@ public class Update extends JPanel {
             int key = e.getKeyCode();
             switch (key) {
             case KeyEvent.VK_LEFT: // rotate angle counter-clockwise
+            case KeyEvent.VK_A:
                ship.changeAngle(-0.15);
                break;
             case KeyEvent.VK_RIGHT: // rotate angle clockwise
+            case KeyEvent.VK_D:
                ship.changeAngle(0.15);
                break;
             case KeyEvent.VK_UP: // increase thrust
+            case KeyEvent.VK_W:
                if (ship.getOnCelestial())
                   ship.changeThrust(0.4);
                else if (ship.getFuel() > 0)
                   ship.changeThrust(0.01);
                break;
             case KeyEvent.VK_DOWN: // decrease thrust
+            case KeyEvent.VK_S:
                ship.changeThrust(-0.4);
                break;
             case KeyEvent.VK_ENTER: // launch from planet
