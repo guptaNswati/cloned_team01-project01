@@ -1,3 +1,7 @@
+/**
+ * In game version of the menu.
+ */
+
 package menu;
 
 import java.awt.Color;

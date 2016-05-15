@@ -1,3 +1,7 @@
+/**
+ * Creates stars in the universe in the GUI background.
+ */
+
 package celestial;
 
 import java.awt.Color;

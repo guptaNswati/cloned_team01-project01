@@ -2,6 +2,9 @@ package update;
 
 import java.util.Random;
 
+/**
+ * Controls game's objectives.
+ */
 public class GameObjectives{
    /**
     * Stores the sequence of game objective regarding which planet to go to.

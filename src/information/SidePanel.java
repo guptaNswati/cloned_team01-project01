@@ -1,3 +1,7 @@
+/**
+ * The side panel of the GUI.
+ */
+
 package information;
 
 import java.awt.BorderLayout;
@@ -96,6 +100,7 @@ public class SidePanel extends JPanel {
       menuButton.setOpaque(true);
 
       menuButton.addActionListener(new ActionListener() {
+         @Override
          public void actionPerformed(ActionEvent e) {
             update.getMenu().toggleIsShown();
             transferFocusBackward();

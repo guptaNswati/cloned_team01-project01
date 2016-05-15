@@ -1,3 +1,7 @@
+/**
+ * The target icon object.
+ */
+
 package update;
 
 import java.awt.Graphics;
